@@ -98,6 +98,9 @@
         color: var(--sub);
         text-wrap: pretty;
       }
+      .vote-box p.fine {
+        font-size: 12px;
+      }
       .left-votes {
         display: flex;
         align-items: center;
@@ -370,6 +373,10 @@
               로그인 없이 한 사람당 서로 다른 시안 3개까지 투표할 수 있습니다. 투표하기를 누른 뒤
               3초 안에는 취소할 수 있고, 그 뒤에는 취소할 수 없습니다.
             </p>
+            <p class="fine">
+              같은 사람이 여러 번 투표하지 않도록 기기 정보와 IP 주소를 되돌릴 수 없는 값(해시)으로 바꿔
+              비교합니다. 원래 정보는 저장하지 않습니다.
+            </p>
             <div class="left-votes" id="left-votes" aria-live="polite"></div>
           </div>
           <div>
@@ -475,7 +482,7 @@
       const pending = {};
 
       function renderLeft() {
-        const used = V.mine().length;
+        const used = V.used();
         const box = document.getElementById('left-votes');
         box.replaceChildren(
           ...Array.from({ length: V.MAX }, (_, i) => el('span', { class: 'pip' + (i < used ? ' used' : ''), 'aria-hidden': 'true' })),
@@ -485,7 +492,7 @@
 
       function renderButtons() {
         const list = V.mine();
-        const used = list.length + Object.keys(pending).length;
+        const used = V.used() + Object.keys(pending).length;
         document.querySelectorAll('[data-vote]').forEach((b) => {
           const id = b.dataset.vote;
           let state = 'ready';
@@ -540,7 +547,7 @@
           delete pending[id];
           return renderButtons();
         }
-        if (V.mine().length + Object.keys(pending).length >= V.MAX) return;
+        if (V.used() + Object.keys(pending).length >= V.MAX) return;
         pending[id] = { left: V.GRACE_SEC };
         pending[id].timer = setInterval(async () => {
           const p = pending[id];
@@ -552,6 +559,7 @@
           try {
             const r = await V.cast(id);
             if (r.ok) counts[id] = r.value;
+            else if (r.reason === 'limit') alert(V.LIMIT_MSG);
           } catch {
             alert('투표를 보내지 못했어요. 잠시 뒤 다시 눌러 주세요.');
           }
@@ -571,6 +579,7 @@
 
       renderButtons();
       renderCounts();
+      V.ready.then(renderButtons);
       refresh(false);
       setInterval(() => document.visibilityState === 'visible' && refresh(true), 45000);
     </script>

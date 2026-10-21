@@ -1,32 +1,52 @@
 // In-page design voting backed by the free Abacus counter API (no login).
-// One browser may vote for up to MAX different designs; a vote can be undone
-// during a short grace period before it is sent. The limit is enforced only in
-// localStorage, so it is a courtesy limit, not an anti-fraud measure.
+//
+// Duplicate protection, strongest first:
+//  1. Device+network registry: a SHA-256 hash of stable device signals plus the
+//     visitor's IP is kept as its own counter ("vtr-<hash>") holding how many
+//     votes that device/network has used. Private windows, other browsers and
+//     cleared storage on the same device and network all map to the same hash.
+//  2. Local markers in localStorage and a cookie (which design was voted).
+//  3. A "ballots" counter incremented with every legitimate vote, so votes
+//     pushed straight to the API (bypassing this page) show up as a mismatch.
+// Nothing here can stop a determined user who changes network and spoofs
+// device signals; only an account-based backend can.
 (() => {
   const API = 'https://abacus.jasoncameron.dev';
   const NS = 'kodokugorumet-sokosoko-design';
   const MAX = 3;
   const GRACE_SEC = 3;
+  const SALT = 'sokosoko-design-vote-2026';
   const MINE_KEY = 'soko-design-votes-v1';
+  const COOKIE = 'soko_dv';
   const CACHE_KEY = 'soko-design-counts-v1';
   const CACHE_MS = 15000;
   const IDS = ['1a', '1b', '1c', '1d', '1e', '1f', '2a', '2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j'];
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+  // ---- local markers ------------------------------------------------------
+  function readCookie() {
+    const m = document.cookie.match(new RegExp('(?:^|; )' + COOKIE + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]).split('.').filter(Boolean) : [];
+  }
+
   function mine() {
+    let ls = [];
     try {
       const v = JSON.parse(localStorage.getItem(MINE_KEY) || '[]');
-      return Array.isArray(v) ? v.filter((x) => IDS.includes(x)) : [];
-    } catch {
-      return [];
-    }
+      if (Array.isArray(v)) ls = v;
+    } catch {}
+    return [...new Set([...ls, ...readCookie()])].filter((x) => IDS.includes(x));
   }
 
   function saveMine(list) {
-    localStorage.setItem(MINE_KEY, JSON.stringify(list));
+    try {
+      localStorage.setItem(MINE_KEY, JSON.stringify(list));
+    } catch {}
+    document.cookie = `${COOKIE}=${encodeURIComponent(list.join('.'))}; max-age=31536000; path=/; SameSite=Lax; Secure`;
   }
 
+  // ---- count cache --------------------------------------------------------
   function readCache() {
     try {
       const c = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
@@ -39,13 +59,15 @@
   function writeCache(counts) {
     const prev = readCache();
     const merged = Object.assign({}, prev ? prev.counts : {}, counts);
-    sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), counts: merged }));
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), counts: merged }));
+    } catch {}
     return merged;
   }
 
-  // GET with one polite retry when the API rate-limits (30 req / 10 s per IP).
+  // GET with polite retries when the API rate-limits (30 req / 10 s per IP).
   async function call(path) {
-    for (let attempt = 0; attempt < 3; attempt++) {
+    for (let attempt = 0; attempt < 6; attempt++) {
       const res = await fetch(API + path, { cache: 'no-store' });
       if (res.status === 404) return { value: 0 };
       if (res.status === 429) {
@@ -58,6 +80,57 @@
       return res.json();
     }
     throw new Error('vote api rate limited');
+  }
+
+  // ---- device + network registry -----------------------------------------
+  // Signals chosen to stay the same across browsers and private windows on one
+  // device (no canvas: Safari randomizes it in private mode).
+  function deviceSignals() {
+    const s = window.screen || {};
+    const dims = [s.width || 0, s.height || 0].sort((a, b) => a - b).join('x');
+    return [
+      dims,
+      window.devicePixelRatio || 1,
+      s.colorDepth || 0,
+      Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+      navigator.hardwareConcurrency || 0,
+      navigator.maxTouchPoints || 0,
+      navigator.platform || '',
+    ].join('|');
+  }
+
+  async function publicIp() {
+    try {
+      const res = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
+      const b = await res.json();
+      return b.ip || 'noip';
+    } catch {
+      return 'noip';
+    }
+  }
+
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  let voterKey = null;
+  let serverUsed = 0;
+  let checkedAt = 0;
+  const ready = (async () => {
+    try {
+      const ip = await publicIp();
+      voterKey = 'vtr-' + (await sha256(`${SALT}|${deviceSignals()}|${ip}`)).slice(0, 40);
+      serverUsed = Number((await call(`/get/${NS}/${voterKey}`)).value) || 0;
+      checkedAt = Date.now();
+    } catch {
+      // Registry unavailable: fall back to local markers only.
+    }
+    return { used: used(), mine: mine() };
+  })();
+
+  function used() {
+    return Math.min(MAX, Math.max(mine().length, serverUsed));
   }
 
   async function fetchCounts(ids, { fresh = false } = {}) {
@@ -83,17 +156,39 @@
     return writeCache(out);
   }
 
-  async function cast(id) {
+  // Votes go out one at a time: parallel casts would race on the local list
+  // and burst past the API rate limit.
+  let queue = Promise.resolve();
+  function cast(id) {
+    const run = queue.then(() => castNow(id));
+    queue = run.catch(() => {});
+    return run;
+  }
+
+  async function castNow(id) {
+    await ready;
     const list = mine();
     if (list.includes(id)) return { ok: false, reason: 'already' };
-    if (list.length >= MAX) return { ok: false, reason: 'limit' };
+    if (voterKey && Date.now() - checkedAt > 20000) {
+      // Re-check the registry in case another browser on this device/network
+      // voted since the last read.
+      serverUsed = Number((await call(`/get/${NS}/${voterKey}`)).value) || 0;
+      checkedAt = Date.now();
+    }
+    if (used() >= MAX) return { ok: false, reason: 'limit' };
     const b = await call(`/hit/${NS}/vote-${id}`);
     saveMine([...list, id]);
+    if (voterKey) {
+      const v = await call(`/hit/${NS}/${voterKey}`).catch(() => null);
+      if (v) serverUsed = Number(v.value) || serverUsed + 1;
+    }
+    call(`/hit/${NS}/ballots`).catch(() => {});
     writeCache({ [id]: Number(b.value) || 0 });
     return { ok: true, value: Number(b.value) || 0 };
   }
 
-  window.SokoVote = { IDS, MAX, GRACE_SEC, mine, fetchCounts, cast };
+  const LIMIT_MSG = `이 기기·네트워크에서는 이미 ${MAX}표를 모두 사용했어요.`;
+  window.SokoVote = { IDS, MAX, GRACE_SEC, LIMIT_MSG, ready, mine, used, fetchCounts, cast };
 
   // ---- Floating widget on individual design pages -------------------------
   const me = document.currentScript;
@@ -112,8 +207,7 @@
   .sv-btn[data-state="voted"]{background:#b23a5c;border-color:#b23a5c;cursor:default}
   .sv-btn:disabled:not([data-state="voted"]){background:#f5f5f2;color:#5c5c58;border-color:#c9c9c4;cursor:default}
   .sv-link{color:#b23a5c;font-weight:700;text-decoration:underline}
-  .sv-link:hover{color:#111}
-  .sv-note{font-size:12px;color:#5c5c58}`;
+  .sv-link:hover{color:#111}`;
   const style = document.createElement('style');
   style.textContent = css;
   document.head.append(style);
@@ -134,13 +228,13 @@
     btn.dataset.state = state;
     btn.disabled = state === 'voted' || state === 'limit';
     btn.setAttribute('aria-pressed', state === 'voted' ? 'true' : 'false');
+    btn.title = state === 'limit' ? LIMIT_MSG : '';
     btn.textContent =
-      state === 'voted' ? '투표했어요' : state === 'limit' ? '남은 표 없음' : state === 'pending' ? `취소 (${left})` : `투표하기 · 남은 ${MAX - mine().length}표`;
+      state === 'voted' ? '투표했어요' : state === 'limit' ? '남은 표 없음' : state === 'pending' ? `취소 (${left})` : `투표하기 · 남은 ${MAX - used()}표`;
   }
 
   function idle() {
-    const list = mine();
-    render(list.includes(pageId) ? 'voted' : list.length >= MAX ? 'limit' : 'ready');
+    render(mine().includes(pageId) ? 'voted' : used() >= MAX ? 'limit' : 'ready');
   }
 
   function showCount(n) {
@@ -166,6 +260,7 @@
       try {
         const r = await cast(pageId);
         if (r.ok) showCount(r.value);
+        else if (r.reason === 'limit') countEl.textContent = LIMIT_MSG;
       } catch {
         countEl.textContent = '투표를 보내지 못했어요. 다시 눌러 주세요';
       }
@@ -174,6 +269,7 @@
   });
 
   idle();
+  ready.then(idle);
   fetchCounts([pageId])
     .then((c) => showCount(c[pageId]))
     .catch(() => showCount(null));
