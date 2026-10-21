@@ -70,28 +70,123 @@
         border-radius: 999px;
         background: #fff;
       }
-      .vote-banner {
-        display: none;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
+      .vote-box {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+        gap: 28px;
         margin-top: 28px;
-        padding: 18px 22px;
+        padding: 22px 24px;
         background: #fff;
         border: 1.5px solid var(--ink);
         border-radius: 14px;
         box-shadow: 3px 3px 0 var(--ink);
+        scroll-margin-top: 16px;
       }
-      .vote-banner.on {
-        display: flex;
+      @media (max-width: 760px) {
+        .vote-box {
+          grid-template-columns: minmax(0, 1fr);
+        }
       }
-      .vote-banner strong {
-        font-size: 17px;
+      .vote-box h2 {
+        margin: 0;
+        font-size: 20px;
         color: var(--ink);
       }
-      .vote-banner span {
+      .vote-box p {
+        margin: 8px 0 0;
+        font-size: 14px;
+        color: var(--sub);
+        text-wrap: pretty;
+      }
+      .left-votes {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .pip {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 1.5px solid var(--accent-deep);
+      }
+      .pip.used {
+        background: var(--accent-deep);
+      }
+      .rank-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--sub);
+      }
+      .rank-head strong {
+        font-size: 16px;
+        color: var(--ink);
+      }
+      .rank {
+        list-style: none;
+        margin: 10px 0 0;
+        padding: 0;
+        display: grid;
+        gap: 2px;
+      }
+      .rank li {
+        display: grid;
+        grid-template-columns: 22px minmax(0, 11em) minmax(0, 1fr) 3.2em;
+        align-items: center;
+        gap: 10px;
+        min-height: 30px;
+        font-size: 14px;
+      }
+      .rank .no {
+        font-variant-numeric: tabular-nums;
+        color: var(--sub);
+        text-align: right;
+      }
+      .rank .nm {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: var(--ink);
+      }
+      .rank .track {
+        height: 14px;
+      }
+      .rank .fill {
         display: block;
+        height: 14px;
+        min-width: 2px;
+        background: var(--accent-deep);
+        border-radius: 0 4px 4px 0;
+      }
+      .rank .val {
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        color: var(--ink);
+        text-align: right;
+      }
+      .rank li:hover .fill {
+        background: var(--ink);
+      }
+      .rank-more {
+        margin-top: 8px;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent-deep);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .rank-empty {
+        margin-top: 12px;
         font-size: 14px;
         color: var(--sub);
       }
@@ -205,10 +300,45 @@
         border-color: var(--accent-deep);
         color: #fff;
       }
+      .vote-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 4px;
+        padding-top: 12px;
+        border-top: 1px solid #e6e6e1;
+      }
+      .vote-count {
+        font-size: 14px;
+        color: var(--sub);
+        font-variant-numeric: tabular-nums;
+      }
+      .vote-count b {
+        font-size: 18px;
+        color: var(--ink);
+      }
       .btn.vote {
+        cursor: pointer;
+        font-family: inherit;
         background: var(--ink);
         border-color: var(--ink);
         color: #fff;
+      }
+      .btn.vote[data-state='pending'] {
+        background: #fff;
+        color: var(--ink);
+      }
+      .btn.vote[data-state='voted'] {
+        background: var(--accent-deep);
+        border-color: var(--accent-deep);
+        cursor: default;
+      }
+      .btn.vote:disabled:not([data-state='voted']) {
+        background: var(--muted, #f5f5f2);
+        border-color: #c9c9c4;
+        color: var(--sub);
+        cursor: default;
       }
       .btn:hover {
         box-shadow: 2px 2px 0 var(--ink);
@@ -233,12 +363,21 @@
           <li>버튼과 탭은 실제로 눌러 볼 수 있습니다</li>
           <li>예시 글과 이름은 모두 가상입니다</li>
         </ul>
-        <div class="vote-banner" id="vote-banner">
+        <div class="vote-box" id="vote">
           <div>
-            <strong>마음에 드는 시안에 투표해 주세요</strong>
-            <span>로그인 없이 1분이면 끝납니다. 각 시안의 '이 시안에 투표' 버튼을 눌러도 됩니다.</span>
+            <h2>마음에 드는 시안에 투표해 주세요</h2>
+            <p>
+              로그인 없이 한 사람당 서로 다른 시안 3개까지 투표할 수 있습니다. 투표하기를 누른 뒤
+              3초 안에는 취소할 수 있고, 그 뒤에는 취소할 수 없습니다.
+            </p>
+            <div class="left-votes" id="left-votes" aria-live="polite"></div>
           </div>
-          <a class="btn vote" id="vote-main" href="#" target="_blank" rel="noopener">투표하기</a>
+          <div>
+            <div class="rank-head"><strong>지금 순위</strong><span id="rank-total"></span></div>
+            <ol class="rank" id="rank" aria-label="시안별 득표 순위"></ol>
+            <div class="rank-empty" id="rank-empty" hidden>아직 투표가 없습니다. 첫 표를 던져 주세요.</div>
+            <button type="button" class="rank-more" id="rank-more" hidden>전체 순위 보기</button>
+          </div>
         </div>
       </header>
 
@@ -261,10 +400,8 @@
       <footer>검토용 시안이며 실제 서비스 화면이 아닙니다. 2026년 10월 21일 작성.</footer>
     </div>
 
+    <script src="vote.js"></script>
     <script>
-      // Google Forms "pre-filled link" with option 1a selected. Empty = voting hidden.
-      const FORM_PREFILL_URL = '';
-
       const DESIGNS = [
         { id: '2a', round: 2, file: '2a-line-refined', jp: 'くらしライン磨き版', ko: '노선도 다듬은 안', tag: '노선도', label: '2a くらしライン磨き版 / 노선도 다듬은 안',
           desc: '1e를 기본으로 정리한 안입니다. 노선도를 히어로에 합치고 소코가 역무원처럼 승강장에 서 있으며, 모바일에서는 노선을 세로로 세웠습니다.' },
@@ -300,19 +437,6 @@
           desc: '구글 첫 화면처럼 큰 질문창 하나에 집중한 안입니다. 소코가 질문창 위로 고개를 내밉니다.' },
       ];
 
-      // Swap the pre-selected option in the pre-filled link for this design's label.
-      function voteUrl(label) {
-        if (!FORM_PREFILL_URL) return '';
-        const url = new URL(FORM_PREFILL_URL);
-        for (const [key, value] of url.searchParams) {
-          if (key.startsWith('entry.') && value.startsWith('1a')) {
-            url.searchParams.set(key, label);
-            return url.toString();
-          }
-        }
-        return url.toString();
-      }
-
       function el(tag, attrs, children) {
         const node = document.createElement(tag);
         Object.entries(attrs || {}).forEach(([k, v]) => node.setAttribute(k, v));
@@ -327,9 +451,9 @@
           el('a', { class: 'btn primary', href: d.file + '.html' }, ['시안 열기']),
           el('a', { class: 'btn', href: 'shots/' + d.file + '.png' }, ['전체 이미지']),
         ];
-        const vote = voteUrl(d.label);
-        if (vote) links.push(el('a', { class: 'btn vote', href: vote, target: '_blank', rel: 'noopener' }, ['이 시안에 투표']));
-        const card = el('article', { class: 'card' }, [
+        const voteBtn = el('button', { type: 'button', class: 'btn vote', 'data-vote': d.id }, ['투표하기']);
+        const voteCount = el('span', { class: 'vote-count', 'data-count': d.id, 'aria-live': 'polite' }, ['']);
+        const card = el('article', { class: 'card', id: 'card-' + d.id }, [
           el('a', { href: d.file + '.html' }, [
             el('img', { src: 'shots/' + d.file + '-thumb.png', alt: d.id + ' ' + d.jp + ' 시안 미리보기', loading: 'lazy' }),
           ]),
@@ -337,17 +461,118 @@
             el('h3', { class: 'title' }, titleBits),
             el('p', { class: 'desc' }, [d.desc]),
             el('div', { class: 'links' }, links),
+            el('div', { class: 'vote-row' }, [voteCount, voteBtn]),
           ]),
         ]);
         document.getElementById(d.round === 2 ? 'round2' : 'round1').append(card);
       });
 
-      if (FORM_PREFILL_URL) {
-        const plain = new URL(FORM_PREFILL_URL);
-        [...plain.searchParams.keys()].filter((k) => k.startsWith('entry.') || k === 'usp').forEach((k) => plain.searchParams.delete(k));
-        document.getElementById('vote-main').href = plain.toString();
-        document.getElementById('vote-banner').classList.add('on');
+      // ---- Voting UI ---------------------------------------------------------
+      const V = window.SokoVote;
+      const byId = Object.fromEntries(DESIGNS.map((d) => [d.id, d]));
+      let counts = {};
+      let showAll = false;
+      const pending = {};
+
+      function renderLeft() {
+        const used = V.mine().length;
+        const box = document.getElementById('left-votes');
+        box.replaceChildren(
+          ...Array.from({ length: V.MAX }, (_, i) => el('span', { class: 'pip' + (i < used ? ' used' : ''), 'aria-hidden': 'true' })),
+          `남은 표 ${V.MAX - used} / ${V.MAX}`,
+        );
       }
+
+      function renderButtons() {
+        const list = V.mine();
+        const used = list.length + Object.keys(pending).length;
+        document.querySelectorAll('[data-vote]').forEach((b) => {
+          const id = b.dataset.vote;
+          let state = 'ready';
+          if (pending[id]) state = 'pending';
+          else if (list.includes(id)) state = 'voted';
+          else if (used >= V.MAX) state = 'limit';
+          b.dataset.state = state;
+          b.disabled = state === 'voted' || state === 'limit';
+          b.setAttribute('aria-pressed', state === 'voted' ? 'true' : 'false');
+          b.textContent =
+            state === 'pending' ? `취소 (${pending[id].left})` : state === 'voted' ? '투표했어요' : state === 'limit' ? '남은 표 없음' : '투표하기';
+        });
+        renderLeft();
+      }
+
+      function renderCounts() {
+        document.querySelectorAll('[data-count]').forEach((s) => {
+          const n = counts[s.dataset.count];
+          s.replaceChildren(...(n == null ? ['집계 중'] : [el('b', {}, [String(n)]), '표']));
+        });
+        const ranked = DESIGNS.map((d) => ({ d, n: counts[d.id] || 0 })).sort((a, b) => b.n - a.n || a.d.id.localeCompare(b.d.id));
+        const total = ranked.reduce((s, r) => s + r.n, 0);
+        const max = Math.max(1, ...ranked.map((r) => r.n));
+        const voted = ranked.filter((r) => r.n > 0);
+        const rows = (showAll ? ranked : voted.slice(0, 5)).map((r, i) =>
+          el('li', { title: `${r.d.id} ${r.d.jp}: ${r.n}표` }, [
+            el('span', { class: 'no' }, [String(i + 1)]),
+            el('a', { class: 'nm', href: '#card-' + r.d.id }, [`${r.d.id} ${r.d.jp}`]),
+            el('span', { class: 'track' }, [el('span', { class: 'fill', style: `width:${(r.n / max) * 100}%` })]),
+            el('span', { class: 'val' }, [`${r.n}표`]),
+          ]),
+        );
+        document.getElementById('rank').replaceChildren(...rows);
+        document.getElementById('rank-total').textContent = `총 ${total}표`;
+        document.getElementById('rank-empty').hidden = total > 0;
+        const more = document.getElementById('rank-more');
+        more.hidden = total === 0;
+        more.textContent = showAll ? '상위 5개만 보기' : '전체 순위 보기';
+      }
+
+      document.getElementById('rank-more').addEventListener('click', () => {
+        showAll = !showAll;
+        renderCounts();
+      });
+
+      document.addEventListener('click', (e) => {
+        const b = e.target.closest('[data-vote]');
+        if (!b || b.disabled) return;
+        const id = b.dataset.vote;
+        if (pending[id]) {
+          clearInterval(pending[id].timer);
+          delete pending[id];
+          return renderButtons();
+        }
+        if (V.mine().length + Object.keys(pending).length >= V.MAX) return;
+        pending[id] = { left: V.GRACE_SEC };
+        pending[id].timer = setInterval(async () => {
+          const p = pending[id];
+          p.left -= 1;
+          if (p.left > 0) return renderButtons();
+          clearInterval(p.timer);
+          b.disabled = true;
+          b.textContent = '보내는 중…';
+          try {
+            const r = await V.cast(id);
+            if (r.ok) counts[id] = r.value;
+          } catch {
+            alert('투표를 보내지 못했어요. 잠시 뒤 다시 눌러 주세요.');
+          }
+          delete pending[id];
+          renderButtons();
+          renderCounts();
+        }, 1000);
+        renderButtons();
+      });
+
+      async function refresh(fresh) {
+        try {
+          counts = Object.assign({}, counts, await V.fetchCounts(V.IDS, { fresh }));
+        } catch {}
+        renderCounts();
+      }
+
+      renderButtons();
+      renderCounts();
+      refresh(false);
+      setInterval(() => document.visibilityState === 'visible' && refresh(true), 45000);
     </script>
   </body>
 </html>
