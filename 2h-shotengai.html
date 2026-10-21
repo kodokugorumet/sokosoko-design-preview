@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>2h 商店街 | 소코소코 홈 시안</title>
+    <meta name="viewport" content="width=1860" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet data-dc-atomics>
+        <meta name="design_doc_mode" content="canvas" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Noto+Sans+KR:wght@400;700&amp;family=Noto+Serif+JP:wght@500;700;900&amp;family=Klee+One:wght@400;600&amp;display=swap" />
+        <style>
+          body{margin:0;background:#e9e7e2;font-family:'Noto Sans JP','Noto Sans KR',system-ui,sans-serif;color:#1a1a18;-webkit-font-smoothing:antialiased}
+          a{color:#b23a5c;text-decoration:none;cursor:pointer}
+          a:hover{color:#111;text-decoration:underline}
+          button{font-family:inherit;cursor:pointer}
+          .cv-title{position:absolute;left:40px;top:32px;width:1720px}
+          .cv-head{display:flex;align-items:center;gap:10px}
+          .cv-id{font:700 12px/1 ui-monospace,Menlo,monospace;background:#111;color:#fff;padding:5px 8px;border-radius:5px}
+          .cv-name{font:700 22px 'Noto Sans JP';color:#111}
+          .cv-ko{font:500 15px 'Noto Sans KR';color:#5c5c58}
+          .cv-desc{margin:10px 0 0;font:400 14px/1.6 'Noto Sans KR';color:#4a4a46;max-width:1180px}
+          .cv-label{font:600 11px ui-monospace,Menlo,monospace;color:#6b6b66;letter-spacing:.06em}
+          .wrap-d{position:absolute;left:40px;top:132px;display:flex;flex-direction:column;gap:10px}
+          .wrap-m{position:absolute;left:1400px;top:132px;display:flex;flex-direction:column;gap:10px}
+          .frame{width:1280px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06),0 16px 48px rgba(0,0,0,.08)}
+
+          .hd{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 40px;border-bottom:2px solid #111}
+          .logo{display:flex;align-items:center;gap:8px}
+          .ava{width:36px;height:36px;border-radius:50%;border:1.5px solid #111;overflow:hidden;position:relative;flex:none;background:#fff}
+          .ava-img{position:absolute;width:130px;left:-69px;top:-51px;max-width:none}
+          .logo-sm{font:500 13px 'Noto Sans JP';color:#1a1a18;margin-left:2px}
+          .logo-hand{font:600 24px 'Klee One';color:#111;letter-spacing:.06em}
+          .nav{display:flex;gap:28px}
+          .nav-a{font:700 14px 'Noto Sans JP';color:#1a1a18;padding:24px 0 21px;border-bottom:3px solid transparent}
+          .nav-a.on{border-bottom-color:#e8728c}
+          .hd-r{display:flex;align-items:center;gap:12px}
+          .seg{display:flex;border:1.5px solid #111;border-radius:999px;overflow:hidden}
+          .seg-on{font:700 12px 'Noto Sans JP';background:#111;color:#fff;padding:6px 12px}
+          .seg-off{font:700 12px 'Noto Sans JP';color:#111;padding:6px 12px;background:#fff}
+          .btn-login{font:700 13px 'Noto Sans JP';color:#111;border:2px solid #111;border-radius:999px;padding:8px 18px;box-shadow:2px 2px 0 #111;background:#fff}
+
+          .gate{position:relative;margin:28px 40px 0;padding:104px 56px 30px}
+          .gate-arc{position:absolute;left:0;right:0;top:0;height:150px;border:6px solid #111;border-bottom:0;border-radius:600px 600px 0 0/150px 150px 0 0;pointer-events:none}
+          .pillar{position:absolute;top:144px;bottom:0;width:14px;background:#111}
+          .pl{left:0}
+          .pr{right:0}
+          .pfoot{position:absolute;bottom:0;width:36px;height:8px;background:#111;border-radius:3px 3px 0 0}
+          .pfl{left:-11px}
+          .pfr{right:-11px}
+          .sign{position:absolute;left:50%;top:-22px;transform:translateX(-50%);background:#111;color:#fff;font:600 32px/1 'Klee One';letter-spacing:.12em;padding:14px 34px 16px;border-radius:12px;box-shadow:5px 5px 0 #e8728c;white-space:nowrap}
+          .lan{position:absolute;width:16px;display:flex;flex-direction:column;align-items:center}
+          .lan-s{width:2px;height:12px;background:#111}
+          .lan-b{width:16px;height:20px;border-radius:50%;background:#e8728c;border:1.5px solid #111;box-sizing:border-box}
+          .booth{position:relative}
+          .booth-grid{display:grid;grid-template-columns:380px minmax(0,1fr);gap:28px;align-items:end}
+          .soko-area{position:relative;z-index:1;height:330px}
+          .soko-crop{position:absolute;left:30px;bottom:0;width:300px;height:330px;overflow:hidden}
+          .soko-img{position:absolute;width:480px;max-width:none;left:-110px;top:-50px}
+          .bubble{position:absolute;left:250px;top:16px;width:152px;box-sizing:border-box;background:#fff;border:2px solid #111;border-radius:14px;padding:10px 12px;font:600 15px/1.55 'Klee One';color:#111;z-index:2}
+          .bubble-tail{position:absolute;left:-8px;top:30px;width:12px;height:12px;background:#fff;border-left:2px solid #111;border-bottom:2px solid #111;transform:rotate(45deg)}
+          .counter{position:relative;z-index:2;margin-top:-44px;height:58px;box-sizing:border-box;background:#fff;border:2.5px solid #111;border-top:9px solid #111;border-radius:4px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+          .counter-l{display:flex;align-items:center;gap:10px}
+          .counter-name{font:600 19px 'Klee One';color:#111;letter-spacing:.08em}
+          .counter-tag{font:700 11px 'Noto Sans JP';color:#111;border:1.5px solid #111;border-radius:4px;padding:2px 7px}
+          .open{font:700 12px 'Noto Sans JP';color:#b23a5c;border:1.5px solid #b23a5c;border-radius:999px;padding:3px 10px;background:#fff}
+          .slip{position:relative;z-index:3;margin-bottom:38px;background:#fff;border:2px solid #111;border-radius:8px;box-shadow:5px 5px 0 #111}
+          .slip-head{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:2px solid #111}
+          .slip-ttl{font:600 16px 'Klee One';color:#b23a5c;letter-spacing:.1em}
+          .slip-r{display:flex;align-items:center;gap:10px}
+          .slip-no{font:600 11.5px ui-monospace,Menlo,monospace;color:#5c5c58}
+          .stamp{width:34px;height:34px;border-radius:50%;border:2px solid #b23a5c;color:#b23a5c;font:700 11px/1 'Noto Sans JP';display:flex;align-items:center;justify-content:center;transform:rotate(-12deg)}
+          .slip-body{padding:18px 22px 20px}
+          .hero-h{margin:0;font:600 32px/1.3 'Klee One';color:#111;letter-spacing:.04em;word-break:auto-phrase}
+          .hero-sub{margin:8px 0 0;font:500 14px 'Noto Sans JP';color:#5c5c58}
+          .field-l{display:block;margin:16px 0 6px;font:700 12px 'Noto Sans JP';color:#1a1a18}
+          .ta{display:block;width:100%;box-sizing:border-box;height:84px;resize:none;border:1.5px solid #111;border-radius:8px;padding:12px 14px;font:400 15px/1.6 'Noto Sans JP';color:#1a1a18;background:#fff}
+          .ta::placeholder{color:#76766f}
+          .ta:focus{outline:none;box-shadow:0 0 0 3px #fde7ec;border-color:#b23a5c}
+          .slip-act{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+          .hint{font:500 12px 'Noto Sans JP';color:#5c5c58}
+          .btns{display:flex;gap:10px}
+          .btn-o{font:700 14px 'Noto Sans JP';color:#111;background:#fff;border:2px solid #111;border-radius:999px;padding:10px 20px;box-shadow:2px 2px 0 #111}
+          .btn-p{font:700 14px 'Noto Sans JP';color:#fff;background:#b23a5c;border:2px solid #111;border-radius:999px;padding:10px 26px;box-shadow:2px 2px 0 #111}
+          .btn-o:active,.btn-p:active{transform:translate(2px,2px);box-shadow:none}
+
+          .street{margin:34px 40px 0}
+          .st-head{display:flex;align-items:flex-end;justify-content:space-between}
+          .st-ttl{margin:0;font:600 26px 'Klee One';color:#111;letter-spacing:.06em}
+          .st-hint{margin:4px 0 0;font:500 13px 'Noto Sans JP';color:#5c5c58}
+          .shops{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin-top:18px;align-items:end}
+          .shop{position:relative;cursor:pointer;display:flex;flex-direction:column;transition:transform .15s}
+          .shop:hover{transform:translateY(-3px)}
+          .eave{height:10px;background:#111;margin:0 -5px;border-radius:3px 3px 0 0}
+          .on .eave{background:#b23a5c}
+          .front{position:relative;background:#fff;border:2px solid #111;border-top:0;border-bottom:0;padding:100px 12px 14px;min-height:178px;box-sizing:border-box}
+          .noren{position:absolute;left:8px;right:8px;top:0;height:88px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+          .pn{background:#fff;border:1.5px solid #111;border-top:0;border-bottom:10px solid #111}
+          .mpn{background:#fff;border:1.5px solid #111;border-top:0;border-bottom:7px solid #111}
+          .c-all{border-bottom-color:#111}
+          .c-q{border-bottom-color:#e8728c}
+          .c-s{border-bottom-color:oklch(0.72 0.12 250)}
+          .c-l{border-bottom-color:oklch(0.72 0.12 155)}
+          .c-c{border-bottom-color:oklch(0.72 0.12 305)}
+          .c-f{border-bottom-color:oklch(0.72 0.12 75)}
+          .pon{background:#111}
+          .nn{position:absolute;left:0;right:0;top:0;bottom:10px;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:0 4px}
+          .nt{display:inline-block;background:#fff;color:#111;font:600 20px/1.15 'Klee One';letter-spacing:.04em;padding:4px 9px 5px;border-radius:4px}
+          .nt-on{background:#111;color:#fff}
+          .desc{font:500 12.5px/1.5 'Noto Sans JP';color:#4a4a46;min-height:38px}
+          .tagrow{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+          .tag{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 7px;border:1.5px solid #111;border-radius:4px;font:700 12px 'Noto Sans JP';color:#111;background:#fff;transform:rotate(-4deg)}
+          .hole{width:6px;height:6px;border-radius:50%;border:1.5px solid #111}
+          .showing{font:700 11px 'Noto Sans JP';color:#b23a5c}
+          .pave{border-top:3px solid #111}
+          .curb{border-top:1.5px dashed #b9b9b2;margin-top:6px}
+
+          .body{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;padding:36px 40px 48px;align-items:start}
+          .card{background:#fff;border:2px solid #111;border-radius:12px;box-shadow:4px 4px 0 #111}
+          .osu-head{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1.5px dashed #111}
+          .osu-l{display:flex;align-items:center;gap:10px}
+          .osu-tab{font:600 17px 'Klee One';background:#111;color:#fff;padding:5px 14px;border-radius:6px;letter-spacing:.08em}
+          .osu-sub{font:500 12.5px 'Noto Sans JP';color:#5c5c58}
+          .lnk{font:700 13px 'Noto Sans JP';color:#b23a5c}
+          .osu-q{padding:18px 22px 0}
+          .meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font:500 12.5px 'Noto Sans JP';color:#5c5c58}
+          .blab{display:inline-flex;align-items:center;gap:6px;font:700 12px 'Noto Sans JP';color:#1a1a18}
+          .sq{width:10px;height:10px;border-radius:2px;background:#111;flex:none}
+          .s-q{background:#e8728c}
+          .s-s{background:oklch(0.72 0.12 250)}
+          .s-l{background:oklch(0.72 0.12 155)}
+          .s-c{background:oklch(0.72 0.12 305)}
+          .s-f{background:oklch(0.72 0.12 75)}
+          .bdg{font:700 10.5px/1 'Noto Sans JP';border:1.5px solid #111;border-radius:4px;padding:3px 5px;color:#111;background:#fff;letter-spacing:.04em}
+          .staff{background:#111;color:#fff}
+          .q-title{margin:10px 0 0;font:700 21px/1.45 'Noto Sans JP';color:#111;word-break:auto-phrase}
+          .q-body{margin:6px 0 0;font:400 14.5px/1.75 'Noto Sans JP';color:#33332f}
+          .q-stat{display:flex;align-items:center;gap:10px;margin-top:8px;font:500 13px 'Noto Sans JP';color:#5c5c58}
+          .solved{font:700 12px 'Noto Sans JP';color:oklch(0.45 0.11 155);border:1.5px solid oklch(0.55 0.11 155);border-radius:999px;padding:2px 10px}
+          .ans{margin:16px 22px 0;border:1.5px solid #111;border-radius:10px;padding:14px 16px}
+          .ans-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+          .who{display:flex;align-items:center;gap:8px;font:500 12.5px 'Noto Sans JP';color:#5c5c58}
+          .who-name{font:700 14px 'Noto Sans JP';color:#111;white-space:nowrap}
+          .mono-ava{width:28px;height:28px;border-radius:50%;border:1.5px solid #111;display:flex;align-items:center;justify-content:center;font:700 13px 'Noto Sans JP';color:#111;background:#fff;flex:none}
+          .best{font:700 11.5px 'Noto Sans JP';color:#b23a5c;border:1.5px solid #b23a5c;border-radius:999px;padding:2px 9px;white-space:nowrap}
+          .ans-text{margin:10px 0 0;font:400 15px/1.75 'Noto Sans JP';color:#1a1a18}
+          .inv{position:relative;margin:20px 22px 22px 40px;display:flex;align-items:stretch;border:2px solid #111;border-radius:10px;background:#fff;transform:rotate(-0.8deg)}
+          .inv-str{position:absolute;left:-30px;top:50%;width:40px;height:2px;background:#e8728c;transform:rotate(-20deg);transform-origin:right center}
+          .inv-stub{position:relative;width:132px;flex:none;border-right:2px dashed #111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px 0 12px 14px}
+          .inv-hole{position:absolute;left:10px;top:50%;margin-top:-6px;width:12px;height:12px;border-radius:50%;border:2px solid #111;background:#fff;box-sizing:border-box}
+          .inv-s{font:700 11px 'Noto Sans JP';color:#5c5c58;letter-spacing:.14em}
+          .inv-k{font:600 22px/1 'Klee One';color:#b23a5c;letter-spacing:.1em}
+          .inv-main{flex:1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px}
+          .inv-t{font:700 16px 'Noto Sans JP';color:#111}
+          .inv-d{margin-top:3px;font:500 12.5px 'Noto Sans JP';color:#5c5c58}
+          .sm{padding:9px 18px;font-size:13.5px;white-space:nowrap}
+
+          .menu{margin-top:28px}
+          .menu-head{display:flex;align-items:flex-end;justify-content:space-between;padding:18px 24px 14px;border-bottom:2px solid #111}
+          .menu-ttl{font:600 24px 'Klee One';color:#111;letter-spacing:.08em}
+          .menu-sub{margin-top:2px;font:500 12.5px 'Noto Sans JP';color:#5c5c58}
+          .sorts{display:flex;gap:16px}
+          .sort{font:700 13px 'Noto Sans JP';color:#5c5c58;padding-bottom:4px;border-bottom:2px solid transparent}
+          .sort.on{color:#111;border-bottom-color:#e8728c}
+          .mrow{padding:14px 24px 13px;border-bottom:1px dashed #c9c9c2}
+          .mrow-main{display:flex;align-items:flex-end;gap:10px}
+          .rt{flex:0 1 auto;max-width:74%;font:700 16px/1.5 'Noto Sans JP';color:#111;word-break:auto-phrase}
+          .m-rt{max-width:none;font-size:15px}
+          .ko{font-family:'Noto Sans KR',sans-serif;word-break:keep-all}
+          .leader{flex:1;min-width:16px;border-bottom:2px dotted #a9a9a2;margin-bottom:7px}
+          .price{font:700 14px 'Noto Sans JP';color:#111;white-space:nowrap;font-variant-numeric:tabular-nums}
+          .zero{color:#b23a5c}
+          .mrow-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:5px;font:500 12.5px 'Noto Sans JP';color:#5c5c58}
+          .tr{display:inline-flex;align-items:center;gap:5px;font:500 12px 'Noto Sans JP';color:#5c5c58}
+          .tr-ic{font:700 10px/1 'Noto Sans JP';border:1.5px solid #5c5c58;border-radius:3px;padding:2px 3px}
+          .tlink{font:700 12px 'Noto Sans JP';color:#b23a5c;text-decoration:underline;background:none;border:0;padding:0}
+          .wait{font:700 12px 'Noto Sans JP';color:#b23a5c}
+          .menu-foot{display:flex;justify-content:center;padding:16px}
+
+          .side{display:flex;flex-direction:column;gap:28px}
+          .kb-roof{height:12px;background:#111;margin:-2px -12px 0;border-radius:6px 6px 0 0}
+          .kb-head{display:flex;align-items:baseline;justify-content:space-between;padding:14px 20px 10px;border-bottom:1.5px solid #111}
+          .kb-ttl{font:700 16px 'Noto Sans JP';color:#111}
+          .kb-sub{font:600 13px 'Klee One';color:#5c5c58}
+          .kb-item{padding:13px 20px;border-bottom:1px dashed #c9c9c2}
+          .kb-t{font:700 14px/1.55 'Noto Sans JP';color:#111}
+          .kb-m{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:5px;font:500 12px 'Noto Sans JP';color:#5c5c58}
+          .src{color:#b23a5c;text-decoration:underline}
+          .made{font:700 11px 'Noto Sans JP';color:#111;border:1.5px solid #111;border-radius:3px;padding:1px 6px}
+          .kb-foot{padding:11px 20px 12px;text-align:right}
+          .poster{overflow:hidden}
+          .po-top{background:#111;color:#fff;padding:16px 20px 14px}
+          .po-k{font:600 26px/1.1 'Klee One';letter-spacing:.1em;color:#fff}
+          .po-s{margin-top:6px;font:500 12px 'Noto Sans JP';color:#fff}
+          .po-body{padding:16px 20px 20px}
+          .po-next{font:700 11px 'Noto Sans JP';color:#5c5c58;letter-spacing:.12em}
+          .po-date{margin-top:4px;font:900 28px/1.2 'Noto Sans JP';color:#111}
+          .po-place{margin-top:4px;font:500 13px 'Noto Sans JP';color:#4a4a46}
+          .pills{display:flex;gap:6px;margin-top:12px}
+          .pill{font:700 11.5px 'Noto Sans JP';border:1.5px solid #111;border-radius:999px;padding:3px 10px;background:#fff;color:#111}
+          .pk{background:#fde7ec;border-color:#b23a5c;color:#b23a5c}
+          .btn-block{display:block;width:100%;margin-top:16px;text-align:center}
+          .guide{padding:16px 20px 18px}
+          .guide-ttl{font:600 18px 'Klee One';color:#111;letter-spacing:.06em}
+          .guide-li{display:flex;gap:10px;margin-top:10px;font:500 13px/1.6 'Noto Sans JP';color:#33332f}
+          .guide-n{width:20px;height:20px;border-radius:50%;background:#111;color:#fff;font:700 11px/20px 'Noto Sans JP';text-align:center;flex:none;margin-top:1px}
+          .ft{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-top:2px solid #111}
+          .ft-l{font:600 16px 'Klee One';color:#111}
+          .ft-r{display:flex;gap:18px;font:500 12.5px 'Noto Sans JP';color:#5c5c58}
+
+          .phone{width:390px;border:10px solid #111;border-radius:48px;overflow:hidden;background:#fff;box-shadow:0 16px 48px rgba(0,0,0,.12)}
+          .m-status{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:700 14px 'Noto Sans JP';color:#111}
+          .batt{width:24px;height:11px;border:1.5px solid #111;border-radius:3px;padding:1.5px;box-sizing:border-box;display:flex}
+          .batt-f{flex:1;background:#111;border-radius:1px}
+          .m-hd{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 10px 0 14px;border-bottom:2px solid #111}
+          .m-logo{display:flex;align-items:center;gap:6px}
+          .ava-s{width:30px;height:30px;border-radius:50%;border:1.5px solid #111;overflow:hidden;position:relative;flex:none;background:#fff}
+          .ava-s-img{position:absolute;width:108px;left:-57px;top:-42px;max-width:none}
+          .m-logo-t{display:flex;flex-direction:column}
+          .m-logo-sm{font:500 9.5px/1.2 'Noto Sans JP';color:#1a1a18}
+          .m-logo-hand{font:600 19px/1.1 'Klee One';color:#111;letter-spacing:.04em}
+          .m-hd-r{display:flex;align-items:center;gap:5px}
+          .m-seg{display:flex;height:44px;border:1.5px solid #111;border-radius:999px;overflow:hidden;box-sizing:border-box}
+          .m-seg-on{display:flex;align-items:center;padding:0 10px;background:#111;color:#fff;font:700 11.5px 'Noto Sans JP'}
+          .m-seg-off{display:flex;align-items:center;padding:0 10px;color:#111;font:700 11.5px 'Noto Sans JP'}
+          .m-login{height:44px;display:inline-flex;align-items:center;padding:0 10px;border:2px solid #111;border-radius:999px;font:700 12px 'Noto Sans JP';color:#111;box-sizing:border-box}
+          .m-menu{width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+          .m-menu-l{width:22px;height:2px;background:#111;border-radius:1px}
+          .m-gate{position:relative;margin:16px 8px 0;padding:70px 16px 16px}
+          .m-arc{position:absolute;left:0;right:0;top:0;height:92px;border:4px solid #111;border-bottom:0;border-radius:187px 187px 0 0/92px 92px 0 0;pointer-events:none}
+          .m-pillar{position:absolute;top:88px;bottom:0;width:9px;background:#111}
+          .m-sign{position:absolute;left:50%;top:-14px;transform:translateX(-50%);background:#111;color:#fff;font:600 19px/1 'Klee One';letter-spacing:.1em;padding:9px 16px 10px;border-radius:9px;box-shadow:3px 3px 0 #e8728c;white-space:nowrap}
+          .m-lan{position:absolute;width:12px;display:flex;flex-direction:column;align-items:center}
+          .m-lan-s{width:2px;height:9px;background:#111}
+          .m-lan-b{width:12px;height:15px;border-radius:50%;background:#e8728c;border:1.5px solid #111;box-sizing:border-box}
+          .m-sokorow{position:relative;z-index:1;height:176px}
+          .m-crop{position:absolute;left:4px;bottom:0;width:180px;height:176px;overflow:hidden}
+          .m-img{position:absolute;width:280px;max-width:none;left:-60px;top:-36px}
+          .m-bubble{position:absolute;left:188px;top:28px;width:146px;box-sizing:border-box;background:#fff;border:2px solid #111;border-radius:12px;padding:9px 11px;font:600 14px/1.55 'Klee One';color:#111}
+          .m-bubble-tail{position:absolute;left:-7px;top:24px;width:10px;height:10px;background:#fff;border-left:2px solid #111;border-bottom:2px solid #111;transform:rotate(45deg)}
+          .m-counter{position:relative;z-index:2;margin-top:-26px;height:42px;box-sizing:border-box;border:2px solid #111;border-top:7px solid #111;border-radius:3px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
+          .m-counter-name{font:600 15px 'Klee One';color:#111;letter-spacing:.06em}
+          .m-slip{margin-top:14px;background:#fff;border:2px solid #111;border-radius:8px;box-shadow:4px 4px 0 #111}
+          .m-slip-head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:2px solid #111}
+          .m-slip-ttl{font:600 14px 'Klee One';color:#b23a5c;letter-spacing:.08em}
+          .m-slip-body{padding:14px 16px 16px}
+          .m-h{margin:0;font:600 23px/1.38 'Klee One';color:#111;word-break:auto-phrase}
+          .m-sub{margin:6px 0 0;font:500 12.5px/1.6 'Noto Sans JP';color:#5c5c58}
+          .m-ta{display:block;width:100%;box-sizing:border-box;height:78px;margin-top:12px;resize:none;border:1.5px solid #111;border-radius:8px;padding:10px 12px;font:400 14.5px/1.6 'Noto Sans JP';color:#1a1a18;background:#fff}
+          .m-ta::placeholder{color:#76766f}
+          .m-btns{display:flex;gap:10px;margin-top:12px}
+          .m-b-o{flex:1;height:48px;font:700 15px 'Noto Sans JP';color:#111;background:#fff;border:2px solid #111;border-radius:999px;box-shadow:2px 2px 0 #111}
+          .m-b-p{flex:1.4;height:48px;font:700 15px 'Noto Sans JP';color:#fff;background:#b23a5c;border:2px solid #111;border-radius:999px;box-shadow:2px 2px 0 #111}
+          .m-street{margin-top:20px}
+          .m-st-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 16px}
+          .m-st-ttl{font:600 19px 'Klee One';color:#111;letter-spacing:.06em}
+          .m-st-hint{font:500 11.5px 'Noto Sans JP';color:#5c5c58}
+          .m-shops{overflow-x:auto;scrollbar-width:none;padding:12px 0 0}
+          .m-shops-in{display:flex;gap:10px;align-items:flex-end;width:max-content;padding:0 16px;border-bottom:3px solid #111}
+          .mshop{flex:none;width:112px;cursor:pointer;display:flex;flex-direction:column}
+          .m-eave{height:7px;background:#111;margin:0 -3px;border-radius:2px 2px 0 0}
+          .on .m-eave{background:#b23a5c}
+          .m-front{position:relative;border:2px solid #111;border-top:0;border-bottom:0;background:#fff;padding:62px 8px 10px;box-sizing:border-box;min-height:100px}
+          .m-noren{position:absolute;left:6px;right:6px;top:0;height:54px;display:grid;grid-template-columns:1fr 1fr;gap:4px}
+          .m-nn{position:absolute;left:0;right:0;top:0;bottom:7px;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 2px;pointer-events:none}
+          .m-nt{display:inline-block;background:#fff;color:#111;font:600 14px/1.15 'Klee One';padding:2px 5px 3px;border-radius:3px}
+          .m-tag{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px 0 6px;border:1.5px solid #111;border-radius:4px;font:700 11px 'Noto Sans JP';color:#111;background:#fff;transform:rotate(-4deg)}
+          .m-curb{border-top:1.5px dashed #b9b9b2;margin:6px 0 0}
+          .m-card{margin:16px 16px 0}
+          .m-osu-head{padding:11px 14px}
+          .m-osu-tab{font-size:15px;padding:4px 11px}
+          .m-pad{padding:13px 14px 0}
+          .m-q-title{margin:8px 0 0;font:700 17px/1.5 'Noto Sans JP';color:#111;word-break:auto-phrase}
+          .m-ans{margin:12px 14px 0;padding:11px 13px}
+          .m-ans-meta{margin-top:6px;font:500 12px 'Noto Sans JP';color:#5c5c58}
+          .m-ans-text{margin:4px 0 0;font:400 14px/1.7 'Noto Sans JP';color:#1a1a18}
+          .m-inv{position:relative;margin:14px 14px 16px;border:2px solid #111;border-radius:10px;padding:0 14px 14px}
+          .m-inv-top{display:flex;align-items:center;gap:8px;padding:10px 0 9px 20px;border-bottom:2px dashed #111;position:relative}
+          .m-inv-hole{position:absolute;left:0;top:50%;margin-top:-6px;width:12px;height:12px;border-radius:50%;border:2px solid #111;box-sizing:border-box}
+          .m-inv-k{font:600 19px/1 'Klee One';color:#b23a5c;letter-spacing:.08em}
+          .m-inv-t{margin-top:10px;font:700 15px 'Noto Sans JP';color:#111}
+          .m-inv-d{margin-top:2px;font:500 12px/1.6 'Noto Sans JP';color:#5c5c58}
+          .m-inv-btn{display:block;width:100%;height:46px;margin-top:12px;font:700 14.5px 'Noto Sans JP';color:#fff;background:#b23a5c;border:2px solid #111;border-radius:999px;box-shadow:2px 2px 0 #111}
+          .m-menu-head{padding:13px 14px 10px}
+          .m-menu-ttl{font-size:20px}
+          .m-mrow{padding:11px 14px 10px}
+          .m-tlink{display:inline-flex;align-items:center;min-height:44px;margin:-14px 0}
+          .m-more{width:100%;height:46px}
+          .m-menu-foot{padding:12px 14px 14px}
+          .m-kb-item{padding:9px 14px}
+          .m-kb-head{padding:11px 14px 8px}
+          .m-kb-t{font-size:13.5px}
+          .m-ft{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding:14px 16px 18px;border-top:2px solid #111;font:500 11px 'Noto Sans JP';color:#5c5c58}
+          .m-ft-l{font:600 14px 'Klee One';color:#111}
+        </style>
+      </helmet>
+
+      <div class="cv-title" data-drags-parent="1">
+        <div class="cv-head"><span class="cv-id">2h</span><span class="cv-name">いもじょも商店街</span><span class="cv-ko">상점가형</span></div>
+        <p class="cv-desc">홈을 일본 동네 상점가로 바꿨습니다. 아치 간판 아래에서 가게 주인 소코가 상담 전표(질문창)를 받고, 게시판은 노렌을 건 가게로 늘어서 있어서 가게를 누르면 그 게시판 글만 보입니다. 피드는 가게 메뉴판(お品書き)처럼 제목과 답변 수를 점선으로 잇습니다.</p>
+      </div>
+
+      <div class="wrap-d">
+        <div class="cv-label" data-drags-parent="1">Desktop 1280</div>
+        <div class="frame" data-screen-label="2h Desktop" lang="ja">
+          <header class="hd">
+            <div class="logo">
+              <span class="ava"><img class="ava-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="" /></span>
+              <span class="logo-sm">釜山暮らし。</span><span class="logo-hand">いもじょも</span>
+            </div>
+            <nav class="nav">
+              <a class="nav-a on">コミュニティ</a><a class="nav-a">質問する</a><a class="nav-a">読みもの</a><a class="nav-a">釜山お知らせ</a><a class="nav-a">交流会</a>
+            </nav>
+            <div class="hd-r">
+              <div class="seg"><span class="seg-on">JP</span><span class="seg-off">KR</span></div>
+              <a class="btn-login">ログイン</a>
+            </div>
+          </header>
+
+          <section class="gate">
+            <div class="gate-arc"></div>
+            <div class="pillar pl"></div>
+            <div class="pillar pr"></div>
+            <div class="pfoot pfl"></div>
+            <div class="pfoot pfr"></div>
+            <div class="lan" style="left:62px;top:84px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="lan" style="left:162px;top:49px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="lan" style="left:262px;top:29px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="lan" style="left:362px;top:16px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="lan" style="left:822px;top:16px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="lan" style="left:922px;top:29px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="lan" style="left:1022px;top:49px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="lan" style="left:1122px;top:84px"><div class="lan-s"></div><div class="lan-b"></div></div>
+            <div class="sign">いもじょも商店街</div>
+
+            <div class="booth">
+              <div class="booth-grid">
+                <div class="soko-area">
+                  <div class="soko-crop"><img class="soko-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="店番のソコ" /></div>
+                  <div class="bubble"><div class="bubble-tail"></div>いらっしゃい！<br />なんでも聞いてね</div>
+                </div>
+                <div class="slip">
+                  <div class="slip-head">
+                    <span class="slip-ttl">ご相談うけたまわります</span>
+                    <span class="slip-r"><span class="slip-no">No. 0129</span><span class="stamp">受付</span></span>
+                  </div>
+                  <div class="slip-body">
+                    <h1 class="hero-h">釜山の暮らし、気軽に聞いてみよう</h1>
+                    <p class="hero-sub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                    <label class="field-l">ご相談内容</label>
+                    <textarea class="ta" placeholder="例：釜山で日本語が通じる病院はありますか？"></textarea>
+                    <div class="slip-act">
+                      <span class="hint">送るときにログインをご案内します</span>
+                      <div class="btns"><button class="btn-o">投稿する</button><button class="btn-p">質問する</button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="counter">
+                <div class="counter-l"><span class="counter-name">よろず相談所</span><span class="counter-tag">店番 ソコ</span></div>
+                <span class="open">営業中</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="street">
+            <div class="st-head">
+              <div>
+                <h2 class="st-ttl">通りのお店</h2>
+                <p class="st-hint">のれんをくぐると、そのお店（掲示板）の話題だけを表示します</p>
+              </div>
+            </div>
+            <div class="shops">
+              <sc-for list="{{ shops }}" as="s" hint-placeholder-count="6">
+                <div class="{{ s.cls }}" onClick="{{ s.onClick }}">
+                  <div class="eave"></div>
+                  <div class="front">
+                    <div class="noren">
+                      <div class="{{ s.pn }}"></div>
+                      <div class="{{ s.pn }}"></div>
+                      <div class="{{ s.pn }}"></div>
+                      <div class="nn"><span class="{{ s.nt }}">{{ s.name }}</span></div>
+                    </div>
+                    <div class="desc">{{ s.desc }}</div>
+                    <div class="tagrow">
+                      <span class="tag"><span class="hole"></span>{{ s.count }}</span>
+                      <sc-if value="{{ s.on }}" hint-placeholder-val="{{ false }}"><span class="showing">表示中</span></sc-if>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div class="pave"></div>
+            <div class="curb"></div>
+          </section>
+
+          <div class="body">
+            <main>
+              <section class="card">
+                <div class="osu-head">
+                  <div class="osu-l"><span class="osu-tab">本日のおすすめ</span><span class="osu-sub">店番ソコのイチオシ相談</span></div>
+                  <a class="lnk">ほかの回答も見る →</a>
+                </div>
+                <div class="osu-q">
+                  <div class="meta">
+                    <span class="blab"><span class="sq s-q"></span>質問</span>
+                    <span class="bdg">JP</span><span>さくら（海雲台在住）</span><span>・ 3時間前</span>
+                  </div>
+                  <h2 class="q-title">外国人登録証の更新、海雲台の出入国事務所は予約必要？</h2>
+                  <p class="q-body">来月で在留期限が切れるので更新に行きたいのですが、予約が必要なのか分かりません。</p>
+                  <div class="q-stat"><span>回答 3</span><span class="solved">解決済み</span></div>
+                </div>
+                <div class="ans">
+                  <div class="ans-head">
+                    <div class="who"><span class="mono-ava">ミ</span><span class="who-name">ミンジ</span><span class="bdg">KR</span><span>日本語で回答 ・ 1時間前</span></div>
+                    <span class="best">ベストアンサー</span>
+                  </div>
+                  <p class="ans-text">はい、ハイコリア（hikorea.go.kr）で事前予約が必要です。平日午前は混むので、午後の枠がおすすめです。</p>
+                </div>
+                <div class="inv">
+                  <div class="inv-str"></div>
+                  <div class="inv-stub"><span class="inv-hole"></span><span class="inv-s">交流会</span><span class="inv-k">ご招待券</span></div>
+                  <div class="inv-main">
+                    <div>
+                      <div class="inv-t">このメンバーと話してみませんか？</div>
+                      <div class="inv-d">毎週土曜 日本語・韓国語交流会</div>
+                    </div>
+                    <button class="btn-p sm">参加してみる →</button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="card menu">
+                <div class="menu-head">
+                  <div>
+                    <div class="menu-ttl">本日のお品書き</div>
+                    <div class="menu-sub">{{ filterLabel }} ・ {{ rowCount }}</div>
+                  </div>
+                  <div class="sorts"><span class="sort on">新着</span><span class="sort">回答待ち</span><span class="sort">人気</span></div>
+                </div>
+                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
+                  <div class="mrow">
+                    <div class="mrow-main">
+                      <a class="{{ r.titleCls }}">{{ r.title }}</a>
+                      <span class="leader"></span>
+                      <span class="{{ r.priceCls }}">{{ r.count }}</span>
+                    </div>
+                    <div class="mrow-meta">
+                      <span class="blab"><span class="{{ r.sq }}"></span>{{ r.board }}</span>
+                      <span class="{{ r.badgeCls }}">{{ r.badge }}</span><span>{{ r.author }} ・ {{ r.time }}</span>
+                      <sc-if value="{{ r.tr }}" hint-placeholder-val="{{ true }}">
+                        <span class="tr"><span class="tr-ic">訳</span>{{ r.trLabel }}</span>
+                        <button class="tlink" onClick="{{ r.onToggle }}">{{ r.trLink }}</button>
+                      </sc-if>
+                      <sc-if value="{{ r.wait }}" hint-placeholder-val="{{ false }}"><span class="wait">回答待ち</span></sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+                <div class="menu-foot"><button class="btn-o">もっと見る</button></div>
+              </section>
+            </main>
+
+            <aside class="side">
+              <section class="card">
+                <div class="kb-roof"></div>
+                <div class="kb-head"><span class="kb-ttl">今週の釜山お知らせ</span><span class="kb-sub">通りの掲示板</span></div>
+                <div class="kb-item">
+                  <div class="kb-t">10/25〜 都市鉄道1号線、一部駅で夜間工事</div>
+                  <div class="kb-m"><span>出典：<a class="src">釜山交通公社</a></span><span class="made">スタッフ作成</span></div>
+                </div>
+                <div class="kb-item">
+                  <div class="kb-t">外国人住民向け 無料健康診断（11月）</div>
+                  <div class="kb-m"><span>出典：<a class="src">釜山広域市</a></span><span class="made">スタッフ作成</span></div>
+                </div>
+                <div class="kb-item">
+                  <div class="kb-t">広安里花火大会の交通規制</div>
+                  <div class="kb-m"><span>出典：<a class="src">水営区</a></span><span class="made">スタッフ作成</span></div>
+                </div>
+                <div class="kb-foot"><a class="lnk">お知らせ一覧 →</a></div>
+              </section>
+
+              <section class="card poster">
+                <div class="po-top"><div class="po-k">ソコソコ交流会</div><div class="po-s">毎週土曜 ・ 参加無料</div></div>
+                <div class="po-body">
+                  <div class="po-next">次回</div>
+                  <div class="po-date">10/26（土）14:00</div>
+                  <div class="po-place">西面 ・ 日本語と韓国語でおしゃべり</div>
+                  <div class="pills"><span class="pill pk">初参加歓迎</span><span class="pill">日本語・韓国語</span></div>
+                  <button class="btn-p btn-block">参加する</button>
+                </div>
+              </section>
+
+              <section class="card guide">
+                <div class="guide-ttl">はじめての方へ</div>
+                <div class="guide-li"><span class="guide-n">1</span><span>母国語のまま書いてOK。読む人の言葉に自動で翻訳されます。</span></div>
+                <div class="guide-li"><span class="guide-n">2</span><span>翻訳された投稿には必ずラベルがつき、原文も読めます。</span></div>
+                <div class="guide-li"><span class="guide-n">3</span><span>答えてくれたメンバーとは、土曜の交流会で会えます。</span></div>
+              </section>
+            </aside>
+          </div>
+
+          <footer class="ft">
+            <span class="ft-l">釜山暮らし。いもじょも商店街</span>
+            <span class="ft-r"><span>運営：ソコソコ（日本語・韓国語スタディ）</span><span>利用規約</span><span>プライバシー</span></span>
+          </footer>
+        </div>
+      </div>
+
+      <div class="wrap-m">
+        <div class="cv-label" data-drags-parent="1">Mobile 390</div>
+        <div class="phone" data-screen-label="2h Mobile" lang="ja">
+          <div class="m-status"><span>9:41</span><span class="batt"><span class="batt-f"></span></span></div>
+          <div class="m-hd">
+            <div class="m-logo">
+              <span class="ava-s"><img class="ava-s-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="" /></span>
+              <span class="m-logo-t"><span class="m-logo-sm">釜山暮らし。</span><span class="m-logo-hand">いもじょも</span></span>
+            </div>
+            <div class="m-hd-r">
+              <div class="m-seg"><span class="m-seg-on">JP</span><span class="m-seg-off">KR</span></div>
+              <a class="m-login">ログイン</a>
+              <span class="m-menu"><span class="m-menu-l"></span><span class="m-menu-l"></span><span class="m-menu-l"></span></span>
+            </div>
+          </div>
+
+          <section class="m-gate">
+            <div class="m-arc"></div>
+            <div class="m-pillar" style="left:0"></div>
+            <div class="m-pillar" style="right:0"></div>
+            <div class="m-lan" style="left:28px;top:42px"><div class="m-lan-s"></div><div class="m-lan-b"></div></div>
+            <div class="m-lan" style="left:68px;top:22px"><div class="m-lan-s"></div><div class="m-lan-b"></div></div>
+            <div class="m-lan" style="left:294px;top:22px"><div class="m-lan-s"></div><div class="m-lan-b"></div></div>
+            <div class="m-lan" style="left:334px;top:42px"><div class="m-lan-s"></div><div class="m-lan-b"></div></div>
+            <div class="m-sign">いもじょも商店街</div>
+            <div class="m-sokorow">
+              <div class="m-crop"><img class="m-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="店番のソコ" /></div>
+              <div class="m-bubble"><div class="m-bubble-tail"></div>いらっしゃい！<br />なんでも聞いてね</div>
+            </div>
+            <div class="m-counter"><span class="counter-l"><span class="m-counter-name">よろず相談所</span><span class="counter-tag">店番 ソコ</span></span><span class="open">営業中</span></div>
+            <div class="m-slip">
+              <div class="m-slip-head"><span class="m-slip-ttl">ご相談うけたまわります</span><span class="slip-no">No. 0129</span></div>
+              <div class="m-slip-body">
+                <h1 class="m-h">釜山の暮らし、気軽に聞いてみよう</h1>
+                <p class="m-sub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                <textarea class="m-ta" placeholder="例：釜山で日本語が通じる病院はありますか？"></textarea>
+                <div class="m-btns"><button class="m-b-o">投稿する</button><button class="m-b-p">質問する</button></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="m-street">
+            <div class="m-st-head"><span class="m-st-ttl">通りのお店</span><span class="m-st-hint">横にスクロール →</span></div>
+            <div class="m-shops">
+              <div class="m-shops-in">
+                <sc-for list="{{ shops }}" as="s" hint-placeholder-count="6">
+                  <div class="{{ s.mcls }}" onClick="{{ s.onClick }}">
+                    <div class="m-eave"></div>
+                    <div class="m-front">
+                      <div class="m-noren">
+                        <div class="{{ s.mpn }}"></div>
+                        <div class="{{ s.mpn }}"></div>
+                        <div class="m-nn"><span class="{{ s.mnt }}">{{ s.name }}</span></div>
+                      </div>
+                      <span class="m-tag"><span class="hole"></span>{{ s.count }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="m-curb"></div>
+          </section>
+
+          <section class="card m-card">
+            <div class="osu-head m-osu-head"><span class="osu-l"><span class="osu-tab m-osu-tab">本日のおすすめ</span><span class="osu-sub">店番ソコのイチオシ</span></span></div>
+            <div class="m-pad">
+              <div class="meta"><span class="blab"><span class="sq s-q"></span>質問</span><span class="bdg">JP</span><span>さくら（海雲台在住）・ 3時間前</span></div>
+              <h3 class="m-q-title">外国人登録証の更新、海雲台の出入国事務所は予約必要？</h3>
+              <div class="q-stat"><span>回答 3</span><span class="solved">解決済み</span></div>
+            </div>
+            <div class="ans m-ans">
+              <div class="ans-head"><div class="who"><span class="mono-ava">ミ</span><span class="who-name">ミンジ</span><span class="bdg">KR</span></div><span class="best">ベストアンサー</span></div>
+              <div class="m-ans-meta">日本語で回答 ・ 1時間前</div>
+              <p class="m-ans-text">はい、ハイコリア（hikorea.go.kr）で事前予約が必要です。平日午前は混むので、午後の枠がおすすめです。</p>
+            </div>
+            <div class="m-inv">
+              <div class="m-inv-top"><span class="m-inv-hole"></span><span class="inv-s">交流会</span><span class="m-inv-k">ご招待券</span></div>
+              <div class="m-inv-t">このメンバーと話してみませんか？</div>
+              <div class="m-inv-d">毎週土曜 日本語・韓国語交流会<br />次回 10/26（土）14:00 西面 ・ 初参加歓迎</div>
+              <button class="m-inv-btn">参加してみる →</button>
+            </div>
+          </section>
+
+          <section class="card m-card">
+            <div class="menu-head m-menu-head"><div><div class="menu-ttl m-menu-ttl">本日のお品書き</div><div class="menu-sub">{{ filterLabel }} ・ {{ rowCount }}</div></div></div>
+            <sc-for list="{{ mrows }}" as="r" hint-placeholder-count="3">
+              <div class="mrow m-mrow">
+                <div class="mrow-main">
+                  <a class="{{ r.mtitleCls }}">{{ r.title }}</a>
+                  <span class="leader"></span>
+                  <span class="{{ r.priceCls }}">{{ r.count }}</span>
+                </div>
+                <div class="mrow-meta">
+                  <span class="blab"><span class="{{ r.sq }}"></span>{{ r.board }}</span>
+                  <span class="{{ r.badgeCls }}">{{ r.badge }}</span><span>{{ r.author }} ・ {{ r.time }}</span>
+                  <sc-if value="{{ r.tr }}" hint-placeholder-val="{{ true }}">
+                    <span class="tr"><span class="tr-ic">訳</span>{{ r.trLabel }}</span>
+                    <button class="tlink m-tlink" onClick="{{ r.onToggle }}">{{ r.trLink }}</button>
+                  </sc-if>
+                  <sc-if value="{{ r.wait }}" hint-placeholder-val="{{ false }}"><span class="wait">回答待ち</span></sc-if>
+                </div>
+              </div>
+            </sc-for>
+            <div class="menu-foot m-menu-foot"><button class="btn-o m-more">もっと見る</button></div>
+          </section>
+
+          <section class="card m-card">
+            <div class="kb-roof"></div>
+            <div class="kb-head m-kb-head"><span class="kb-ttl">今週の釜山お知らせ</span><span class="kb-sub">通りの掲示板</span></div>
+            <div class="kb-item m-kb-item"><div class="kb-t m-kb-t">10/25〜 都市鉄道1号線、一部駅で夜間工事</div><div class="kb-m"><span>出典：<a class="src">釜山交通公社</a></span><span class="made">スタッフ作成</span></div></div>
+            <div class="kb-item m-kb-item"><div class="kb-t m-kb-t">外国人住民向け 無料健康診断（11月）</div><div class="kb-m"><span>出典：<a class="src">釜山広域市</a></span><span class="made">スタッフ作成</span></div></div>
+            <div class="kb-item m-kb-item" style="border-bottom:0"><div class="kb-t m-kb-t">広安里花火大会の交通規制</div><div class="kb-m"><span>出典：<a class="src">水営区</a></span><span class="made">スタッフ作成</span></div></div>
+          </section>
+
+          <div class="m-ft"><span class="m-ft-l">いもじょも商店街</span><span>利用規約 ・ プライバシー</span></div>
+        </div>
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script data-props='{}'>
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.state = { shop: 'all', orig: {} };
+        }
+        renderVals() {
+          var self = this;
+          var shop = this.state.shop;
+          var orig = this.state.orig;
+          var COLOR = { all: 'c-all', qa: 'c-q', study: 'c-s', lang: 'c-l', culture: 'c-c', free: 'c-f' };
+          var SQ = { qa: 's-q', study: 's-s', lang: 's-l', culture: 's-c', free: 's-f' };
+          var SHOPS = [
+            { id: 'all', name: 'すべて', desc: '通りのお店をぜんぶ見る', count: 128 },
+            { id: 'qa', name: '質問 Q&A', desc: '困りごとを聞いてみる', count: 48 },
+            { id: 'study', name: '留学・就職', desc: '釜山での留学・仕事のリアル', count: 12 },
+            { id: 'lang', name: '日韓言語交流', desc: 'スタディのお知らせと振り返り', count: 21 },
+            { id: 'culture', name: '日韓文化交流', desc: '日韓の“違い”を話そう', count: 9 },
+            { id: 'free', name: '自由', desc: 'なんでも気軽に', count: 17 }
+          ];
+          var current = SHOPS[0];
+          var shops = SHOPS.map(function (s) {
+            var on = s.id === shop;
+            if (on) { current = s; }
+            return {
+              id: s.id,
+              name: s.name,
+              desc: s.desc,
+              count: s.count + '件',
+              on: on,
+              cls: on ? 'shop on' : 'shop',
+              pn: 'pn ' + COLOR[s.id] + (on ? ' pon' : ''),
+              nt: on ? 'nt nt-on' : 'nt',
+              mcls: on ? 'mshop on' : 'mshop',
+              mpn: 'mpn ' + COLOR[s.id] + (on ? ' pon' : ''),
+              mnt: on ? 'm-nt nt-on' : 'm-nt',
+              onClick: function () { self.setState({ shop: s.id }); }
+            };
+          });
+          var ITEMS = [
+            { id: 2, b: 'free', board: '自由', badge: 'KR', author: 'ジフン', time: '5時間前', title: '日本から来た友達を案内するなら、影島と甘川洞どっちがいい？', ko: '일본에서 온 친구를 안내한다면 영도랑 감천동 중 어디가 좋을까요?', count: 'コメント 7' },
+            { id: 3, b: 'qa', board: '質問', badge: 'JP', author: 'ゆうと（西面在住）', time: '2時間前', title: '釜山の地下鉄、交通カードはどれがおすすめ？', count: '回答 0', wait: true },
+            { id: 4, b: 'free', board: '自由', badge: 'JP', author: 'あや', time: '昨日', title: '広安里の花火、今年はどこから見るのがおすすめ？', count: 'コメント 6' },
+            { id: 5, b: 'study', board: '留学・就職', badge: '運営', author: 'ケコ', time: '昨日', title: '釜山で日本語を活かせる仕事の探し方', count: '読みもの' },
+            { id: 6, b: 'qa', board: '質問', badge: 'KR', author: 'ソヨン', time: '昨日', title: '日本の友達の結婚式、ご祝儀の相場は？', ko: '일본 친구 결혼식, 축의금은 얼마 정도가 적당할까요?', count: '回答 2' },
+            { id: 7, b: 'lang', board: '日韓言語交流', badge: '運営', author: 'ソコソコ', time: '2日前', title: '10月のスタディ振り返り：敬語の使い分け', count: 'コメント 4' },
+            { id: 8, b: 'culture', board: '日韓文化交流', badge: '運営', author: 'ソコソコ', time: '3日前', title: 'チュソクに招かれたら、手土産は何がいい？', count: 'コメント 9' }
+          ];
+          var rows = ITEMS.filter(function (it) { return shop === 'all' || it.b === shop; }).map(function (it) {
+            var o = !!orig[it.id];
+            return {
+              id: it.id,
+              board: it.board,
+              badge: it.badge,
+              author: it.author,
+              time: it.time,
+              sq: 'sq ' + SQ[it.b],
+              badgeCls: it.badge === '運営' ? 'bdg staff' : 'bdg',
+              title: o ? it.ko : it.title,
+              titleCls: o ? 'rt ko' : 'rt',
+              mtitleCls: o ? 'rt m-rt ko' : 'rt m-rt',
+              tr: !!it.ko,
+              trLabel: o ? '原文（韓国語）を表示中' : '韓国語から自動翻訳',
+              trLink: o ? '翻訳を見る' : '原文を見る',
+              onToggle: function () { var n = Object.assign({}, orig); n[it.id] = !o; self.setState({ orig: n }); },
+              wait: !!it.wait,
+              count: it.count,
+              priceCls: it.wait ? 'price zero' : 'price'
+            };
+          });
+          return {
+            shops: shops,
+            rows: rows,
+            mrows: rows.slice(0, 3),
+            filterLabel: shop === 'all' ? '通り全体' : current.name + 'のお店',
+            rowCount: rows.length + '件・新着順'
+          };
+        }
+      }
+    </script>
+  </body>
+</html>

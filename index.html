@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>소코소코 R1 커뮤니티 홈 시안</title>
+    <title>소코소코 커뮤니티 홈 시안</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=Noto+Sans+JP:wght@400;700&amp;family=Klee+One:wght@600&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=Noto+Sans+JP:wght@400;700&amp;family=Gaegu:wght@700&amp;display=swap"
     />
     <style>
       :root {
@@ -16,6 +16,7 @@
         --text: #1a1a18;
         --paper: #fafaf7;
         --accent: #e8728c;
+        --accent-soft: #fde7ec;
         --accent-deep: #b23a5c;
         --sub: #5c5c58;
       }
@@ -36,22 +37,22 @@
         color: var(--ink);
       }
       .wrap {
-        max-width: 1120px;
+        max-width: 1180px;
         margin: 0 auto;
         padding: 56px 24px 72px;
       }
       header h1 {
         margin: 0;
-        font-family: 'Klee One', 'Noto Sans JP', serif;
-        font-weight: 600;
-        font-size: clamp(28px, 4vw, 40px);
+        font-family: 'Gaegu', 'Noto Sans KR', sans-serif;
+        font-weight: 700;
+        font-size: clamp(32px, 4.4vw, 46px);
+        line-height: 1.2;
         color: var(--ink);
-        letter-spacing: 0.04em;
       }
       header p {
         margin: 12px 0 0;
         color: var(--sub);
-        max-width: 720px;
+        max-width: 760px;
         text-wrap: pretty;
       }
       .note {
@@ -69,11 +70,57 @@
         border-radius: 999px;
         background: #fff;
       }
+      .vote-banner {
+        display: none;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 28px;
+        padding: 18px 22px;
+        background: #fff;
+        border: 1.5px solid var(--ink);
+        border-radius: 14px;
+        box-shadow: 3px 3px 0 var(--ink);
+      }
+      .vote-banner.on {
+        display: flex;
+      }
+      .vote-banner strong {
+        font-size: 17px;
+        color: var(--ink);
+      }
+      .vote-banner span {
+        display: block;
+        font-size: 14px;
+        color: var(--sub);
+      }
+      section {
+        margin-top: 56px;
+      }
+      .sec-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 12px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--ink);
+      }
+      .sec-head h2 {
+        margin: 0;
+        font-size: 24px;
+        color: var(--ink);
+      }
+      .sec-head p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--sub);
+      }
       .grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
         gap: 28px;
-        margin-top: 40px;
+        margin-top: 28px;
       }
       .card {
         display: flex;
@@ -102,8 +149,9 @@
       }
       .title {
         display: flex;
+        flex-wrap: wrap;
         align-items: baseline;
-        gap: 10px;
+        gap: 6px 10px;
         margin: 0;
         font-size: 18px;
         color: var(--ink);
@@ -114,6 +162,14 @@
         border-radius: 5px;
         background: var(--ink);
         color: #fff;
+      }
+      .tag {
+        font-size: 12px;
+        font-weight: 700;
+        padding: 1px 8px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent-deep);
       }
       .jp {
         font-family: 'Noto Sans JP', sans-serif;
@@ -149,11 +205,16 @@
         border-color: var(--accent-deep);
         color: #fff;
       }
+      .btn.vote {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
       .btn:hover {
         box-shadow: 2px 2px 0 var(--ink);
       }
       footer {
-        margin-top: 48px;
+        margin-top: 56px;
         font-size: 13px;
         color: var(--sub);
       }
@@ -162,112 +223,131 @@
   <body>
     <div class="wrap">
       <header>
-        <h1>소코소코 R1 커뮤니티 홈 시안</h1>
+        <h1>소코소코 커뮤니티 홈 시안</h1>
         <p>
-          「釜山暮らし。いもじょも」를 커뮤니티형으로 개편하면서 만든 홈 화면 시안 6개입니다. 방향마다
-          레이아웃과 콘셉트를 확실히 다르게 잡았습니다. 각 시안 페이지의 왼쪽은 데스크톱(1280px),
-          오른쪽은 모바일(390px) 화면입니다.
+          「釜山暮らし。いもじょも」를 커뮤니티형으로 개편하면서 만든 홈 화면 시안입니다. 시안 페이지의
+          왼쪽은 데스크톱(1280px), 오른쪽은 모바일(390px) 화면입니다.
         </p>
         <ul class="note">
           <li>PC에서 보시는 것을 권장합니다</li>
           <li>버튼과 탭은 실제로 눌러 볼 수 있습니다</li>
           <li>예시 글과 이름은 모두 가상입니다</li>
         </ul>
+        <div class="vote-banner" id="vote-banner">
+          <div>
+            <strong>마음에 드는 시안에 투표해 주세요</strong>
+            <span>로그인 없이 1분이면 끝납니다. 각 시안의 '이 시안에 투표' 버튼을 눌러도 됩니다.</span>
+          </div>
+          <a class="btn vote" id="vote-main" href="#" target="_blank" rel="noopener">투표하기</a>
+        </div>
       </header>
 
-      <main class="grid">
-        <article class="card">
-          <a href="1a-window.html"><img src="shots/1a-window-thumb.png" alt="1a 窓辺 시안 미리보기" loading="lazy" /></a>
-          <div class="body">
-            <h2 class="title"><span class="id">1a</span><span class="jp">窓辺</span> 소코의 창가</h2>
-            <p class="desc">
-              지금 사이트를 가장 충실하게 발전시킨 안입니다. 소코가 「なにか困ってる？」라고 묻는 말풍선 안에서
-              바로 질문을 쓰고, 朝·夕·夜 버튼으로 시간대별 소코를 볼 수 있습니다.
-            </p>
-            <div class="links">
-              <a class="btn primary" href="1a-window.html">시안 열기</a>
-              <a class="btn" href="shots/1a-window.png">전체 이미지</a>
-            </div>
-          </div>
-        </article>
+      <section>
+        <div class="sec-head">
+          <h2>2차 시안</h2>
+          <p>1차에서 반응이 좋았던 노선도(1e)를 발전시킨 6개와 새로운 방향 4개입니다.</p>
+        </div>
+        <div class="grid" id="round2"></div>
+      </section>
 
-        <article class="card">
-          <a href="1b-kairanban.html"><img src="shots/1b-kairanban-thumb.png" alt="1b 回覧板 시안 미리보기" loading="lazy" /></a>
-          <div class="body">
-            <h2 class="title"><span class="id">1b</span><span class="jp">回覧板</span> 동네 게시판</h2>
-            <p class="desc">
-              홈 전체가 코르크 게시판입니다. 글은 핀과 테이프로 붙인 메모지로 보이고, 교류회 안내는 아래를
-              뜯어 가는 전단지로 표현했습니다.
-            </p>
-            <div class="links">
-              <a class="btn primary" href="1b-kairanban.html">시안 열기</a>
-              <a class="btn" href="shots/1b-kairanban.png">전체 이미지</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <a href="1c-kawaraban.html"><img src="shots/1c-kawaraban-thumb.png" alt="1c 釜山かわら版 시안 미리보기" loading="lazy" /></a>
-          <div class="body">
-            <h2 class="title"><span class="id">1c</span><span class="jp">釜山かわら版</span> 신문형</h2>
-            <p class="desc">
-              일본 신문 1면처럼 손글씨 제호, 톱기사, 세로쓰기 칼럼으로 구성했습니다. 6개 중 정보 밀도가 가장
-              높습니다.
-            </p>
-            <div class="links">
-              <a class="btn primary" href="1c-kawaraban.html">시안 열기</a>
-              <a class="btn" href="shots/1c-kawaraban.png">전체 이미지</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <a href="1d-chat.html"><img src="shots/1d-chat-thumb.png" alt="1d ソコと話す 시안 미리보기" loading="lazy" /></a>
-          <div class="body">
-            <h2 class="title"><span class="id">1d</span><span class="jp">ソコと話す</span> 대화형</h2>
-            <p class="desc">
-              메신저처럼 게시판이 '대화방'이 되고, 질문과 답변이 말풍선으로 오갑니다. 「原文を見る」를 누르면
-              번역과 한국어 원문이 그 자리에서 바뀝니다.
-            </p>
-            <div class="links">
-              <a class="btn primary" href="1d-chat.html">시안 열기</a>
-              <a class="btn" href="shots/1d-chat.png">전체 이미지</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <a href="1e-area.html"><img src="shots/1e-area-thumb.png" alt="1e エリアで探す 시안 미리보기" loading="lazy" /></a>
-          <div class="body">
-            <h2 class="title"><span class="id">1e</span><span class="jp">エリアで探す</span> 동네 노선도형</h2>
-            <p class="desc">
-              南浦洞부터 海雲台까지 이은 노선도에서 역(동네)을 고르면 그 동네의 질문과 화제가 바로 아래에
-              나타납니다.
-            </p>
-            <div class="links">
-              <a class="btn primary" href="1e-area.html">시안 열기</a>
-              <a class="btn" href="shots/1e-area.png">전체 이미지</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card">
-          <a href="1f-search.html"><img src="shots/1f-search-thumb.png" alt="1f ひとこと検索 시안 미리보기" loading="lazy" /></a>
-          <div class="body">
-            <h2 class="title"><span class="id">1f</span><span class="jp">ひとこと検索</span> 미니멀 검색형</h2>
-            <p class="desc">
-              구글 첫 화면처럼 큰 질문창 하나에 집중한 안입니다. 소코가 질문창 위로 고개를 내밀고, 피드는
-              카드 없이 선과 글자로만 정리했습니다.
-            </p>
-            <div class="links">
-              <a class="btn primary" href="1f-search.html">시안 열기</a>
-              <a class="btn" href="shots/1f-search.png">전체 이미지</a>
-            </div>
-          </div>
-        </article>
-      </main>
+      <section>
+        <div class="sec-head">
+          <h2>1차 시안</h2>
+          <p>방향마다 레이아웃과 콘셉트를 확실히 다르게 잡은 6개입니다.</p>
+        </div>
+        <div class="grid" id="round1"></div>
+      </section>
 
       <footer>검토용 시안이며 실제 서비스 화면이 아닙니다. 2026년 10월 21일 작성.</footer>
     </div>
+
+    <script>
+      // Google Forms "pre-filled link" with option 1a selected. Empty = voting hidden.
+      const FORM_PREFILL_URL = '';
+
+      const DESIGNS = [
+        { id: '2a', round: 2, file: '2a-line-refined', jp: 'くらしライン磨き版', ko: '노선도 다듬은 안', tag: '노선도', label: '2a くらしライン磨き版 / 노선도 다듬은 안',
+          desc: '1e를 기본으로 정리한 안입니다. 노선도를 히어로에 합치고 소코가 역무원처럼 승강장에 서 있으며, 모바일에서는 노선을 세로로 세웠습니다.' },
+        { id: '2b', round: 2, file: '2b-train-monitor', jp: '車内モニター', ko: '차내 안내 화면', tag: '노선도', label: '2b 車内モニター / 차내 안내 화면',
+          desc: '일본 전철의 차내 안내 모니터가 주인공입니다. 역을 누르면 「次は 海雲台」 화면과 그 동네의 질문이 함께 바뀝니다.' },
+        { id: '2c', round: 2, file: '2c-kippu', jp: 'きっぷ', ko: '승차권형', tag: '노선도', label: '2c きっぷ / 승차권형',
+          desc: '질문하기를 질문권 발매로, 글 목록을 승차권 묶음으로 바꿨습니다. 해결된 질문에는 「改札済」 도장이 찍힙니다.' },
+        { id: '2d', round: 2, file: '2d-board-lines', jp: '掲示板が路線', ko: '게시판 노선형', tag: '노선도', label: '2d 掲示板が路線 / 게시판 노선형',
+          desc: '게시판마다 색과 기호가 다른 노선으로 만들고, 일본 역의 안내 표지판처럼 구성했습니다. 노선과 역을 함께 골라 글을 걸러 볼 수 있습니다.' },
+        { id: '2e', round: 2, file: '2e-departure-board', jp: '発車標', ko: '발차 안내판형', tag: '노선도', label: '2e 発車標 / 발차 안내판형',
+          desc: '답을 기다리는 질문을 LED 발차 안내판에 띄우고, 전체 글은 일본식 시각표로 정리했습니다.' },
+        { id: '2f', round: 2, file: '2f-sanpo-map', jp: 'おさんぽマップ', ko: '산책 지도형', tag: '노선도', label: '2f おさんぽマップ / 산책 지도형',
+          desc: '노선도를 손그림 산책 지도로 바꿨습니다. 동네 핀을 누르면 소코가 그 동네로 걸어가고 최근 질문이 말풍선으로 열립니다.' },
+        { id: '2g', round: 2, file: '2g-bento', jp: 'ベント', ko: '벤토 그리드형', tag: '새 방향', label: '2g ベント / 벤토 그리드형',
+          desc: '소코, 질문창, 번역 체험, 교류회 날짜를 크기가 다른 타일로 나눠 한 화면에 모은 최신 웹 스타일입니다.' },
+        { id: '2h', round: 2, file: '2h-shotengai', jp: '商店街', ko: '상점가형', tag: '새 방향', label: '2h 商店街 / 상점가형',
+          desc: '홈을 일본 동네 상점가로 꾸몄습니다. 게시판은 노렌을 건 가게이고, 가게 주인 소코가 카운터에서 질문을 받습니다.' },
+        { id: '2i', round: 2, file: '2i-letters', jp: '日韓レター', ko: '편지·엽서형', tag: '새 방향', label: '2i 日韓レター / 편지·엽서형',
+          desc: '질문과 답변이 한국과 일본 이웃 사이를 엽서처럼 오갑니다. 번역된 글에는 「翻訳メモ」 쪽지가 붙습니다.' },
+        { id: '2j', round: 2, file: '2j-two-doors', jp: 'ふたつの入口', ko: '두 개의 입구형', tag: '새 방향', label: '2j ふたつの入口 / 두 개의 입구형',
+          desc: '화면을 「聞きたい」(일본인)와 「答えたい」(한국인 멤버) 두 문으로 나누고, 두 쪽에서 나온 질문과 답이 가운데에서 만납니다.' },
+        { id: '1a', round: 1, file: '1a-window', jp: '窓辺', ko: '소코의 창가', label: '1a 窓辺 / 소코의 창가',
+          desc: '지금 사이트를 가장 충실하게 발전시킨 안입니다. 소코의 말풍선 안에서 바로 질문을 쓰고, 朝·夕·夜 버튼으로 시간대별 소코를 볼 수 있습니다.' },
+        { id: '1b', round: 1, file: '1b-kairanban', jp: '回覧板', ko: '동네 게시판', label: '1b 回覧板 / 동네 게시판',
+          desc: '홈 전체가 코르크 게시판입니다. 글은 핀과 테이프로 붙인 메모지이고, 교류회 안내는 뜯어 가는 전단지입니다.' },
+        { id: '1c', round: 1, file: '1c-kawaraban', jp: '釜山かわら版', ko: '신문형', label: '1c 釜山かわら版 / 신문형',
+          desc: '일본 신문 1면처럼 손글씨 제호, 톱기사, 세로쓰기 칼럼으로 구성했습니다. 정보 밀도가 가장 높습니다.' },
+        { id: '1d', round: 1, file: '1d-chat', jp: 'ソコと話す', ko: '대화형', label: '1d ソコと話す / 대화형',
+          desc: '게시판이 메신저의 대화방이 되고, 질문과 답변이 말풍선으로 오갑니다. 「原文を見る」로 번역과 원문을 바꿔 볼 수 있습니다.' },
+        { id: '1e', round: 1, file: '1e-area', jp: 'エリアで探す', ko: '노선도형', label: '1e エリアで探す / 노선도형',
+          desc: '南浦洞부터 海雲台까지 이은 노선도에서 역(동네)을 고르면 그 동네의 질문과 화제가 바로 아래에 나타납니다.' },
+        { id: '1f', round: 1, file: '1f-search', jp: 'ひとこと検索', ko: '미니멀 검색형', label: '1f ひとこと検索 / 미니멀 검색형',
+          desc: '구글 첫 화면처럼 큰 질문창 하나에 집중한 안입니다. 소코가 질문창 위로 고개를 내밉니다.' },
+      ];
+
+      // Swap the pre-selected option in the pre-filled link for this design's label.
+      function voteUrl(label) {
+        if (!FORM_PREFILL_URL) return '';
+        const url = new URL(FORM_PREFILL_URL);
+        for (const [key, value] of url.searchParams) {
+          if (key.startsWith('entry.') && value.startsWith('1a')) {
+            url.searchParams.set(key, label);
+            return url.toString();
+          }
+        }
+        return url.toString();
+      }
+
+      function el(tag, attrs, children) {
+        const node = document.createElement(tag);
+        Object.entries(attrs || {}).forEach(([k, v]) => node.setAttribute(k, v));
+        (children || []).forEach((c) => node.append(c));
+        return node;
+      }
+
+      DESIGNS.forEach((d) => {
+        const titleBits = [el('span', { class: 'id' }, [d.id]), el('span', { class: 'jp' }, [d.jp]), d.ko];
+        if (d.tag) titleBits.push(el('span', { class: 'tag' }, [d.tag]));
+        const links = [
+          el('a', { class: 'btn primary', href: d.file + '.html' }, ['시안 열기']),
+          el('a', { class: 'btn', href: 'shots/' + d.file + '.png' }, ['전체 이미지']),
+        ];
+        const vote = voteUrl(d.label);
+        if (vote) links.push(el('a', { class: 'btn vote', href: vote, target: '_blank', rel: 'noopener' }, ['이 시안에 투표']));
+        const card = el('article', { class: 'card' }, [
+          el('a', { href: d.file + '.html' }, [
+            el('img', { src: 'shots/' + d.file + '-thumb.png', alt: d.id + ' ' + d.jp + ' 시안 미리보기', loading: 'lazy' }),
+          ]),
+          el('div', { class: 'body' }, [
+            el('h3', { class: 'title' }, titleBits),
+            el('p', { class: 'desc' }, [d.desc]),
+            el('div', { class: 'links' }, links),
+          ]),
+        ]);
+        document.getElementById(d.round === 2 ? 'round2' : 'round1').append(card);
+      });
+
+      if (FORM_PREFILL_URL) {
+        const plain = new URL(FORM_PREFILL_URL);
+        [...plain.searchParams.keys()].filter((k) => k.startsWith('entry.') || k === 'usp').forEach((k) => plain.searchParams.delete(k));
+        document.getElementById('vote-main').href = plain.toString();
+        document.getElementById('vote-banner').classList.add('on');
+      }
+    </script>
   </body>
 </html>

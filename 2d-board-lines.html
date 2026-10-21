@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>2d 掲示板が路線 | 소코소코 홈 시안</title>
+    <meta name="viewport" content="width=1860" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet data-dc-atomics>
+        <meta name="design_doc_mode" content="canvas" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Noto+Sans+KR:wght@400;700&amp;family=Noto+Serif+JP:wght@500;700;900&amp;family=Klee+One:wght@400;600&amp;display=swap" />
+        <style>
+          body{margin:0;background:#e9e7e2;font-family:'Noto Sans JP',sans-serif;color:#1a1a18;-webkit-font-smoothing:antialiased}
+          a{color:#b23a5c;text-decoration:underline;text-underline-offset:2px}
+          a:hover{color:#111111}
+          button{font-family:inherit;cursor:pointer}
+          .c-Q{--lc:#e8728c}
+          .c-F{--lc:oklch(0.7 0.13 245)}
+          .c-S{--lc:oklch(0.7 0.13 70)}
+          .c-L{--lc:oklch(0.7 0.13 150)}
+          .c-C{--lc:oklch(0.7 0.13 305)}
+          .c-X{--lc:#111111}
+          .ttl{position:absolute;left:40px;top:32px;width:1760px}
+          .ttl-h{display:flex;align-items:center;gap:12px}
+          .oid{font:700 12px ui-monospace,Menlo,monospace;background:#111;color:#fff;padding:3px 8px;border-radius:5px}
+          .ttl-n{font-weight:700;font-size:20px;color:#111}
+          .ttl-k{font-family:'Noto Sans KR',sans-serif;font-size:15px;color:#5c5c58}
+          .ttl-d{margin:8px 0 0;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.6;color:#4a4a46;max-width:1180px}
+          .flbl{font:700 11px ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#5c5c58;margin:0 0 10px}
+          .dwrap{position:absolute;left:40px;top:132px;width:1280px}
+          .mwrap{position:absolute;left:1400px;top:132px;width:410px}
+          .dframe{width:1280px;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.08)}
+          .phone{width:390px;border:10px solid #111;border-radius:48px;overflow:hidden;background:#fff}
+          .sbar{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-weight:700;font-size:13px}
+          .batt{width:22px;height:11px;border:1.5px solid #111;border-radius:3px;box-sizing:border-box;padding:1px}
+          .batt span{display:block;height:100%;width:70%;background:#111;border-radius:1px}
+          .hd{height:68px;display:flex;align-items:center;gap:36px;padding:0 40px;border-bottom:1.5px solid #111;background:#fff}
+          .logo{display:flex;align-items:center;gap:10px;color:#111;text-decoration:none}
+          .ava{width:38px;height:38px;border-radius:50%;overflow:hidden;position:relative;border:1.5px solid #111;background:#fff;flex:none}
+          .ava img{position:absolute;width:116px;left:-55px;top:-46px}
+          .lg-a{font-size:13px;font-weight:500}
+          .lg-b{font-family:'Klee One',serif;font-weight:600;font-size:23px;letter-spacing:.06em}
+          .nav{display:flex;gap:26px;font-size:14px;font-weight:500}
+          .nav a{color:#111;text-decoration:none;padding:23px 0}
+          .nav a.on{font-weight:700;box-shadow:inset 0 -3px 0 #e8728c}
+          .hd-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+          .lang{display:flex;border:1.5px solid #111;border-radius:999px;overflow:hidden;font-size:12px;font-weight:700}
+          .lang span{padding:5px 10px}
+          .lang .on{background:#111;color:#fff}
+          .btn-o{border:1.5px solid #111;border-radius:999px;padding:7px 16px;font-size:13px;font-weight:700;background:#fff;box-shadow:2px 2px 0 #111;color:#111}
+          .hero{background:#fafaf7;border-bottom:1.5px solid #111;padding:34px 40px 38px;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:24px;align-items:center}
+          .sign{background:#fff;border:2.5px solid #111;border-radius:14px;box-shadow:5px 5px 0 #111;overflow:hidden}
+          .sign-top{background:#111;color:#fff;display:flex;align-items:center;gap:14px;padding:11px 22px}
+          .info{width:28px;height:28px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;font:700 16px Georgia,serif;flex:none}
+          .sign-t1{font-weight:900;font-size:19px;letter-spacing:.14em}
+          .sign-t2{font-size:12px;letter-spacing:.06em;color:#d9d9d3}
+          .sign-tr{margin-left:auto;font-size:12px;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+          .lamp{width:8px;height:8px;border-radius:50%;background:oklch(0.78 0.15 150)}
+          .sign-b{padding:24px 28px 22px}
+          .kick{font-family:'Klee One',serif;font-weight:600;font-size:16px;color:#b23a5c}
+          .h1{margin:4px 0 0;font-weight:900;font-size:36px;line-height:1.3;color:#111;letter-spacing:.02em}
+          .sub{margin:8px 0 0;font-size:14px;color:#4a4a46}
+          .ask{margin-top:20px;display:flex;gap:10px;align-items:stretch}
+          .inp{flex:1;min-width:0;height:58px;border:2px solid #111;border-radius:12px;padding:0 18px;font:16px 'Noto Sans JP',sans-serif;color:#111;background:#fff;box-sizing:border-box}
+          .inp::placeholder{color:#74746d}
+          .btn-p{background:#b23a5c;color:#fff;border:2px solid #111;border-radius:12px;padding:0 26px;font-weight:700;font-size:16px;box-shadow:3px 3px 0 #111}
+          .btn-s{background:#fff;color:#111;border:2px solid #111;border-radius:12px;padding:0 20px;font-weight:700;font-size:15px;box-shadow:3px 3px 0 #111}
+          .hint{margin-top:14px;font-size:12px;color:#5c5c58;display:flex;gap:8px;align-items:center}
+          .band{display:flex;height:8px}
+          .band span{flex:1;background:var(--lc)}
+          .guide{position:relative;height:330px}
+          .soko{position:absolute;left:40px;top:-14px;width:420px}
+          .bub{position:absolute;left:0;top:4px;background:#fff;border:2px solid #111;border-radius:16px;padding:11px 16px;font-family:'Klee One',serif;font-weight:600;font-size:16px;line-height:1.55;box-shadow:3px 3px 0 #111;max-width:176px;z-index:2;color:#111}
+          .bub::after{content:'';position:absolute;right:-9px;top:30px;width:14px;height:14px;background:#fff;border-right:2px solid #111;border-top:2px solid #111;transform:rotate(45deg)}
+          .gtag{position:absolute;right:18px;bottom:2px;background:#111;color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;z-index:2}
+          .sec{padding:34px 40px 0}
+          .hang{position:relative}
+          .hang::before,.hang::after{content:'';position:absolute;top:-12px;width:3px;height:12px;background:#111}
+          .hang::before{left:56px}
+          .hang::after{right:56px}
+          .hbar{background:#111;color:#fff;border-radius:8px;display:flex;align-items:center;gap:14px;padding:9px 18px;min-height:48px;box-sizing:border-box}
+          .hb-t{font-weight:900;font-size:18px;letter-spacing:.12em}
+          .hb-s{font-size:12px;letter-spacing:.06em;color:#d9d9d3}
+          .hb-r{margin-left:auto;font-size:13px;font-weight:700;display:flex;gap:10px;align-items:center}
+          .hb-r a{color:#fff}
+          .mini{display:flex;width:30px;height:30px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-sizing:border-box;flex:none}
+          .mini span{flex:1;background:var(--lc)}
+          .rd{width:38px;height:38px;border-radius:50%;background:#fff;border:5px solid var(--lc);display:grid;place-items:center;font-weight:900;font-size:16px;color:#111;flex:none;box-sizing:border-box;line-height:1}
+          .rd.sm{width:30px;height:30px;border-width:4px;font-size:13px}
+          .rd.xs{width:24px;height:24px;border-width:3.5px;font-size:11px}
+          .map{margin-top:16px;border:2px solid #111;border-radius:14px;background:#fff;box-shadow:4px 4px 0 #111;padding:16px 22px 12px}
+          .mhead{display:grid;grid-template-columns:232px minmax(0,1fr);align-items:end}
+          .sts{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+          .sth{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 9px;border-radius:10px;cursor:pointer;text-align:center}
+          .sth.br{box-shadow:inset -1.5px 0 0 #c9c9c2}
+          .sth-c{font:700 11px ui-monospace,Menlo,monospace;border:1.5px solid #111;border-radius:6px;padding:1px 6px;background:#fff;color:#111}
+          .sth-n{font-weight:900;font-size:17px;color:#111;margin-top:3px}
+          .sth-s{font-family:'Noto Sans KR',sans-serif;font-size:10px;color:#5c5c58;white-space:nowrap}
+          .sth-k{font-size:11px;font-weight:700;color:#3d3d3a}
+          .sth-b{font-size:10px;font-weight:700;color:#5c5c58}
+          .sth.on{background:#111}
+          .sth.on .sth-n{color:#fff}
+          .sth.on .sth-s,.sth.on .sth-k,.sth.on .sth-b{color:#e4e4de}
+          .mrow{display:grid;grid-template-columns:232px minmax(0,1fr);align-items:center}
+          .mrow.dim{opacity:.2}
+          .leg{display:flex;align-items:center;gap:10px;height:50px;padding:0 12px;border-radius:10px;cursor:pointer;margin-right:10px}
+          .leg-x{display:flex;flex-direction:column;line-height:1.3}
+          .leg-n{font-weight:700;font-size:14px;color:#111}
+          .leg-p{font-size:11px;color:#5c5c58}
+          .leg-c{margin-left:auto;font-size:12px;font-weight:700;color:#3d3d3a}
+          .leg.on{background:#111}
+          .leg.on .leg-n,.leg.on .leg-c{color:#fff}
+          .leg.on .leg-p{color:#d9d9d3}
+          .leg.all{height:44px;border:1.5px solid #111;margin-bottom:10px}
+          .track{position:relative;height:50px}
+          .bar{position:absolute;left:21.43%;width:71.43%;top:50%;height:10px;margin-top:-5px;background:var(--lc);border-radius:5px}
+          .brb{position:absolute;left:7.14%;width:14.29%;top:50%;height:0;margin-top:-2px;border-top:4px dotted var(--lc)}
+          .stops{position:absolute;left:0;right:0;top:0;bottom:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:center;justify-items:center}
+          .cell{display:grid;place-items:center;width:100%;height:100%}
+          .stop{width:28px;height:28px;border-radius:50%;background:#fff;border:4px solid var(--lc);box-sizing:border-box;display:grid;place-items:center;font-weight:900;font-size:11px;color:#111;position:relative;z-index:1}
+          .stop.on{border-color:#111;width:32px;height:32px;box-shadow:0 0 0 3px #fff}
+          .mnote{display:flex;justify-content:space-between;gap:16px;margin-top:8px;padding-top:10px;border-top:1.5px solid #e2e2dc;font-size:11px;color:#5c5c58}
+          .body{display:grid;grid-template-columns:minmax(0,1fr) 352px;gap:32px;padding:34px 40px 40px;align-items:start}
+          .card{background:#fff;border:2px solid #111;border-radius:14px;box-shadow:4px 4px 0 #111}
+          .feat{margin-top:18px;padding:20px 24px 18px}
+          .fk{display:flex;align-items:center;gap:10px;font-size:12px;flex-wrap:wrap}
+          .pick{font-family:'Klee One',serif;font-weight:600;font-size:13px;border:1.5px dashed #111;border-radius:999px;padding:1px 10px;color:#111}
+          .lnm{font-weight:700;font-size:12px;color:#111}
+          .stc{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;border:1.5px solid #111;border-radius:999px;padding:1px 9px 1px 4px;background:#fff;color:#111;white-space:nowrap}
+          .stc .dot{width:11px;height:11px;border-radius:50%;border:2.5px solid #111;box-sizing:border-box;display:block}
+          .stc.all{border-style:dashed}
+          .ftitle{margin:10px 0 0;font-weight:900;font-size:22px;line-height:1.45;color:#111}
+          .fbody{margin:6px 0 0;font-size:14px;color:#3d3d3a;line-height:1.7}
+          .meta{display:flex;align-items:center;gap:8px;font-size:12px;color:#5c5c58;flex-wrap:wrap}
+          .au{font-weight:700;color:#111}
+          .bdg{font:700 10px ui-monospace,Menlo,monospace;border-radius:4px;padding:1px 5px;border:1.5px solid currentColor;line-height:1.3}
+          .bdg-jp{color:#b23a5c}
+          .bdg-kr{color:#2f5aa8}
+          .bdg-st{background:#111;color:#fff;border-color:#111}
+          .ans{margin-top:14px;background:#fafaf7;border:1.5px solid #111;border-radius:12px;padding:13px 16px}
+          .ans-h{display:flex;align-items:center;gap:8px;font-size:12px;color:#5c5c58}
+          .best{font-size:11px;font-weight:700;color:#1f6b45;border:1.5px solid #1f6b45;border-radius:999px;padding:0 8px;margin-left:auto;background:#fff}
+          .ans-t{margin:7px 0 0;font-size:15px;line-height:1.75;color:#111}
+          .xfer{margin-top:14px;border:2px dashed #111;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:14px}
+          .xf-l{display:flex;flex-direction:column;align-items:center;gap:5px;flex:none}
+          .xf-p{background:#111;color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;padding:2px 7px;border-radius:4px}
+          .xf-k{font-size:11px;font-weight:700;color:#5c5c58}
+          .xf-t{font-weight:700;font-size:15px;color:#111}
+          .xf-s{font-size:12px;color:#5c5c58;margin-top:2px}
+          .xf-b{margin-left:auto;flex:none;background:#b23a5c;color:#fff;border:2px solid #111;border-radius:999px;padding:9px 16px;font-weight:700;font-size:13px;box-shadow:2px 2px 0 #111;text-decoration:none;white-space:nowrap}
+          .ffoot{display:flex;align-items:center;gap:12px;margin-top:14px;font-size:12px;color:#5c5c58}
+          .solved{color:#1f6b45;font-weight:700}
+          .more{margin-left:auto;font-weight:700}
+          .list{margin-top:18px;background:#fff;border:2px solid #111;border-radius:14px;box-shadow:4px 4px 0 #111;overflow:hidden}
+          .row{display:grid;grid-template-columns:52px minmax(0,1fr) 82px;gap:14px;align-items:center;padding:13px 20px;border-top:1.5px solid #e2e2dc}
+          .row:first-child{border-top:0}
+          .pf{display:flex;flex-direction:column;align-items:center;gap:4px}
+          .pf-n{font-size:10px;font-weight:700;color:#5c5c58;white-space:nowrap}
+          .rtitle{font-weight:700;font-size:16px;line-height:1.5;color:#111;margin:5px 0 0;word-break:auto-phrase}
+          .ko{font-family:'Noto Sans KR',sans-serif}
+          .tr{display:flex;align-items:center;gap:8px;font-size:12px;color:#5c5c58;margin-top:3px}
+          .tr-i{font-size:10px;font-weight:700;border:1.5px solid #5c5c58;border-radius:3px;padding:0 4px;line-height:1.4}
+          .tg{color:#b23a5c;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+          .rc{display:flex;flex-direction:column;gap:6px}
+          .cnt{border:1.5px solid #111;border-radius:10px;text-align:center;padding:5px 4px}
+          .cnt-n{font-weight:900;font-size:20px;line-height:1.15;color:#111}
+          .cnt-l{font-size:10px;color:#5c5c58}
+          .stt{font-size:10px;font-weight:700;text-align:center;border-radius:999px;padding:1px 0}
+          .stt-ok{color:#1f6b45;border:1.5px solid #1f6b45}
+          .stt-wait{color:#b23a5c;border:1.5px solid #b23a5c;background:#fde7ec}
+          .empty{padding:26px 24px;text-align:center;font-size:14px;color:#3d3d3a}
+          .empty-k{font-family:'Klee One',serif;font-weight:600;font-size:17px;color:#b23a5c;margin-top:6px}
+          .side{display:flex;flex-direction:column;gap:26px;padding-top:12px}
+          .sc{background:#fff;border:2px solid #111;border-radius:14px;box-shadow:4px 4px 0 #111;overflow:hidden}
+          .sc-h{background:#111;color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px}
+          .sc-ht{font-weight:900;font-size:15px;letter-spacing:.08em}
+          .sc-hs{margin-left:auto;font-size:11px;color:#d9d9d3}
+          .sc-b{padding:14px 18px 18px}
+          .ev-n{font-family:'Klee One',serif;font-weight:600;font-size:24px;color:#111}
+          .ev-l{font-size:11px;font-weight:700;color:#5c5c58;letter-spacing:.08em;margin-top:8px}
+          .ev-d{font-weight:900;font-size:26px;color:#111;line-height:1.25}
+          .ev-r{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+          .tag{font-size:11px;font-weight:700;border:1.5px solid #111;border-radius:999px;padding:1px 9px;color:#111}
+          .tag-p{color:#b23a5c;border-color:#b23a5c;background:#fde7ec}
+          .btn-w{display:flex;justify-content:center;align-items:center;margin-top:14px;height:48px;background:#b23a5c;color:#fff;border:2px solid #111;border-radius:12px;font-weight:700;font-size:15px;box-shadow:3px 3px 0 #111;text-decoration:none}
+          .nt{padding:11px 0;border-top:1.5px solid #e2e2dc}
+          .nt:first-child{border-top:0;padding-top:2px}
+          .nt-t{font-weight:700;font-size:14px;line-height:1.5;color:#111}
+          .nt-m{display:flex;gap:8px;align-items:center;font-size:11px;color:#5c5c58;margin-top:3px}
+          .sf{font-size:10px;font-weight:700;border:1.5px solid #111;border-radius:4px;padding:0 5px;color:#111}
+          .bl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 0;border-top:1.5px solid #e2e2dc;cursor:pointer}
+          .bl:first-child{border-top:0;padding-top:2px}
+          .bl-n{font-weight:700;font-size:14px;color:#111}
+          .bl-d{font-size:12px;color:#5c5c58}
+          .bl-c{font-size:12px;font-weight:700;color:#b23a5c;white-space:nowrap}
+          .ft{border-top:1.5px solid #111;padding:20px 40px;display:flex;justify-content:space-between;font-size:12px;color:#5c5c58}
+          .ft-b{font-family:'Klee One',serif;font-weight:600;font-size:15px;color:#111}
+          .m-hd{height:56px;display:flex;align-items:center;gap:8px;padding:0 10px 0 16px;border-bottom:1.5px solid #111}
+          .m-hd .lg-b{font-size:19px}
+          .m-hd .lg-a{font-size:11px}
+          .m-hd .ava{width:32px;height:32px}
+          .m-hd .ava img{width:98px;left:-47px;top:-39px}
+          .burger{width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:5px;align-items:center}
+          .burger span{display:block;width:20px;height:2px;background:#111;border-radius:1px}
+          .m-hero{background:#fafaf7;border-bottom:1.5px solid #111;padding:14px 16px 22px}
+          .m-guide{position:relative;height:150px}
+          .m-soko{position:absolute;right:-14px;top:-26px;width:236px}
+          .m-bub{position:absolute;left:0;top:16px;background:#fff;border:2px solid #111;border-radius:14px;padding:9px 12px;font-family:'Klee One',serif;font-weight:600;font-size:14px;line-height:1.5;box-shadow:3px 3px 0 #111;max-width:158px;z-index:2;color:#111}
+          .m-tag{position:absolute;right:6px;bottom:16px;background:#111;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;z-index:2}
+          .m-sign .sign-top{padding:9px 16px;gap:10px}
+          .m-sign .sign-t1{font-size:16px}
+          .m-sign .sign-b{padding:16px 16px 16px}
+          .m-h1{margin:2px 0 0;font-weight:900;font-size:25px;line-height:1.35;color:#111}
+          .m-sub{margin:6px 0 0;font-size:12.5px;color:#4a4a46}
+          .m-ta{display:block;width:100%;height:76px;margin-top:14px;border:2px solid #111;border-radius:12px;padding:11px 14px;font:15px/1.55 'Noto Sans JP',sans-serif;color:#111;resize:none;box-sizing:border-box;background:#fff}
+          .m-ta::placeholder{color:#74746d}
+          .m-btns{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;margin-top:12px}
+          .m-btns .btn-p,.m-btns .btn-s{height:50px;padding:0}
+          .m-chips{display:flex;gap:8px;overflow-x:auto;padding:16px 16px 6px;scrollbar-width:none}
+          .chip{flex:none;display:flex;align-items:center;gap:7px;height:44px;padding:0 14px 0 9px;border:2px solid #111;border-radius:999px;font-size:13px;font-weight:700;background:#fff;color:#111;box-sizing:border-box}
+          .chip.on{background:#111;color:#fff;padding-left:14px}
+          .chip-c{font-size:11px;font-weight:500}
+          .m-maph{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 8px;font-size:13px;font-weight:900;letter-spacing:.08em;color:#111}
+          .m-maph span{font-size:11px;font-weight:500;letter-spacing:0;color:#5c5c58}
+          .m-map{margin:0 16px;border:2px solid #111;border-radius:12px;overflow-x:auto;background:#fff;scrollbar-width:none}
+          .m-mapin{width:640px;padding:8px 12px 6px}
+          .mm .mhead,.mm .mrow{grid-template-columns:40px minmax(0,1fr)}
+          .mm .track{height:34px}
+          .mm .sth{padding:4px 2px 6px}
+          .mm .sth-n{font-size:14px}
+          .mm .stop{width:22px;height:22px;border-width:3.5px;font-size:10px}
+          .mm .bar{height:7px;margin-top:-3.5px}
+          .m-note{font-size:10.5px;color:#5c5c58;padding:6px 16px 0}
+          .m-sec{padding:18px 16px 8px}
+          .m-sec .hbar{min-height:42px;padding:8px 14px}
+          .m-sec .hb-t{font-size:15px}
+          .m-feat{margin-top:16px;padding:16px 16px 14px}
+          .m-feat .ftitle{font-size:18px}
+          .m-feat .ans-t{font-size:14px}
+          .m-feat .xfer{flex-wrap:wrap;gap:10px 12px}
+          .m-xft{flex:1;min-width:0}
+          .m-feat .xf-b{margin-left:0;width:100%;text-align:center;box-sizing:border-box;padding:12px 16px}
+          .m-list .row{grid-template-columns:40px minmax(0,1fr) 62px;gap:10px;padding:12px 14px}
+          .m-list .rtitle{font-size:14.5px}
+          .m-list .cnt-n{font-size:17px}
+          .m-more{display:flex;justify-content:center;align-items:center;height:46px;margin-top:14px;border:2px solid #111;border-radius:999px;font-weight:700;font-size:14px;color:#111;background:#fff;text-decoration:none}
+          .m-side{padding:16px 16px 22px;display:flex;flex-direction:column;gap:20px}
+          .m-tick{display:flex;align-items:center;gap:8px;height:40px;padding:0 10px 0 14px;background:#111;color:#fff;font-size:12px}
+          .m-tick-l{flex:none;font-size:10px;font-weight:700;color:#111;background:oklch(0.86 0.13 85);padding:2px 6px;border-radius:3px}
+          .m-tick-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+          .m-tick-t a{color:#fff}
+          .m-tick-n{flex:none;font-size:11px;color:#d9d9d3}
+          .m-tick-a{flex:none;color:#fff;font-weight:700;font-size:11px;padding:12px 4px}
+          .m-ev{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end}
+          .m-evn{font-size:20px}
+          .m-evd{font-size:21px;margin-top:2px}
+          .m-evb{margin-top:0;width:96px;height:48px}
+          .m-ft{border-top:1.5px solid #111;padding:14px 16px 18px;font-size:11px;color:#5c5c58;display:flex;justify-content:space-between}
+        </style>
+      </helmet>
+
+      <div class="ttl" data-drags-parent="1">
+        <div class="ttl-h">
+          <span class="oid">2d</span>
+          <span class="ttl-n">掲示板が路線</span>
+          <span class="ttl-k">게시판 = 노선 안내표지형</span>
+        </div>
+        <p class="ttl-d">1e 노선도를 발전시킨 안입니다. 게시판 하나하나를 색이 다른 지하철 노선(Q선 질문, F선 자유…)으로 바꾸고 동네는 여러 노선이 지나는 역으로 두어, 일본 역의 안내표지처럼 '어느 노선(게시판)을 탈지, 어느 역(동네)에서 내릴지' 고르게 했습니다.</p>
+      </div>
+
+      <div class="dwrap">
+        <div class="flbl" data-drags-parent="1">Desktop 1280</div>
+        <div class="dframe" data-screen-label="2d Desktop">
+          <header class="hd">
+            <a class="logo" href="#">
+              <span class="ava"><img src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="" /></span>
+              <span class="lg-a">釜山暮らし。</span>
+              <span class="lg-b">いもじょも</span>
+            </a>
+            <nav class="nav">
+              <a class="on" href="#">コミュニティ</a>
+              <a href="#">質問する</a>
+              <a href="#">読みもの</a>
+              <a href="#">釜山お知らせ</a>
+              <a href="#">交流会</a>
+            </nav>
+            <div class="hd-r">
+              <div class="lang"><span class="on">JP</span><span>KR</span></div>
+              <button class="btn-o" type="button">ログイン</button>
+            </div>
+          </header>
+
+          <section class="hero">
+            <div class="sign">
+              <div class="sign-top">
+                <span class="info">i</span>
+                <span class="sign-t1">ご案内</span>
+                <span class="sign-t2">Information · 안내</span>
+                <span class="sign-tr"><span class="lamp"></span>きょうの運行：平常どおり</span>
+              </div>
+              <div class="sign-b">
+                <div class="kick">いらっしゃいませ。案内係のソコです</div>
+                <h1 class="h1">釜山の暮らし、気軽に聞いてみよう</h1>
+                <p class="sub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                <div class="ask">
+                  <input class="inp" type="text" placeholder="例：釜山で日本語が通じる病院はありますか？" />
+                  <button class="btn-p" type="button">質問する</button>
+                  <button class="btn-s" type="button">投稿する</button>
+                </div>
+                <div class="hint">
+                  <span class="rd xs c-Q">Q</span>
+                  <span>質問は 1番線・Q線 へ。書いた言葉は自動で判定して、相手の言葉で届けます</span>
+                </div>
+              </div>
+              <div class="band">
+                <span class="c-Q"></span><span class="c-F"></span><span class="c-S"></span><span class="c-L"></span><span class="c-C"></span>
+              </div>
+            </div>
+            <div class="guide">
+              <div class="bub">どの線に乗る？<br />聞きたいことを書いてね</div>
+              <img class="soko" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="案内係のソコ" />
+              <span class="gtag">案内係 ソコ</span>
+            </div>
+          </section>
+
+          <section class="sec">
+            <div class="hang">
+              <div class="hbar">
+                <span class="mini"><span class="c-Q"></span><span class="c-F"></span><span class="c-S"></span><span class="c-L"></span><span class="c-C"></span></span>
+                <span class="hb-t">路線図</span>
+                <span class="hb-s">Route Map · 노선도</span>
+                <span class="hb-r">線をえらぶと掲示板、駅をえらぶとエリアで絞りこみ</span>
+              </div>
+            </div>
+            <div class="map">
+              <div class="mhead">
+                <div class="{{ allLeg.cls }}" onClick="{{ allLeg.onClick }}">
+                  <span class="leg-x"><span class="leg-n">すべての線</span><span class="leg-p">全5路線</span></span>
+                  <span class="leg-c">128件</span>
+                </div>
+                <div class="sts">
+                  <sc-for list="{{ sts }}" as="s" hint-placeholder-count="7">
+                    <div class="{{ s.cls }}" onClick="{{ s.onClick }}">
+                      <span class="sth-c">{{ s.code }}</span>
+                      <span class="sth-n">{{ s.name }}</span>
+                      <span class="sth-s">{{ s.sub }}</span>
+                      <span class="sth-k">{{ s.n }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+                <div class="{{ r.cls }}">
+                  <div class="{{ r.legCls }}" onClick="{{ r.onClick }}">
+                    <span class="rd sm">{{ r.letter }}</span>
+                    <span class="leg-x"><span class="leg-n">{{ r.name }}</span><span class="leg-p">{{ r.pf }}・{{ r.letter }}線</span></span>
+                    <span class="leg-c">{{ r.count }}</span>
+                  </div>
+                  <div class="track">
+                    <div class="bar"></div>
+                    <sc-if value="{{ r.hasBr }}"><div class="brb"></div></sc-if>
+                    <div class="stops">
+                      <sc-for list="{{ r.stops }}" as="p" hint-placeholder-count="7">
+                        <div class="cell">
+                          <sc-if value="{{ p.has }}"><span class="{{ p.cls }}">{{ p.n }}</span></sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+              <div class="mnote">
+                <span>○の数字＝今月その駅（エリア）に投稿された数　・　点線＝影島への支線</span>
+                <span>※ くらしラインは生活圏を簡略化した案内図です。実際の地下鉄路線とは異なります</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="body">
+            <div>
+              <div class="hang">
+                <div class="hbar">
+                  <sc-if value="{{ fAll }}"><span class="mini"><span class="c-Q"></span><span class="c-F"></span><span class="c-S"></span><span class="c-L"></span><span class="c-C"></span></span></sc-if>
+                  <sc-if value="{{ fOne }}"><span class="{{ fRd }}">{{ fLetter }}</span></sc-if>
+                  <span class="hb-t">新着の投稿</span>
+                  <span class="hb-s">Departures · 새 글</span>
+                  <span class="hb-r">
+                    <span>{{ fLabel }}</span>
+                    <span>{{ fCount }}</span>
+                    <sc-if value="{{ showClear }}"><a href="#" onClick="{{ clear }}">すべてにもどる</a></sc-if>
+                  </span>
+                </div>
+              </div>
+
+              <sc-if value="{{ showFeat }}">
+                <article class="card feat c-Q">
+                  <div class="fk">
+                    <span class="pick">ソコのピックアップ</span>
+                    <span class="rd xs">Q</span>
+                    <span class="lnm">1番線・Q線 質問</span>
+                    <span class="stc"><span class="dot"></span>K06 海雲台</span>
+                  </div>
+                  <h2 class="ftitle">外国人登録証の更新、海雲台の出入国事務所は予約必要？</h2>
+                  <p class="fbody">来月で在留期限が切れるので更新に行きたいのですが、予約が必要なのか分かりません。</p>
+                  <div class="meta" style="margin-top:8px">
+                    <span class="bdg bdg-jp">JP</span><span class="au">さくら</span><span>海雲台在住 · 3時間前</span>
+                  </div>
+                  <div class="ans">
+                    <div class="ans-h">
+                      <span class="bdg bdg-kr">KR</span><span class="au">ミンジ</span><span>日本語で回答 · 1時間前</span>
+                      <span class="best">ベストアンサー</span>
+                    </div>
+                    <p class="ans-t">はい、ハイコリア（hikorea.go.kr）で事前予約が必要です。平日午前は混むので、午後の枠がおすすめです。</p>
+                  </div>
+                  <div class="xfer">
+                    <div class="xf-l"><span class="xf-p">のりかえ</span><span class="rd sm c-X">交</span></div>
+                    <div>
+                      <div class="xf-k">交流会線 · 毎週土曜</div>
+                      <div class="xf-t">このメンバーと話してみませんか？</div>
+                      <div class="xf-s">毎週土曜 日本語・韓国語交流会</div>
+                    </div>
+                    <a class="xf-b" href="#">参加してみる →</a>
+                  </div>
+                  <div class="ffoot">
+                    <span class="solved">● 解決済み</span><span>回答 3</span>
+                    <a class="more" href="#">ほかの回答も見る →</a>
+                  </div>
+                </article>
+              </sc-if>
+
+              <sc-if value="{{ hasList }}">
+                <div class="list">
+                  <sc-for list="{{ list }}" as="f" hint-placeholder-count="7">
+                    <div class="row">
+                      <div class="pf"><span class="{{ f.rcls }}">{{ f.letter }}</span><span class="pf-n">{{ f.pf }}</span></div>
+                      <div>
+                        <div class="meta">
+                          <span class="lnm">{{ f.lineName }}</span>
+                          <span class="{{ f.stCls }}"><span class="dot"></span>{{ f.stTxt }}</span>
+                          <span class="{{ f.bdgCls }}">{{ f.bdg }}</span>
+                          <span class="au">{{ f.au }}</span>
+                          <span>{{ f.t }}</span>
+                        </div>
+                        <div class="{{ f.titleCls }}">{{ f.title }}</div>
+                        <sc-if value="{{ f.isTr }}">
+                          <div class="tr"><span class="tr-i">訳</span><span>{{ f.trTxt }}</span><span class="tg" onClick="{{ f.onToggle }}">{{ f.tgTxt }}</span></div>
+                        </sc-if>
+                      </div>
+                      <div class="rc">
+                        <div class="cnt"><div class="cnt-n">{{ f.num }}</div><div class="cnt-l">{{ f.lbl }}</div></div>
+                        <sc-if value="{{ f.hasSt }}"><div class="{{ f.sttCls }}">{{ f.sttTxt }}</div></sc-if>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ isEmpty }}">
+                <div class="list empty">
+                  <div>この線・この駅の投稿は、まだありません。</div>
+                  <div class="empty-k">ソコ：最初の質問をしてみよう</div>
+                </div>
+              </sc-if>
+            </div>
+
+            <aside class="side">
+              <div class="sc">
+                <div class="sc-h"><span class="rd sm c-X">交</span><span class="sc-ht">交流会線 のりば</span><span class="sc-hs">毎週土曜</span></div>
+                <div class="sc-b">
+                  <div class="ev-n">ソコソコ交流会</div>
+                  <div class="ev-l">つぎの発車</div>
+                  <div class="ev-d">10/26（土）14:00</div>
+                  <div class="ev-r">
+                    <span class="stc"><span class="dot"></span>K03 西面</span>
+                    <span class="tag tag-p">初参加歓迎</span>
+                    <span class="tag">日本語・韓国語</span>
+                  </div>
+                  <a class="btn-w" href="#">参加する</a>
+                </div>
+              </div>
+
+              <div class="sc">
+                <div class="sc-h"><span class="sc-ht">駅からのお知らせ</span><span class="sc-hs">今週の釜山お知らせ</span></div>
+                <div class="sc-b">
+                  <sc-for list="{{ notices }}" as="n" hint-placeholder-count="3">
+                    <div class="nt">
+                      <div class="nt-t">{{ n.t }}</div>
+                      <div class="nt-m"><span>出典：<a href="#">{{ n.src }}</a></span><span class="sf">スタッフ作成</span></div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div class="sc">
+                <div class="sc-h"><span class="sc-ht">掲示板の路線</span><span class="sc-hs">のりばへ</span></div>
+                <div class="sc-b">
+                  <sc-for list="{{ boards }}" as="b" hint-placeholder-count="4">
+                    <div class="bl" onClick="{{ b.onClick }}">
+                      <span class="{{ b.rd }}">{{ b.letter }}</span>
+                      <span><span class="bl-n">{{ b.name }}</span><br /><span class="bl-d">{{ b.desc }}</span></span>
+                      <span class="bl-c">{{ b.cnt }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </aside>
+          </section>
+
+          <footer class="ft">
+            <span class="ft-b">釜山暮らし。いもじょも</span>
+            <span>運営：ソコソコ（釜山の日本語・韓国語交流サークル）</span>
+          </footer>
+        </div>
+      </div>
+
+      <div class="mwrap">
+        <div class="flbl" data-drags-parent="1">Mobile 390</div>
+        <div class="phone">
+          <div class="m-screen" data-screen-label="2d Mobile">
+            <div class="sbar"><span>9:41</span><span class="batt"><span></span></span></div>
+            <header class="m-hd">
+              <a class="logo" href="#">
+                <span class="ava"><img src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="" /></span>
+                <span class="lg-a">釜山暮らし。</span>
+                <span class="lg-b">いもじょも</span>
+              </a>
+              <div class="hd-r" style="gap:4px">
+                <div class="lang"><span class="on">JP</span><span>KR</span></div>
+                <div class="burger"><span></span><span></span><span></span></div>
+              </div>
+            </header>
+            <div class="m-tick">
+              <span class="m-tick-l">お知らせ</span>
+              <span class="m-tick-t">10/25〜 都市鉄道1号線、一部駅で夜間工事（出典：<a href="#">釜山交通公社</a>・スタッフ作成）</span>
+              <span class="m-tick-n">1/3</span>
+              <a class="m-tick-a" href="#">一覧</a>
+            </div>
+
+            <section class="m-hero">
+              <div class="m-guide">
+                <div class="m-bub">どの線に乗る？<br />聞きたいことを書いてね</div>
+                <img class="m-soko" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="案内係のソコ" />
+                <span class="m-tag">案内係 ソコ</span>
+              </div>
+              <div class="sign m-sign">
+                <div class="sign-top">
+                  <span class="info">i</span>
+                  <span class="sign-t1">ご案内</span>
+                  <span class="sign-t2">Information</span>
+                </div>
+                <div class="sign-b">
+                  <h1 class="m-h1">釜山の暮らし、<br />気軽に聞いてみよう</h1>
+                  <p class="m-sub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                  <textarea class="m-ta" placeholder="例：釜山で日本語が通じる病院はありますか？"></textarea>
+                  <div class="m-btns">
+                    <button class="btn-p" type="button">質問する</button>
+                    <button class="btn-s" type="button">投稿する</button>
+                  </div>
+                </div>
+                <div class="band">
+                  <span class="c-Q"></span><span class="c-F"></span><span class="c-S"></span><span class="c-L"></span><span class="c-C"></span>
+                </div>
+              </div>
+            </section>
+
+            <div class="m-chips">
+              <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+                <div class="{{ c.cls }}" onClick="{{ c.onClick }}">
+                  <sc-if value="{{ c.hasRd }}"><span class="{{ c.rd }}">{{ c.letter }}</span></sc-if>
+                  <span>{{ c.label }}</span>
+                  <span class="chip-c">{{ c.cnt }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <div class="m-maph">路線図<span>← 横にスワイプ →</span></div>
+            <div class="m-map">
+              <div class="m-mapin mm">
+                <div class="mhead">
+                  <div></div>
+                  <div class="sts">
+                    <sc-for list="{{ sts }}" as="s" hint-placeholder-count="7">
+                      <div class="{{ s.cls }}" onClick="{{ s.onClick }}">
+                        <span class="sth-c">{{ s.code }}</span>
+                        <span class="sth-n">{{ s.name }}</span>
+                        <span class="sth-k">{{ s.n }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="5">
+                  <div class="{{ r.cls }}">
+                    <span class="rd xs" onClick="{{ r.onClick }}">{{ r.letter }}</span>
+                    <div class="track">
+                      <div class="bar"></div>
+                      <sc-if value="{{ r.hasBr }}"><div class="brb"></div></sc-if>
+                      <div class="stops">
+                        <sc-for list="{{ r.stops }}" as="p" hint-placeholder-count="7">
+                          <div class="cell">
+                            <sc-if value="{{ p.has }}"><span class="{{ p.cls }}">{{ p.n }}</span></sc-if>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="m-note">※ 生活圏を簡略化した案内図です。実際の地下鉄路線とは異なります</div>
+
+            <section class="m-sec">
+              <div class="hang">
+                <div class="hbar">
+                  <span class="hb-t">新着の投稿</span>
+                  <span class="hb-r"><span>{{ fLabelShort }}</span></span>
+                </div>
+              </div>
+              <sc-if value="{{ showFeat }}">
+                <article class="card feat m-feat c-Q">
+                  <div class="fk">
+                    <span class="rd xs">Q</span>
+                    <span class="lnm">Q線 質問</span>
+                    <span class="stc"><span class="dot"></span>K06 海雲台</span>
+                  </div>
+                  <h2 class="ftitle">外国人登録証の更新、海雲台の出入国事務所は予約必要？</h2>
+                  <div class="meta" style="margin-top:8px">
+                    <span class="bdg bdg-jp">JP</span><span class="au">さくら</span><span>3時間前</span>
+                  </div>
+                  <div class="ans">
+                    <div class="ans-h"><span class="bdg bdg-kr">KR</span><span class="au">ミンジ</span><span>日本語で回答</span><span class="best">ベストアンサー</span></div>
+                    <p class="ans-t">はい、ハイコリア（hikorea.go.kr）で事前予約が必要です。平日午前は混むので、午後の枠がおすすめです。</p>
+                  </div>
+                  <div class="xfer">
+                    <span class="rd sm c-X">交</span>
+                    <div class="m-xft">
+                      <div class="xf-k">のりかえ · 交流会線</div>
+                      <div class="xf-t">このメンバーと話してみませんか？</div>
+                      <div class="xf-s">毎週土曜 日本語・韓国語交流会</div>
+                    </div>
+                    <a class="xf-b" href="#">参加してみる →</a>
+                  </div>
+                  <div class="ffoot"><span class="solved">● 解決済み</span><span>回答 3</span><a class="more" href="#">ほかの回答 →</a></div>
+                </article>
+              </sc-if>
+              <sc-if value="{{ hasList }}">
+                <div class="list m-list">
+                  <sc-for list="{{ mList }}" as="f" hint-placeholder-count="3">
+                    <div class="row">
+                      <div class="pf"><span class="{{ f.rcls }}">{{ f.letter }}</span></div>
+                      <div>
+                        <div class="meta">
+                          <span class="{{ f.stCls }}"><span class="dot"></span>{{ f.stTxt }}</span>
+                          <span class="{{ f.bdgCls }}">{{ f.bdg }}</span>
+                          <span class="au">{{ f.au }}</span>
+                        </div>
+                        <div class="{{ f.titleCls }}">{{ f.title }}</div>
+                        <sc-if value="{{ f.isTr }}">
+                          <div class="tr"><span class="tr-i">訳</span><span class="tg" onClick="{{ f.onToggle }}">{{ f.tgTxt }}</span></div>
+                        </sc-if>
+                      </div>
+                      <div class="rc">
+                        <div class="cnt"><div class="cnt-n">{{ f.num }}</div><div class="cnt-l">{{ f.lbl }}</div></div>
+                        <sc-if value="{{ f.hasSt }}"><div class="{{ f.sttCls }}">{{ f.sttTxt }}</div></sc-if>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ isEmpty }}">
+                <div class="list empty">
+                  <div>この線・この駅の投稿は、まだありません。</div>
+                  <div class="empty-k">ソコ：最初の質問をしてみよう</div>
+                </div>
+              </sc-if>
+              <a class="m-more" href="#">新着をもっと見る</a>
+            </section>
+
+            <section class="m-side">
+              <div class="sc">
+                <div class="sc-h"><span class="rd sm c-X">交</span><span class="sc-ht">交流会線 のりば</span><span class="sc-hs">毎週土曜</span></div>
+                <div class="sc-b m-ev">
+                  <div>
+                    <div class="ev-n m-evn">ソコソコ交流会</div>
+                    <div class="ev-d m-evd">10/26（土）14:00</div>
+                    <div class="ev-r"><span class="stc"><span class="dot"></span>K03 西面</span><span class="tag tag-p">初参加歓迎</span></div>
+                  </div>
+                  <a class="btn-w m-evb" href="#">参加する</a>
+                </div>
+              </div>
+            </section>
+            <div class="m-ft"><span>釜山暮らし。いもじょも</span><span>利用規約・プライバシー</span></div>
+          </div>
+        </div>
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script data-props='{}'>
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.state = { line: 'all', st: null, orig: {} };
+        }
+        renderVals() {
+          var self = this;
+          var S = this.state;
+          function setLine(k) { return function () { self.setState({ line: k }); }; }
+          function setSt(k) { return function () { self.setState({ st: self.state.st === k ? null : k }); }; }
+          function tog(id) { return function () { var o = Object.assign({}, self.state.orig); o[id] = !o[id]; self.setState({ orig: o }); }; }
+          var LINES = [
+            { key: 'qa', code: 'Q', name: '質問 Q&A', short: '質問', no: '1番線', count: 48, desc: '暮らしの「わからない」を聞こう', counts: [1, 2, 2, 5, 1, 3, 5] },
+            { key: 'free', code: 'F', name: '自由', short: '自由', no: '2番線', count: 17, desc: 'なんでも気軽に', counts: [2, 2, 1, 3, 1, 4, 3] },
+            { key: 'study', code: 'S', name: '留学・就職', short: '留学・就職', no: '3番線', count: 12, desc: '釜山での留学・仕事のリアル', counts: [0, 0, 1, 2, 3, 0, 1] },
+            { key: 'lang', code: 'L', name: '日韓言語交流', short: '日韓言語交流', no: '4番線', count: 21, desc: 'スタディのお知らせと振り返り', counts: [0, 1, 0, 3, 0, 1, 1] },
+            { key: 'culture', code: 'C', name: '日韓文化交流', short: '日韓文化交流', no: '5番線', count: 9, desc: '日韓の“違い”を話そう', counts: [0, 1, 0, 1, 0, 1, 1] }
+          ];
+          var LMAP = {};
+          LINES.forEach(function (l) { LMAP[l.key] = l; });
+          var STATIONS = [
+            { key: 'yeongdo', code: 'Y01', name: '影島', sub: '영도 · Yeongdo', n: 3, branch: true },
+            { key: 'nampo', code: 'K01', name: '南浦洞', sub: '남포동 · Nampo-dong', n: 6 },
+            { key: 'station', code: 'K02', name: '釜山駅', sub: '부산역 · Busan Sta.', n: 4 },
+            { key: 'seomyeon', code: 'K03', name: '西面', sub: '서면 · Seomyeon', n: 14 },
+            { key: 'pnu', code: 'K04', name: '釜山大', sub: '부산대 · Pusan Univ.', n: 5 },
+            { key: 'gwangalli', code: 'K05', name: '広安里', sub: '광안리 · Gwangalli', n: 9 },
+            { key: 'haeundae', code: 'K06', name: '海雲台', sub: '해운대 · Haeundae', n: 11 }
+          ];
+          var SMAP = {};
+          STATIONS.forEach(function (s) { SMAP[s.key] = s; });
+          var BDG = { JP: ['JP', 'bdg bdg-jp'], KR: ['KR', 'bdg bdg-kr'], staff: ['運営', 'bdg bdg-st'] };
+          var FEED = [
+            { key: 1, b: 'qa', area: 'haeundae', n: 'JP', au: 'さくら', t: '3時間前', title: '外国人登録証の更新、海雲台の出入国事務所は予約必要？', num: '3', lbl: '回答', status: 'solved' },
+            { key: 2, b: 'free', area: 'yeongdo', n: 'KR', au: 'ジフン', t: '5時間前', title: '日本から来た友達を案内するなら、影島と甘川洞どっちがいい？', orig: '일본에서 온 친구를 안내한다면 영도랑 감천동 중 어디가 좋을까요?', num: '7', lbl: 'コメント' },
+            { key: 3, b: 'qa', area: 'seomyeon', n: 'JP', au: 'ゆうと', t: '2時間前', title: '釜山の地下鉄、交通カードはどれがおすすめ？', num: '0', lbl: '回答', status: 'waiting' },
+            { key: 4, b: 'free', area: 'gwangalli', n: 'JP', au: 'あや', t: '昨日', title: '広安里の花火、今年はどこから見るのがおすすめ？', num: '6', lbl: 'コメント' },
+            { key: 5, b: 'study', area: 'all', n: 'staff', au: 'ケコ', t: '昨日', title: '釜山で日本語を活かせる仕事の探し方', num: '5分', lbl: '読みもの' },
+            { key: 6, b: 'qa', area: 'all', n: 'KR', au: 'ソヨン', t: '昨日', title: '日本の友達の結婚式、ご祝儀の相場は？', orig: '일본 친구 결혼식, 축의금은 얼마 정도가 적당할까요?', num: '2', lbl: '回答' },
+            { key: 7, b: 'lang', area: 'seomyeon', n: 'staff', au: 'ソコソコ', t: '2日前', title: '10月のスタディ振り返り：敬語の使い分け', num: '4', lbl: 'コメント' },
+            { key: 8, b: 'culture', area: 'all', n: 'staff', au: 'ソコソコ', t: '3日前', title: 'チュソクに招かれたら、手土産は何がいい？', num: '9', lbl: 'コメント' }
+          ];
+          var EX = {
+            haeundae: [
+              { key: 'h2', b: 'qa', area: 'haeundae', n: 'JP', au: 'まなみ', t: '4時間前', title: '海雲台で日本語が通じる歯医者さん、知っていますか？', num: '2', lbl: '回答' },
+              { key: 'h3', b: 'free', area: 'haeundae', n: 'JP', au: 'けんた', t: '2日前', title: '海雲台ブルーラインパーク、平日でも予約したほうがいい？', num: '3', lbl: 'コメント' }],
+            gwangalli: [
+              { key: 'g2', b: 'free', area: 'gwangalli', n: 'KR', au: 'ハヌル', t: '3日前', title: '広安里でひとりでも入りやすいカフェ、教えます', orig: '광안리에서 혼자 가기 좋은 카페 알려드려요', num: '5', lbl: 'コメント' }],
+            seomyeon: [
+              { key: 's3', b: 'qa', area: 'seomyeon', n: 'JP', au: 'りな', t: '4日前', title: '西面で日本の調味料が買えるスーパーは？', num: '4', lbl: '回答', status: 'solved' }],
+            pnu: [
+              { key: 'p1', b: 'study', area: 'pnu', n: 'JP', au: 'しょう', t: '5時間前', title: '釜山大の語学堂、秋学期の途中からでも入れる？', num: '1', lbl: '回答' },
+              { key: 'p2', b: 'free', area: 'pnu', n: 'KR', au: 'テヤン', t: '2日前', title: '釜山大前でシェアハウスを探すときのコツ', orig: '부산대 앞에서 셰어하우스 구할 때 팁', num: '2', lbl: 'コメント' }],
+            station: [
+              { key: 'b1', b: 'qa', area: 'station', n: 'JP', au: 'ゆき', t: '6時間前', title: '釜山駅からKTXで大邱へ。当日券でも乗れますか？', num: '3', lbl: '回答', status: 'solved' },
+              { key: 'b2', b: 'qa', area: 'station', n: 'JP', au: 'たくみ', t: '1時間前', title: '釜山駅に24時間使える荷物預かりはある？', num: '0', lbl: '回答', status: 'waiting' }],
+            nampo: [
+              { key: 'n1', b: 'qa', area: 'nampo', n: 'JP', au: 'みさき', t: '昨日', title: '国際市場で日本円を両替するなら、どこがいい？', num: '2', lbl: '回答' },
+              { key: 'n2', b: 'free', area: 'nampo', n: 'KR', au: 'ドユン', t: '3日前', title: 'BIFF広場の屋台、日本語メニューがあるお店まとめ', orig: 'BIFF광장 포장마차, 일본어 메뉴 있는 가게 정리', num: '4', lbl: 'コメント' }],
+            yeongdo: [
+              { key: 'y2', b: 'qa', area: 'yeongdo', n: 'JP', au: 'あおい', t: '4日前', title: '影島のヒンヨウル文化村、ベビーカーでも回れますか？', num: '1', lbl: '回答' }]
+          };
+          function deco(it) {
+            var L = LMAP[it.b];
+            var st = it.area === 'all' ? null : SMAP[it.area];
+            var bd = BDG[it.n];
+            var isTr = !!it.orig;
+            var showO = isTr && !!S.orig[it.key];
+            return {
+              rcls: 'rd sm c-' + L.code, letter: L.code, pf: L.no, lineName: L.code + '線 ' + L.short,
+              stTxt: st ? st.code + ' ' + st.name : '全域', stCls: st ? 'stc' : 'stc all',
+              bdg: bd[0], bdgCls: bd[1], au: it.au, t: it.t,
+              title: showO ? it.orig : it.title, titleCls: showO ? 'rtitle ko' : 'rtitle',
+              isTr: isTr, trTxt: showO ? '韓国語の原文を表示中' : '韓国語から自動翻訳', tgTxt: showO ? '翻訳を見る' : '原文を見る', onToggle: tog(it.key),
+              num: it.num, lbl: it.lbl, hasSt: !!it.status,
+              sttTxt: it.status === 'solved' ? '解決済み' : '回答待ち', sttCls: it.status === 'solved' ? 'stt stt-ok' : 'stt stt-wait'
+            };
+          }
+          var base = FEED;
+          if (S.st) {
+            base = FEED.filter(function (f) { return f.area === S.st; }).concat(EX[S.st] || []);
+          }
+          if (S.line !== 'all') {
+            base = base.filter(function (f) { return f.b === S.line; });
+          }
+          var showFeat = base.some(function (f) { return f.key === 1; });
+          var list = base.filter(function (f) { return f.key !== 1; }).map(deco);
+          var curL = LMAP[S.line];
+          var curS = S.st ? SMAP[S.st] : null;
+          var fLabel = (curL ? curL.code + '線 ' + curL.name : 'すべての線') + (curS ? ' ・ ' + curS.code + ' ' + curS.name : '');
+          var rows = LINES.map(function (l) {
+            var on = S.line === l.key;
+            var dim = S.line !== 'all' && !on;
+            return {
+              cls: 'mrow c-' + l.code + (dim ? ' dim' : ''), legCls: 'leg' + (on ? ' on' : ''), letter: l.code, name: l.name, pf: l.no, count: l.count + '件',
+              onClick: setLine(on ? 'all' : l.key), hasBr: l.counts[0] > 0,
+              stops: STATIONS.map(function (s, i) { return { has: l.counts[i] > 0, n: l.counts[i], cls: 'stop' + (S.st === s.key ? ' on' : '') }; })
+            };
+          });
+          var sts = STATIONS.map(function (s) {
+            return { code: s.code, name: s.name, sub: s.sub, n: s.n + '件', cls: 'sth' + (S.st === s.key ? ' on' : '') + (s.branch ? ' br' : ''), onClick: setSt(s.key) };
+          });
+          var chips = [{ cls: 'chip' + (S.line === 'all' ? ' on' : ''), hasRd: false, label: 'すべて', cnt: '128', onClick: setLine('all') }].concat(LINES.map(function (l) {
+            var on = S.line === l.key;
+            return { cls: 'chip' + (on ? ' on' : ''), hasRd: true, rd: 'rd xs c-' + l.code, letter: l.code, label: l.name, cnt: String(l.count), onClick: setLine(on ? 'all' : l.key) };
+          }));
+          var boards = ['study', 'lang', 'culture', 'free'].map(function (k) {
+            var l = LMAP[k];
+            return { rd: 'rd sm c-' + l.code, letter: l.code, name: l.name, desc: l.desc, cnt: l.count + '件 →', onClick: setLine(k) };
+          });
+          return {
+            allLeg: { cls: 'leg all' + (S.line === 'all' ? ' on' : ''), onClick: setLine('all') },
+            rows: rows, sts: sts, chips: chips, boards: boards,
+            showFeat: showFeat, list: list, mList: list.slice(0, showFeat ? 2 : 3),
+            hasList: list.length > 0, isEmpty: !showFeat && list.length === 0,
+            fAll: !curL, fOne: !!curL, fRd: curL ? 'rd sm c-' + curL.code : 'rd sm', fLetter: curL ? curL.code : '',
+            fLabel: fLabel, fLabelShort: fLabel,
+            fCount: S.st ? (base.length + '件を表示') : (curL ? curL.count + '件' : '128件'),
+            showClear: S.line !== 'all' || !!S.st,
+            clear: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ line: 'all', st: null }); },
+            notices: [
+              { t: '10/25〜 都市鉄道1号線、一部駅で夜間工事', src: '釜山交通公社' },
+              { t: '外国人住民向け 無料健康診断（11月）', src: '釜山広域市' },
+              { t: '広安里花火大会の交通規制', src: '水営区' }
+            ]
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
