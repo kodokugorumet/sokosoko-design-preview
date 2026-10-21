@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>1c 釜山かわら版 | 소코소코 R1 홈 시안</title>
+    <meta name="viewport" content="width=1860" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet data-dc-atomics>
+        <meta name="design_doc_mode" content="canvas" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@500;700;900&amp;family=Klee+One:wght@400;600&amp;family=Noto+Sans+KR:wght@400;700&amp;display=swap" />
+        <style>
+          body{margin:0;background:#e9e7e2;color:#1a1a18;font-family:'Noto Sans JP','Noto Sans KR',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+          a{color:#111111;text-decoration:none;cursor:pointer}
+          a:hover{color:#b23a5c}
+          sc-for,sc-if{display:contents}
+          button{font-family:inherit;cursor:pointer}
+          p,h1,h2,h3{margin:0}
+
+          .cv-title{position:absolute;left:40px;top:32px;display:flex;flex-direction:column;gap:8px;width:1240px}
+          .cv-row{display:flex;align-items:center;gap:12px}
+          .cv-id{font:600 12px ui-monospace,Menlo,monospace;background:#1a1a1a;color:#fff;padding:4px 8px;border-radius:4px}
+          .cv-name{font:700 22px 'Noto Sans JP',sans-serif;color:#1a1a18}
+          .cv-ko{font:700 16px 'Noto Sans KR',sans-serif;color:#4a4944}
+          .cv-desc{font:400 14px/1.6 'Noto Sans KR',sans-serif;color:#4a4944}
+          .flabel{font:600 11px ui-monospace,Menlo,monospace;color:#55534d;margin:0 0 10px;letter-spacing:.04em}
+          .dwrap{position:absolute;left:40px;top:132px;width:1280px}
+          .mwrap{position:absolute;left:1400px;top:132px;width:410px}
+          .dframe{width:1280px;background:#fafaf7;box-shadow:0 2px 14px rgba(0,0,0,.12);padding-bottom:4px}
+          .phone{width:390px;border:10px solid #111;border-radius:48px;overflow:hidden;background:#fafaf7;box-shadow:0 2px 14px rgba(0,0,0,.12)}
+
+          .strip{display:flex;align-items:center;justify-content:space-between;height:48px;padding:0 40px;border-bottom:1px solid #111;background:#fff}
+          .snav{display:flex;gap:30px;font:500 14px 'Noto Sans JP',sans-serif}
+          .sright{display:flex;align-items:center;gap:12px}
+          .lang{display:flex;align-items:center;border:1px solid #111;height:30px;background:#fff}
+          .lg{border:0;background:transparent;font:700 12px 'Noto Sans JP',sans-serif;height:28px;padding:0 10px;color:#111}
+          .lg.on{background:#111;color:#fff}
+          .login{height:32px;padding:0 16px;border:1.5px solid #111;background:#fff;font:700 13px 'Noto Sans JP',sans-serif;color:#111}
+
+          .mast{display:grid;grid-template-columns:270px minmax(0,1fr) 270px;gap:28px;align-items:stretch;padding:24px 40px 18px}
+          .ear{border:1px solid #111;background:#fff;padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px}
+          .ear-tag{align-self:flex-start;font:700 11px 'Noto Sans JP',sans-serif;background:#111;color:#fff;padding:3px 8px;letter-spacing:.12em}
+          .soko-d{position:relative;width:200px;height:212px;overflow:hidden;align-self:center}
+          .soko-d-img{position:absolute;left:-76px;top:-33px;width:317px;height:auto;display:block}
+          .bubble{position:relative;border:1.5px solid #111;border-radius:14px;padding:9px 12px;font:600 15.5px/1.6 'Klee One',serif;color:#111;background:#fff;text-align:center}
+          .bubble-tail{position:absolute;top:-8px;left:150px;width:13px;height:13px;background:#fff;border-left:1.5px solid #111;border-top:1.5px solid #111;transform:rotate(45deg)}
+          .ttl{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px}
+          .t-pre{font:600 24px 'Klee One',serif;color:#111;letter-spacing:.1em}
+          .t-word{font:600 112px/1.08 'Klee One',serif;color:#111}
+          .t-sub{display:flex;align-items:center;gap:16px;font:900 27px 'Noto Serif JP',serif;color:#111;letter-spacing:.5em;margin-top:6px}
+          .t-rule{display:block;width:56px;height:3px;background:#111}
+          .t-tag{font:500 12.5px 'Noto Sans JP',sans-serif;color:#4a4944;letter-spacing:.14em;margin-top:10px}
+          .legend-p{font:400 13px/1.75 'Noto Sans JP',sans-serif;color:#33322e}
+          .lg-row{display:grid;grid-template-columns:62px minmax(0,1fr);gap:8px;align-items:center;font:400 12.5px/1.5 'Noto Sans JP',sans-serif;color:#33322e;padding:8px 0;border-top:1px solid #d6d3ca}
+          .lg-mark{display:flex;gap:4px;align-items:center;font:700 13px 'Noto Sans JP',sans-serif;color:#111}
+          .go-q{margin-top:auto;display:flex;align-items:center;justify-content:space-between;border-top:1.5px solid #111;padding-top:10px;font:700 13.5px 'Noto Sans JP',sans-serif;color:#111}
+
+          .dl{padding:0 40px}
+          .r-thick{height:5px;background:#111}
+          .r-gap{height:3px}
+          .r-thin{height:1px;background:#111}
+          .dl-row{display:flex;justify-content:space-between;align-items:center;padding:7px 6px;font:700 14px 'Noto Serif JP',serif;color:#111;letter-spacing:.08em}
+
+          .idx{display:flex;align-items:stretch;margin:14px 40px 0;border:1px solid #111;background:#fff}
+          .idx-label{display:flex;align-items:center;padding:0 18px;font:900 14px 'Noto Serif JP',serif;background:#fafaf7;color:#111;letter-spacing:.2em}
+          .tab{flex:1;display:flex;align-items:baseline;justify-content:center;gap:8px;border:0;border-left:1px solid #111;background:#fff;padding:13px 6px;color:#111}
+          .tab:hover{background:#f5f5f2}
+          .tab.on{background:#111;color:#fff}
+          .men{font:500 11.5px 'Noto Serif JP',serif;letter-spacing:.08em}
+          .tl{font:700 15px 'Noto Sans JP',sans-serif}
+          .tn{font:500 12px 'Noto Sans JP',sans-serif}
+
+          .bodyd{padding:24px 40px 0}
+          .g6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:start}
+          .c1{grid-column:span 1}
+          .c2{grid-column:span 2}
+          .c4{grid-column:span 4}
+          .pr{padding-right:24px}
+          .pl{padding-left:24px}
+          .px{padding:0 16px}
+          .rule-l{border-left:1px solid #111;align-self:stretch}
+
+          .qbox{background:#fff;border:2px solid #111;box-shadow:4px 4px 0 #111;display:flex;flex-direction:column}
+          .qband{display:flex;justify-content:space-between;align-items:center;background:#111;color:#fff;padding:8px 14px;font:900 15px 'Noto Serif JP',serif;letter-spacing:.16em}
+          .qband-s{font:500 11px 'Noto Sans JP',sans-serif;letter-spacing:.06em}
+          .qin{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px}
+          .qh{font:900 26px/1.4 'Noto Serif JP',serif;color:#111}
+          .qsub{font:500 13.5px/1.6 'Noto Sans JP',sans-serif;color:#4a4944}
+          .qline{display:block;width:100%;box-sizing:border-box;border:0;border-top:1px solid #111;resize:none;background-color:#fff;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 43px,#c9c6bd 43px,#c9c6bd 44px);font:500 15px/44px 'Noto Sans JP',sans-serif;color:#1a1a18;padding:0 4px;height:176px;outline:none}
+          .qline::placeholder{color:#6b6a64}
+          .qbtns{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:10px}
+          .btn-ink{height:50px;border:2px solid #111;background:#111;color:#fff;font:700 16px 'Noto Sans JP',sans-serif;letter-spacing:.06em}
+          .btn-ink:hover{background:#2b2a27}
+          .btn-ol{height:50px;border:2px solid #111;background:#fff;color:#111;font:700 15px 'Noto Sans JP',sans-serif}
+          .btn-ol:hover{background:#f5f5f2}
+          .qnote{font:400 12px 'Noto Sans JP',sans-serif;color:#5c5b55}
+
+          .top{position:relative}
+          .top-kick{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+          .kick-inv{font:900 12px 'Noto Serif JP',serif;background:#111;color:#fff;padding:4px 10px;letter-spacing:.2em}
+          .kick{font:700 13px 'Noto Sans JP',sans-serif;color:#111}
+          .top-h{font:900 40px/1.34 'Noto Serif JP',serif;color:#111;padding-right:120px;text-wrap:pretty}
+          .byline{font:500 13px 'Noto Sans JP',sans-serif;color:#4a4944;margin-top:12px;display:flex;align-items:center;gap:6px}
+          .stamp{position:absolute;top:0;right:4px;width:100px;height:100px;box-sizing:border-box;border-radius:50%;border:3px solid #e8728c;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4.5px #e8728c;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-12deg);color:#b23a5c}
+          .stamp-b{font:900 19px 'Noto Serif JP',serif;letter-spacing:.04em}
+          .stamp-s{font:700 11px 'Noto Sans JP',sans-serif;margin-top:2px}
+          .lede-wrap{margin-top:16px;padding-top:14px;border-top:1px solid #111}
+          .lede-by{font:700 13px 'Noto Sans JP',sans-serif;color:#111;display:flex;align-items:center;gap:6px;margin-bottom:8px}
+          .lede-note{font:500 12px 'Noto Sans JP',sans-serif;color:#5c5b55}
+          .lede{font:700 21px/1.75 'Noto Serif JP',serif;color:#111;text-wrap:pretty}
+          .top2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:16px;border-top:1px solid #cfccc3;padding-top:16px;align-items:start}
+          .mini-h{font:700 12px 'Noto Sans JP',sans-serif;color:#111;letter-spacing:.12em;margin-bottom:6px}
+          .body-s{font:500 15px/1.9 'Noto Serif JP',serif;color:#262522}
+          .more{display:inline-block;margin-top:10px;font:700 13px 'Noto Sans JP',sans-serif;border-bottom:1.5px solid #111}
+          .invite{background:#fff;border:2px solid #e8728c;padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
+          .inv-tag{align-self:flex-start;font:900 12px 'Noto Serif JP',serif;color:#fff;background:#b23a5c;padding:3px 10px;letter-spacing:.2em}
+          .inv-h{font:900 18px/1.5 'Noto Serif JP',serif;color:#111}
+          .inv-s{font:500 13px 'Noto Sans JP',sans-serif;color:#4a4944}
+          .inv-btn{align-self:flex-start;margin-top:6px;height:44px;padding:0 18px;background:#b23a5c;color:#fff;font:700 14px 'Noto Sans JP',sans-serif;border:0}
+          .inv-btn:hover{background:#9c2f4f}
+
+          .rowB{margin-top:28px;padding-top:18px;border-top:3px solid #111}
+          .sec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+          .sec-t{font:900 20px 'Noto Serif JP',serif;color:#111;letter-spacing:.06em}
+          .sec-s{font:500 12px 'Noto Sans JP',sans-serif;color:#5c5b55}
+          .cols2{columns:2;column-gap:40px;column-rule:1px solid #111}
+          .item{break-inside:avoid;padding:0 0 14px;margin:0 0 14px;border-bottom:1px solid #cfccc3;display:flex;flex-direction:column;gap:6px}
+          .kicker{font:700 12.5px 'Noto Sans JP',sans-serif;color:#111}
+          .ih{font:700 18px/1.55 'Noto Serif JP','Noto Sans KR',serif;color:#111;text-wrap:pretty}
+          .ibyl{display:flex;align-items:center;gap:6px;font:500 12.5px 'Noto Sans JP',sans-serif;color:#33322e}
+          .dim{color:#5c5b55}
+          .nat{font:700 10.5px/1 'Noto Sans JP',sans-serif;border:1px solid #111;padding:2px 4px;color:#111;letter-spacing:.04em;background:#fff}
+          .staffb{font:700 10.5px/1 'Noto Sans JP',sans-serif;background:#111;color:#fff;padding:3px 5px;letter-spacing:.06em}
+          .trn{font:400 12px 'Noto Sans JP',sans-serif;color:#5c5b55;display:flex;align-items:center;flex-wrap:wrap}
+          .trl{border:0;background:none;padding:0;font:700 12px 'Noto Sans JP',sans-serif;color:#111;text-decoration:underline;text-underline-offset:2px}
+          .trl:hover{color:#b23a5c}
+          .imeta{display:flex;align-items:center;gap:10px;font:500 12.5px 'Noto Sans JP',sans-serif;color:#33322e}
+          .st-solved{font:700 11.5px 'Noto Sans JP',sans-serif;color:#b23a5c;border:1.5px solid #e8728c;padding:1px 6px;background:#fff}
+          .st-wait{font:700 12px 'Noto Sans JP',sans-serif;color:#b23a5c}
+
+          .ntc{background:#fff;border:1px solid #111;padding:12px 12px 4px}
+          .tag-inv{align-self:flex-start;display:inline-block;font:900 12px 'Noto Serif JP',serif;background:#111;color:#fff;padding:3px 10px;letter-spacing:.2em}
+          .ntc-h{font:900 15px/1.45 'Noto Serif JP',serif;color:#111;margin:8px 0 6px}
+          .ntc-item{padding:10px 0;border-top:1px solid #cfccc3;display:flex;flex-direction:column;gap:6px}
+          .ntc-t{font:700 13.5px/1.6 'Noto Sans JP',sans-serif;color:#111}
+          .ntc-m{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:500 11.5px 'Noto Sans JP',sans-serif;color:#4a4944}
+          .src{color:#111;text-decoration:underline;text-underline-offset:2px}
+          .staff-tag{border:1px solid #111;padding:1px 5px;font:700 10.5px 'Noto Sans JP',sans-serif;color:#111}
+
+          .tate-box{background:#fff;border:2px solid #111;padding:12px 10px;display:flex;flex-direction:column;gap:12px}
+          .tate{writing-mode:vertical-rl;height:316px;align-self:center;color:#111}
+          .tate-h{font:900 24px/1.4 'Noto Serif JP',serif;letter-spacing:.14em;margin:0 0 0 10px}
+          .tate-b{font:700 16px/1.7 'Noto Serif JP',serif;letter-spacing:.08em}
+          .tate-w{font:700 16px/1.7 'Noto Serif JP',serif;letter-spacing:.08em;color:#b23a5c}
+          .tcy{text-combine-upright:all}
+          .btn-full{width:100%;height:46px;border:2px solid #111;background:#111;color:#fff;font:700 15px 'Noto Sans JP',sans-serif}
+          .btn-full:hover{background:#2b2a27}
+
+          .rowC{margin-top:30px;padding-top:16px;border-top:3px solid #111}
+          .boards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+          .bcard{background:#fff;border:1.5px solid #111;box-shadow:3px 3px 0 #111;padding:16px 18px;display:flex;flex-direction:column;gap:6px;cursor:pointer}
+          .bcard:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 #111}
+          .bc-top{display:flex;justify-content:space-between;font:500 12px 'Noto Serif JP',serif;color:#4a4944}
+          .bc-h{font:900 22px 'Noto Serif JP',serif;color:#111}
+          .bc-d{font:500 13.5px/1.6 'Noto Sans JP',sans-serif;color:#33322e}
+          .bc-go{margin-top:6px;font:700 13px 'Noto Sans JP',sans-serif;color:#111;border-bottom:1.5px solid #111;align-self:flex-start}
+          .foot{margin:34px 40px 0;padding:14px 0 28px;border-top:4px double #111;display:flex;justify-content:space-between;font:500 12px 'Noto Sans JP',sans-serif;color:#4a4944}
+
+          .ms{width:390px;background:#fafaf7;padding-bottom:10px}
+          .mstatus{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font:600 15px system-ui,sans-serif;color:#111;background:#fff}
+          .mst-ic{display:flex;gap:5px;align-items:center}
+          .mdot{display:block;width:17px;height:10px;background:#111;border-radius:2px}
+          .mdot2{display:block;width:24px;height:11px;border:1.5px solid #111;border-radius:3px;box-sizing:border-box}
+          .mbar{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 6px;background:#fff;border-bottom:1px solid #111}
+          .burger{width:44px;height:44px;border:0;background:none;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
+          .bl{display:block;height:2px;background:#111;width:22px}
+          .mbar-r{display:flex;gap:8px;align-items:center}
+          .mlogin{height:36px;padding:0 12px;border:1.5px solid #111;background:#fff;font:700 13px 'Noto Sans JP',sans-serif;color:#111}
+          .mmast{display:flex;flex-direction:column;align-items:center;padding:14px 16px 10px;text-align:center}
+          .mt-pre{font:600 15px 'Klee One',serif;color:#111;letter-spacing:.1em}
+          .mt-word{font:600 62px/1.1 'Klee One',serif;color:#111}
+          .mt-sub{display:flex;align-items:center;gap:10px;font:900 15px 'Noto Serif JP',serif;letter-spacing:.42em;color:#111;margin-top:2px}
+          .mt-rule{display:block;width:28px;height:2px;background:#111}
+          .mdl{padding:0 16px}
+          .mdl-row{display:flex;justify-content:space-between;padding:6px 2px;font:700 11.5px 'Noto Serif JP',serif;color:#111}
+          .msoko{display:grid;grid-template-columns:minmax(0,1fr) 150px;align-items:end;gap:4px;padding:10px 16px 0}
+          .mbubble{position:relative;border:1.5px solid #111;border-radius:14px;padding:10px 10px;font:600 14px/1.65 'Klee One',serif;color:#111;background:#fff;margin-bottom:64px}
+          .mbubble-tail{position:absolute;right:-8px;top:26px;width:13px;height:13px;background:#fff;border-right:1.5px solid #111;border-top:1.5px solid #111;transform:rotate(45deg)}
+          .soko-m{position:relative;width:150px;height:166px;overflow:hidden}
+          .soko-m-img{position:absolute;left:-57px;top:-25px;width:238px;height:auto;display:block}
+          .mq{margin:0 16px;background:#fff;border:2px solid #111;box-shadow:4px 4px 0 #111}
+          .mqh{font:900 21px/1.45 'Noto Serif JP',serif;color:#111}
+          .mqin{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px}
+          .mchips{display:flex;gap:8px;overflow-x:auto;padding:22px 16px 4px;scrollbar-width:none}
+          .chip{flex:none;height:44px;display:flex;align-items:center;gap:6px;padding:0 14px;border:1.5px solid #111;background:#fff;color:#111;font:700 14px 'Noto Sans JP',sans-serif}
+          .chip.on{background:#111;color:#fff}
+          .chip-n{font:500 12px 'Noto Sans JP',sans-serif}
+          .mtop{margin:16px 16px 0;padding-top:12px;border-top:3px solid #111;position:relative}
+          .mtop-h{font:900 23px/1.4 'Noto Serif JP',serif;color:#111;padding-right:80px;text-wrap:pretty}
+          .mstamp{position:absolute;top:46px;right:0;width:70px;height:70px;box-sizing:border-box;border-radius:50%;border:2.5px solid #e8728c;box-shadow:inset 0 0 0 2.5px #fff,inset 0 0 0 3.5px #e8728c;background:#fff;display:flex;align-items:center;justify-content:center;transform:rotate(-12deg);color:#b23a5c;font:900 14px 'Noto Serif JP',serif}
+          .mlede{font:700 17px/1.75 'Noto Serif JP',serif;color:#111}
+          .msec{margin:22px 16px 12px;padding-top:12px;border-top:3px solid #111;display:flex;justify-content:space-between;align-items:baseline}
+          .mfeed{padding:0 16px}
+          .mih{font:700 17px/1.55 'Noto Serif JP','Noto Sans KR',serif;color:#111;text-wrap:pretty}
+          .mmore{margin:2px 16px 0;width:calc(100% - 32px);height:48px;border:1.5px solid #111;background:#fff;font:700 14px 'Noto Sans JP',sans-serif;color:#111}
+          .mduo{display:grid;grid-template-columns:minmax(0,1fr) 138px;gap:12px;margin:22px 16px 0;align-items:stretch}
+          .mtate{writing-mode:vertical-rl;height:236px;align-self:center;color:#111}
+          .mtate-h{font:900 19px/1.45 'Noto Serif JP',serif;letter-spacing:.12em;margin:0 0 0 6px}
+          .mtate-b{font:700 14px/1.7 'Noto Serif JP',serif;letter-spacing:.06em}
+          .mtate-w{font:700 14px/1.7 'Noto Serif JP',serif;letter-spacing:.06em;color:#b23a5c}
+          .mfoot{margin:22px 16px 0;padding:12px 0 16px;border-top:4px double #111;font:500 11.5px/1.7 'Noto Sans JP',sans-serif;color:#4a4944}
+        </style>
+      </helmet>
+
+      <div class="cv-title" data-drags-parent="1">
+        <div class="cv-row"><span class="cv-id">1c</span><span class="cv-name">釜山かわら版</span><span class="cv-ko">신문형</span></div>
+        <p class="cv-desc">일본 신문 1면처럼 제호·톱기사·단 구분선으로 정보를 차분하고 촘촘하게 정리하고, 소코는 제호 옆 ‘귀’ 칸의 마스코트로 독자에게 말을 거는 방향입니다.</p>
+      </div>
+
+      <div class="dwrap">
+        <div class="flabel" data-drags-parent="1">Desktop 1280</div>
+        <div class="dframe" data-screen-label="1c Desktop">
+          <div class="strip">
+            <nav class="snav"><a>コミュニティ</a><a>質問する</a><a>読みもの</a><a>釜山お知らせ</a><a>交流会</a></nav>
+            <div class="sright">
+              <div class="lang"><button class="{{ jpCls }}" onClick="{{ setJP }}">JP</button><button class="{{ krCls }}" onClick="{{ setKR }}">KR</button></div>
+              <button class="login">ログイン</button>
+            </div>
+          </div>
+
+          <header class="mast">
+            <div class="ear">
+              <span class="ear-tag">今日のひとこと</span>
+              <div class="soko-d"><img class="soko-d-img" src="{{ img.day }}" alt="ソコ" /></div>
+              <div class="bubble"><span class="bubble-tail"></span>こんにちは、ソコです。<br />質問は下の受付へどうぞ。</div>
+            </div>
+            <div class="ttl">
+              <div class="t-pre">釜山暮らし。</div>
+              <div class="t-word">いもじょも</div>
+              <div class="t-sub"><span class="t-rule"></span>釜山暮らし新聞<span class="t-rule"></span></div>
+              <div class="t-tag">日本語と韓国語、ふたつの言葉で読む地域の掲示板</div>
+            </div>
+            <div class="ear">
+              <span class="ear-tag">この新聞の読み方</span>
+              <p class="legend-p">書き手は母国語で、読み手は自動翻訳で。日本語でも韓国語でも参加できます。</p>
+              <div class="fx col">
+                <div class="lg-row"><span class="lg-mark">※</span><span>韓国語・日本語から自動翻訳された記事。原文も読めます</span></div>
+                <div class="lg-row"><span class="lg-mark"><span class="nat">JP</span><span class="nat">KR</span></span><span>書き手の国（本人が公開した場合）</span></div>
+                <div class="lg-row"><span class="lg-mark"><span class="staffb">運営</span></span><span>ソコソコ運営スタッフの記事</span></div>
+              </div>
+              <a class="go-q"><span>質問を送る</span><span>↓</span></a>
+            </div>
+          </header>
+
+          <div class="dl">
+            <div class="r-thick"></div>
+            <div class="r-gap"></div>
+            <div class="r-thin"></div>
+            <div class="dl-row"><span>2026年10月21日（水）</span><span>第128号</span><span>晴れ 19℃</span></div>
+            <div class="r-thin"></div>
+          </div>
+
+          <div class="idx">
+            <div class="idx-label">紙面案内</div>
+            <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+              <button class="{{ t.cls }}" onClick="{{ t.onClick }}"><span class="men">{{ t.men }}</span><span class="tl">{{ t.label }}</span><span class="tn">{{ t.n }}</span></button>
+            </sc-for>
+          </div>
+
+          <div class="bodyd">
+            <div class="g6">
+              <section class="c2 pr">
+                <div class="qbox">
+                  <div class="qband"><span>読者の質問受付</span><span class="qband-s">随時受付中</span></div>
+                  <div class="qin">
+                    <h2 class="qh">釜山の暮らし、<br />気軽に聞いてみよう</h2>
+                    <p class="qsub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                    <textarea class="qline" placeholder="例：釜山で日本語が通じる病院はありますか？"></textarea>
+                    <div class="qbtns"><button class="btn-ink">質問する</button><button class="btn-ol">投稿する</button></div>
+                    <p class="qnote">送信するときにログインをご案内します。</p>
+                  </div>
+                </div>
+              </section>
+
+              <article class="c4 rule-l pl top">
+                <div class="top-kick"><span class="kick-inv">トップ記事</span><span class="kick">【質問 Q&amp;A】</span></div>
+                <div class="stamp"><span class="stamp-b">解決済み</span><span class="stamp-s">回答 3</span></div>
+                <h1 class="top-h">{{ top.title }}</h1>
+                <div class="byline"><span>質問</span><span>さくら</span><span class="nat">JP</span><span>（海雲台在住）・3時間前</span></div>
+                <div class="lede-wrap">
+                  <div class="lede-by"><span>回答</span><span>ミンジ</span><span class="nat">KR</span><span>ソコソコ会員</span><span class="lede-note">・日本語で回答</span></div>
+                  <p class="lede">{{ top.answer }}</p>
+                </div>
+                <div class="top2">
+                  <div>
+                    <div class="mini-h">質問者より</div>
+                    <p class="body-s">{{ top.body }}</p>
+                    <a class="more">回答 3件をすべて読む →</a>
+                  </div>
+                  <aside class="invite">
+                    <span class="inv-tag">お誘い</span>
+                    <p class="inv-h">このメンバーと話してみませんか？</p>
+                    <p class="inv-s">毎週土曜 日本語・韓国語交流会</p>
+                    <button class="inv-btn">参加してみる →</button>
+                  </aside>
+                </div>
+              </article>
+            </div>
+
+            <div class="g6 rowB">
+              <section class="c4 pr">
+                <div class="sec-h"><span class="sec-t">{{ feedTitle }}</span><span class="sec-s">{{ feedSub }}</span></div>
+                <div class="cols2">
+                  <sc-for list="{{ feed }}" as="it" hint-placeholder-count="7">
+                    <article class="item">
+                      <div class="kicker">{{ it.kicker }}</div>
+                      <h3 class="ih">{{ it.title }}</h3>
+                      <div class="ibyl"><sc-if value="{{ it.hasName }}"><span>{{ it.who }}</span></sc-if><span class="{{ it.badgeCls }}">{{ it.badge }}</span><span class="dim">・{{ it.time }}</span></div>
+                      <sc-if value="{{ it.tr }}"><div class="trn"><span>{{ it.trNote }}</span><button class="trl" onClick="{{ it.onToggle }}">{{ it.trLink }}</button></div></sc-if>
+                      <div class="imeta"><span>{{ it.meta }}</span><sc-if value="{{ it.hasStatus }}"><span class="{{ it.statusCls }}">{{ it.status }}</span></sc-if></div>
+                    </article>
+                  </sc-for>
+                </div>
+              </section>
+
+              <aside class="c1 rule-l px">
+                <div class="ntc">
+                  <span class="tag-inv">告知</span>
+                  <h3 class="ntc-h">今週の釜山お知らせ</h3>
+                  <sc-for list="{{ notices }}" as="n" hint-placeholder-count="3">
+                    <div class="ntc-item">
+                      <p class="ntc-t">{{ n.title }}</p>
+                      <div class="ntc-m"><a class="src">出典：{{ n.src }}</a><span class="staff-tag">スタッフ作成</span></div>
+                    </div>
+                  </sc-for>
+                </div>
+              </aside>
+
+              <aside class="c1 rule-l" style="padding-left:16px">
+                <div class="tate-box">
+                  <span class="tag-inv">ソコソコ交流会</span>
+                  <div class="tate">
+                    <p class="tate-h">交流会のお知らせ</p>
+                    <p class="tate-b"><span class="tcy">10</span>月<span class="tcy">26</span>日（土）<span class="tcy">14</span>時</p>
+                    <p class="tate-b">西面にて開催</p>
+                    <p class="tate-w">初参加歓迎</p>
+                  </div>
+                  <button class="btn-full">参加する</button>
+                </div>
+              </aside>
+            </div>
+
+            <div class="rowC">
+              <div class="sec-h"><span class="sec-t">各面のご案内</span><span class="sec-s">面を選ぶと記事が切り替わります</span></div>
+              <div class="boards">
+                <sc-for list="{{ boards }}" as="b" hint-placeholder-count="4">
+                  <div class="bcard" onClick="{{ b.onClick }}">
+                    <div class="bc-top"><span>{{ b.men }}</span><span>{{ b.nText }}</span></div>
+                    <div class="bc-h">{{ b.label }}</div>
+                    <p class="bc-d">{{ b.desc }}</p>
+                    <span class="bc-go">この面を読む →</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <footer class="foot"><span>発行　釜山暮らし。いもじょも編集部（日本語・韓国語スタディ ソコソコ）</span><span>翻訳記事には※印を付けています</span></footer>
+        </div>
+      </div>
+
+      <div class="mwrap">
+        <div class="flabel" data-drags-parent="1">Mobile 390</div>
+        <div class="phone">
+          <div class="ms" data-screen-label="1c Mobile">
+            <div class="mstatus"><span>9:41</span><span class="mst-ic"><span class="mdot"></span><span class="mdot2"></span></span></div>
+            <div class="mbar">
+              <button class="burger" aria-label="メニュー"><span class="bl"></span><span class="bl"></span><span class="bl"></span></button>
+              <div class="mbar-r">
+                <div class="lang"><button class="{{ jpCls }}" onClick="{{ setJP }}">JP</button><button class="{{ krCls }}" onClick="{{ setKR }}">KR</button></div>
+                <button class="mlogin">ログイン</button>
+              </div>
+            </div>
+            <div class="mmast">
+              <div class="mt-pre">釜山暮らし。</div>
+              <div class="mt-word">いもじょも</div>
+              <div class="mt-sub"><span class="mt-rule"></span>釜山暮らし新聞<span class="mt-rule"></span></div>
+            </div>
+            <div class="mdl">
+              <div class="r-thick" style="height:4px"></div>
+              <div class="r-gap" style="height:2px"></div>
+              <div class="r-thin"></div>
+              <div class="mdl-row"><span>2026年10月21日（水）</span><span>第128号</span><span>晴れ 19℃</span></div>
+              <div class="r-thin"></div>
+            </div>
+            <div class="msoko">
+              <div class="mbubble"><span class="mbubble-tail"></span>こんにちは、ソコです。<br />質問は下の受付へどうぞ。</div>
+              <div class="soko-m"><img class="soko-m-img" src="{{ img.day }}" alt="ソコ" /></div>
+            </div>
+            <div class="mq">
+              <div class="qband"><span>読者の質問受付</span><span class="qband-s">随時受付中</span></div>
+              <div class="mqin">
+                <h2 class="mqh">釜山の暮らし、<br />気軽に聞いてみよう</h2>
+                <p class="qsub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                <textarea class="qline" style="height:132px;font-size:14.5px" placeholder="例：釜山で日本語が通じる病院はありますか？"></textarea>
+                <div class="qbtns"><button class="btn-ink">質問する</button><button class="btn-ol">投稿する</button></div>
+              </div>
+            </div>
+
+            <div class="mchips">
+              <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+                <button class="{{ t.chipCls }}" onClick="{{ t.onClick }}"><span>{{ t.label }}</span><span class="chip-n">{{ t.n }}</span></button>
+              </sc-for>
+            </div>
+
+            <article class="mtop">
+              <div class="top-kick"><span class="kick-inv">トップ記事</span><span class="kick">【質問 Q&amp;A】</span></div>
+              <div class="mstamp">解決済み</div>
+              <h1 class="mtop-h">{{ top.title }}</h1>
+              <div class="byline"><span>さくら</span><span class="nat">JP</span><span>海雲台在住・3時間前</span></div>
+              <div class="lede-wrap">
+                <div class="lede-by"><span>回答</span><span>ミンジ</span><span class="nat">KR</span><span class="lede-note">日本語で回答</span></div>
+                <p class="mlede">{{ top.answer }}</p>
+              </div>
+              <aside class="invite" style="margin-top:14px">
+                <span class="inv-tag">お誘い</span>
+                <p class="inv-h">このメンバーと話してみませんか？</p>
+                <p class="inv-s">毎週土曜 日本語・韓国語交流会</p>
+                <button class="inv-btn">参加してみる →</button>
+              </aside>
+              <a class="more">回答 3件をすべて読む →</a>
+            </article>
+
+            <div class="msec"><span class="sec-t" style="font-size:18px">{{ feedTitle }}</span><span class="sec-s">新着順</span></div>
+            <div class="mfeed">
+              <sc-for list="{{ mfeed }}" as="it" hint-placeholder-count="3">
+                <article class="item">
+                  <div class="kicker">{{ it.kicker }}</div>
+                  <h3 class="mih">{{ it.title }}</h3>
+                  <div class="ibyl"><sc-if value="{{ it.hasName }}"><span>{{ it.who }}</span></sc-if><span class="{{ it.badgeCls }}">{{ it.badge }}</span><span class="dim">・{{ it.time }}</span></div>
+                  <sc-if value="{{ it.tr }}"><div class="trn"><span>{{ it.trNote }}</span><button class="trl" onClick="{{ it.onToggle }}">{{ it.trLink }}</button></div></sc-if>
+                  <div class="imeta"><span>{{ it.meta }}</span><sc-if value="{{ it.hasStatus }}"><span class="{{ it.statusCls }}">{{ it.status }}</span></sc-if></div>
+                </article>
+              </sc-for>
+            </div>
+            <button class="mmore">記事をもっと読む</button>
+
+            <div class="mduo">
+              <div class="ntc">
+                <span class="tag-inv">告知</span>
+                <h3 class="ntc-h">今週の釜山お知らせ</h3>
+                <sc-for list="{{ notices }}" as="n" hint-placeholder-count="3">
+                  <div class="ntc-item">
+                    <p class="ntc-t" style="font-size:13px">{{ n.title }}</p>
+                    <div class="ntc-m"><a class="src">出典：{{ n.src }}</a><span class="staff-tag">スタッフ作成</span></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div class="tate-box" style="padding:10px 8px">
+                <span class="tag-inv" style="font-size:11px;padding:3px 6px;letter-spacing:.08em">交流会</span>
+                <div class="mtate">
+                  <p class="mtate-h">ソコソコ交流会</p>
+                  <p class="mtate-b"><span class="tcy">10</span>月<span class="tcy">26</span>日（土）<span class="tcy">14</span>時</p>
+                  <p class="mtate-b">西面にて</p>
+                  <p class="mtate-w">初参加歓迎</p>
+                </div>
+                <button class="btn-full" style="height:44px;font-size:14px">参加する</button>
+              </div>
+            </div>
+
+            <div class="mfoot">発行　釜山暮らし。いもじょも編集部<br />翻訳記事には※印を付けています</div>
+          </div>
+        </div>
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script data-props='{}'>
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.state = { tab: 'all', orig: {}, lang: 'JP' };
+        }
+        renderVals() {
+          const S = this.state;
+          const img = {
+            day: 'https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&w=640&q=75',
+            sunset: 'https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-sunset.png&w=640&q=75',
+            night: 'https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-night.png&w=640&q=75'
+          };
+          const LABEL = { qa: '質問 Q&A', free: '自由', study: '留学・就職', lang: '日韓言語交流', culture: '日韓文化交流' };
+          const TABS = [
+            { key: 'all', men: '一面', label: 'すべて', n: 128 },
+            { key: 'qa', men: '二面', label: '質問 Q&A', n: 48 },
+            { key: 'study', men: '三面', label: '留学・就職', n: 12 },
+            { key: 'lang', men: '四面', label: '日韓言語交流', n: 21 },
+            { key: 'culture', men: '五面', label: '日韓文化交流', n: 9 },
+            { key: 'free', men: '六面', label: '自由', n: 17 }
+          ];
+          const ITEMS = [
+            { id: 1, board: 'qa', who: 'さくら', nat: 'JP', time: '3時間前', kind: 'q', count: 3, solved: true,
+              title: '外国人登録証の更新、海雲台の出入国事務所は予約必要？',
+              body: '来月で在留期限が切れるので更新に行きたいのですが、予約が必要なのか分かりません。',
+              answer: 'はい、ハイコリア（hikorea.go.kr）で事前予約が必要です。平日午前は混むので、午後の枠がおすすめです。' },
+            { id: 2, board: 'free', who: 'ジフン', nat: 'KR', time: '5時間前', kind: 'p', count: 7, tr: true,
+              title: '日本から来た友達を案内するなら、影島と甘川洞どっちがいい？',
+              orig: '일본에서 온 친구를 안내한다면 영도랑 감천동 중 어디가 좋을까요?' },
+            { id: 3, board: 'qa', who: 'ゆうと', nat: 'JP', time: '2時間前', kind: 'q', count: 0,
+              title: '釜山の地下鉄、交通カードはどれがおすすめ？' },
+            { id: 4, board: 'free', who: 'あや', nat: 'JP', time: '昨日', kind: 'p', count: 6,
+              title: '広安里の花火、今年はどこから見るのがおすすめ？' },
+            { id: 5, board: 'study', who: 'ケコ', staff: true, time: '昨日', kind: 'read',
+              title: '釜山で日本語を活かせる仕事の探し方' },
+            { id: 6, board: 'qa', who: 'ソヨン', nat: 'KR', time: '昨日', kind: 'q', count: 2, tr: true,
+              title: '日本の友達の結婚式、ご祝儀の相場は？',
+              orig: '일본 친구 결혼식, 축의금은 얼마 정도가 적당할까요?' },
+            { id: 7, board: 'lang', staff: true, time: '2日前', kind: 'p', count: 4,
+              title: '10月のスタディ振り返り：敬語の使い分け' },
+            { id: 8, board: 'culture', staff: true, time: '3日前', kind: 'p', count: 9,
+              title: 'チュソクに招かれたら、手土産は何がいい？' }
+          ];
+          const NOTICES = [
+            { title: '10/25〜 都市鉄道1号線、一部駅で夜間工事', src: '釜山交通公社' },
+            { title: '外国人住民向け 無料健康診断（11月）', src: '釜山広域市' },
+            { title: '広安里花火大会の交通規制', src: '水営区' }
+          ];
+          const BOARDS = [
+            { key: 'study', men: '三面', label: '留学・就職', desc: '釜山での留学・仕事のリアル', n: 12 },
+            { key: 'lang', men: '四面', label: '日韓言語交流', desc: 'スタディのお知らせと振り返り', n: 21 },
+            { key: 'culture', men: '五面', label: '日韓文化交流', desc: '日韓の“違い”を話そう', n: 9 },
+            { key: 'free', men: '六面', label: '自由', desc: 'なんでも気軽に', n: 17 }
+          ];
+          const tabs = TABS.map((t) => Object.assign({}, t, {
+            cls: S.tab === t.key ? 'tab on' : 'tab',
+            chipCls: S.tab === t.key ? 'chip on' : 'chip',
+            onClick: () => this.setState({ tab: t.key })
+          }));
+          const decorate = (it) => {
+            const showOrig = !!S.orig[it.id];
+            const status = it.solved ? '解決済み' : (it.kind === 'q' && it.count === 0 ? '回答待ち' : '');
+            return {
+              id: it.id,
+              kicker: '【' + LABEL[it.board] + '】',
+              title: showOrig && it.orig ? it.orig : it.title,
+              who: it.who || '',
+              hasName: !!it.who,
+              badge: it.staff ? '運営' : it.nat,
+              badgeCls: it.staff ? 'staffb' : 'nat',
+              time: it.time,
+              tr: !!it.tr,
+              trNote: showOrig ? '※原文（韓国語）を表示中・' : '※韓国語から自動翻訳・',
+              trLink: showOrig ? '翻訳を見る' : '原文を見る',
+              onToggle: () => {
+                const next = Object.assign({}, this.state.orig);
+                next[it.id] = !showOrig;
+                this.setState({ orig: next });
+              },
+              meta: it.kind === 'q' ? '回答 ' + it.count : (it.kind === 'read' ? '読みもの' : 'コメント ' + it.count),
+              status: status,
+              hasStatus: !!status,
+              statusCls: it.solved ? 'st-solved' : 'st-wait'
+            };
+          };
+          const rest = ITEMS.slice(1).filter((it) => S.tab === 'all' || it.board === S.tab).map(decorate);
+          const active = TABS.find((t) => t.key === S.tab) || TABS[0];
+          return {
+            img: img,
+            top: ITEMS[0],
+            tabs: tabs,
+            feed: rest,
+            mfeed: rest.slice(0, 3),
+            feedTitle: S.tab === 'all' ? '各面の記事' : active.men + '　' + active.label,
+            feedSub: S.tab === 'all' ? '新着順・全128件' : '新着順・' + active.n + '件',
+            notices: NOTICES,
+            boards: BOARDS.map((b) => Object.assign({}, b, { nText: b.n + '件', onClick: () => this.setState({ tab: b.key }) })),
+            jpCls: S.lang === 'JP' ? 'lg on' : 'lg',
+            krCls: S.lang === 'KR' ? 'lg on' : 'lg',
+            setJP: () => this.setState({ lang: 'JP' }),
+            setKR: () => this.setState({ lang: 'KR' })
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
