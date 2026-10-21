@@ -390,6 +390,14 @@
 
       <section>
         <div class="sec-head">
+          <h2>3차 시안</h2>
+          <p>지금까지 없던 방향 6개입니다. 다크 모드, 앱 화면, 잡지, 단어장, 달력, 칸반으로 구성했습니다.</p>
+        </div>
+        <div class="grid" id="round3"></div>
+      </section>
+
+      <section>
+        <div class="sec-head">
           <h2>2차 시안</h2>
           <p>1차에서 반응이 좋았던 노선도(1e)를 발전시킨 6개와 새로운 방향 4개입니다.</p>
         </div>
@@ -410,6 +418,18 @@
     <script src="vote.js"></script>
     <script>
       const DESIGNS = [
+        { id: '3a', round: 3, file: '3a-night-gwangan', jp: '夜の広安里', ko: '밤의 광안리 다크형', tag: '새 방향',
+          desc: '유일한 다크 모드 시안입니다. 밤의 광안대교와 소코를 배경으로, 화면에서 가장 밝은 질문창이 주인공입니다.' },
+        { id: '3b', round: 3, file: '3b-app-stories', jp: 'アプリ風', ko: '앱 스토리형', tag: '새 방향',
+          desc: '커뮤니티 앱을 여는 느낌입니다. 스토리 줄, 넘겨 보는 「答えられる？」 질문 카드, 모바일 하단 탭바가 있습니다.' },
+        { id: '3c', round: 3, file: '3c-magazine', jp: 'MAGAZINE', ko: '잡지 표지형', tag: '새 방향',
+          desc: '일본 라이프스타일 잡지 표지처럼 큰 손글씨 제호 앞에 소코를 세우고, 게시판은 목차로, 인기 질문은 표지 문구로 보여 줍니다.' },
+        { id: '3d', round: 3, file: '3d-flashcards', jp: '単語帳', ko: '단어장 카드형', tag: '새 방향',
+          desc: '글을 링에 끼운 단어장 카드로 보여 줍니다. 번역된 글은 「めくる」를 누르면 뒷면의 한국어 원문이 나옵니다.' },
+        { id: '3e', round: 3, file: '3e-koyomi', jp: 'こよみ', ko: '달력·일력형', tag: '새 방향',
+          desc: '오늘 장에 바로 질문을 쓰는 일력과 이번 주 플래너로 구성했습니다. 토요일 교류회가 달력에서 바로 보입니다.' },
+        { id: '3f', round: 3, file: '3f-answer-board', jp: '回答ボード', ko: '답변 칸반형', tag: '새 방향',
+          desc: '질문이 回答待ち → 回答あり → 解決済み로 넘어가는 흐름을 칸반 보드로 보여 줘서, 답할 질문이 한눈에 보입니다.' },
         { id: '2a', round: 2, file: '2a-line-refined', jp: 'くらしライン磨き版', ko: '노선도 다듬은 안', tag: '노선도', label: '2a くらしライン磨き版 / 노선도 다듬은 안',
           desc: '1e를 기본으로 정리한 안입니다. 노선도를 히어로에 합치고 소코가 역무원처럼 승강장에 서 있으며, 모바일에서는 노선을 세로로 세웠습니다.' },
         { id: '2b', round: 2, file: '2b-train-monitor', jp: '車内モニター', ko: '차내 안내 화면', tag: '노선도', label: '2b 車内モニター / 차내 안내 화면',
@@ -471,7 +491,7 @@
             el('div', { class: 'vote-row' }, [voteCount, voteBtn]),
           ]),
         ]);
-        document.getElementById(d.round === 2 ? 'round2' : 'round1').append(card);
+        document.getElementById('round' + d.round).append(card);
       });
 
       // ---- Voting UI ---------------------------------------------------------

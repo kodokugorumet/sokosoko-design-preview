@@ -20,7 +20,7 @@
   const COOKIE = 'soko_dv';
   const CACHE_KEY = 'soko-design-counts-v1';
   const CACHE_MS = 15000;
-  const IDS = ['1a', '1b', '1c', '1d', '1e', '1f', '2a', '2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j'];
+  const IDS = ['1a', '1b', '1c', '1d', '1e', '1f', '2a', '2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j', '3a', '3b', '3c', '3d', '3e', '3f'];
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -193,7 +193,8 @@
   // ---- Floating widget on individual design pages -------------------------
   const me = document.currentScript;
   const pageId = me && me.dataset.voteId;
-  if (!pageId) return;
+  // ?nowidget keeps the floating bar out of preview screenshots.
+  if (!pageId || new URLSearchParams(location.search).has('nowidget')) return;
 
   const css = `
   .sv-bar{position:fixed;right:24px;bottom:24px;z-index:2147483000;display:flex;align-items:center;gap:12px;

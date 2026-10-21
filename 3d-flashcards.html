@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>3d 単語帳 | 소코소코 홈 시안</title>
+    <meta name="viewport" content="width=1860" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet data-dc-atomics>
+        <meta name="design_doc_mode" content="canvas" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Noto+Sans+KR:wght@400;700&amp;family=Noto+Serif+JP:wght@500;700;900&amp;family=Klee+One:wght@400;600&amp;display=swap" />
+        <style>
+          * { box-sizing: border-box; }
+          body { margin: 0; background: #e9e7e2; color: #1a1a18; font-family: 'Noto Sans JP', 'Noto Sans KR', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+          a { color: #b23a5c; text-decoration: underline; text-underline-offset: 2px; }
+          a:hover { color: #111111; }
+          button { font-family: inherit; }
+          .hand { font-family: 'Klee One', 'Noto Sans JP', serif; font-weight: 600; }
+          .ko { font-family: 'Noto Sans KR', 'Noto Sans JP', sans-serif; }
+
+          /* canvas chrome */
+          .ttl { position: absolute; left: 40px; top: 32px; width: 1720px; }
+          .ttl-row { display: flex; align-items: center; gap: 12px; }
+          .oid { font: 700 12px ui-monospace, Menlo, monospace; background: #111; color: #fff; padding: 3px 8px; border-radius: 5px; }
+          .ttl-name { font-size: 20px; font-weight: 700; color: #111; }
+          .ttl-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 14px; color: #5c5c58; }
+          .ttl-desc { margin: 8px 0 0; font-family: 'Noto Sans KR', sans-serif; font-size: 13px; line-height: 1.6; color: #4a4a46; max-width: 1180px; }
+          .fw { position: absolute; top: 132px; }
+          .fl { font: 600 11px ui-monospace, Menlo, monospace; letter-spacing: 0.06em; color: #5c5c58; margin-bottom: 10px; }
+          .desk { width: 1280px; background: #fafaf7; box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08); }
+          .phone { width: 410px; border: 10px solid #111; border-radius: 48px; overflow: hidden; background: #fafaf7; }
+          .scr { width: 390px; background: #fafaf7; }
+
+          /* header */
+          .hd { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 48px; background: #fff; border-bottom: 1.5px solid #111; }
+          .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #111; }
+          .ava { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; border: 1.5px solid #111; background: #fff; flex: none; }
+          .ava-img { display: block; width: 200px; max-width: none; margin: -87px 0 0 -100px; }
+          .logo-s { font-size: 13px; color: #1a1a18; }
+          .logo-w { font-size: 26px; letter-spacing: 0.12em; color: #111; }
+          .nav { display: flex; gap: 28px; }
+          .nav-a { font-size: 14px; font-weight: 700; color: #1a1a18; text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+          .nav-on { border-bottom-color: #e8728c; }
+          .hd-r { display: flex; align-items: center; gap: 12px; }
+          .lang { display: flex; border: 1.5px solid #111; border-radius: 999px; overflow: hidden; font-size: 12px; font-weight: 700; }
+          .lang-on { background: #111; color: #fff; padding: 5px 11px; }
+          .lang-off { background: #fff; color: #111; padding: 5px 11px; }
+          .login { display: inline-flex; align-items: center; min-height: 38px; padding: 0 18px; border: 1.5px solid #111; border-radius: 999px; background: #fff; box-shadow: 2px 2px 0 #111; font-size: 14px; font-weight: 700; color: #111; text-decoration: none; }
+
+          /* hero */
+          .hero { display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 32px; align-items: center; padding: 44px 64px 44px 48px; border-bottom: 1.5px solid #111; }
+          .hs { position: relative; height: 430px; }
+          .bubble { position: absolute; left: 0; top: 0; z-index: 3; max-width: 236px; padding: 14px 18px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; font-size: 17px; line-height: 1.6; color: #111; }
+          .tail { position: absolute; right: 36px; bottom: -9px; width: 16px; height: 16px; background: #fff; border-right: 1.5px solid #111; border-bottom: 1.5px solid #111; transform: rotate(45deg); }
+          .crop { position: absolute; right: 0; bottom: 0; width: 360px; height: 400px; overflow: hidden; }
+          .crop-img { display: block; width: 600px; max-width: none; margin: -64px 0 0 -150px; }
+          .cap { position: absolute; left: 12px; bottom: 6px; z-index: 3; font-size: 12px; font-weight: 700; background: #111; color: #fff; padding: 4px 10px; border-radius: 6px; }
+          .stack { position: relative; padding: 22px 22px 22px 30px; }
+          .sb { position: absolute; top: 22px; right: 22px; bottom: 22px; left: 30px; background: #fff; border: 1.5px solid #111; border-radius: 18px; }
+          .sb1 { transform: rotate(2.4deg) translate(12px, 8px); }
+          .sb2 { transform: rotate(-2.2deg) translate(-8px, 12px); }
+          .big { position: relative; background: #fff; border: 1.5px solid #111; border-radius: 18px; box-shadow: 4px 4px 0 #111; padding: 34px 40px 28px 82px; }
+          .big-hole { position: absolute; left: 28px; top: 30px; z-index: 4; width: 26px; height: 26px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .big-ring { position: absolute; left: 7px; top: -25px; z-index: 3; width: 68px; height: 68px; border: 7px solid #111; border-radius: 50%; }
+          .big-tab { position: absolute; right: 28px; top: -15px; padding: 5px 12px; border-radius: 8px; background: #111; color: #fff; font-size: 12px; font-weight: 700; }
+          .kick { font-size: 13px; font-weight: 700; color: #b23a5c; letter-spacing: 0.04em; }
+          .big-h { margin: 6px 0 0; font-size: 36px; line-height: 1.4; color: #111; }
+          .big-sub { margin: 10px 0 0; font-size: 14px; color: #4a4a46; }
+          .big-in { display: block; width: 100%; min-height: 96px; margin-top: 18px; padding: 14px 16px; border: 1.5px solid #111; border-radius: 12px; background: #fff; font: 16px/1.6 'Noto Sans JP', sans-serif; color: #1a1a18; resize: none; }
+          .big-act { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+          .btn-p { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 26px; border: 1.5px solid #111; border-radius: 999px; background: #b23a5c; color: #fff; box-shadow: 3px 3px 0 #111; font-size: 16px; font-weight: 700; cursor: pointer; }
+          .btn-o { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1.5px solid #111; border-radius: 999px; background: #fff; color: #111; box-shadow: 3px 3px 0 #111; font-size: 15px; font-weight: 700; cursor: pointer; }
+          .no { margin-left: auto; font: 600 12px ui-monospace, Menlo, monospace; color: #5c5c58; }
+
+          /* body grid */
+          .bd { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; padding: 34px 48px 48px; }
+          .pick-wrap { grid-column: 1 / -1; }
+          .sec { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 16px; }
+          .sec-h { margin: 0; font-size: 24px; color: #111; }
+          .sec-s { font-size: 13px; color: #5c5c58; }
+          .stks { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+          .stk { position: relative; display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 12px 0 10px; background: #fff; border: 1.5px solid #111; border-radius: 10px; box-shadow: 2px 2px 0 #111; font-size: 13px; font-weight: 700; color: #111; cursor: pointer; white-space: nowrap; }
+          .is-on { background: #111; color: #fff; }
+          .is-on .stk-n { color: #fff; }
+          .is-on .dot { box-shadow: 0 0 0 2px #fff; }
+          .stk-n { font: 600 10.5px ui-monospace, Menlo, monospace; color: #5c5c58; }
+          .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; display: inline-block; }
+          .d-all { background: #111; }
+          .d-qa { background: oklch(0.68 0.13 5); }
+          .d-free { background: oklch(0.68 0.13 245); }
+          .d-study { background: oklch(0.68 0.13 75); }
+          .d-lang { background: oklch(0.68 0.13 150); }
+          .d-culture { background: oklch(0.68 0.13 305); }
+
+          /* flashcards */
+          .fc { position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 176px; padding: 22px 22px 16px 58px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .is-back { box-shadow: 3px 3px 0 #b23a5c; }
+          .hole { position: absolute; left: 20px; top: 22px; z-index: 4; width: 18px; height: 18px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .ring { position: absolute; left: 9px; top: -14px; z-index: 3; width: 40px; height: 45px; border: 5px solid #111; border-radius: 50%; }
+          .side { position: absolute; right: 16px; top: -12px; padding: 3px 10px; border-radius: 999px; background: #fff; border: 1.5px solid #111; font-size: 11px; font-weight: 700; color: #111; }
+          .side-back { background: #b23a5c; border-color: #b23a5c; color: #fff; }
+          .fc-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-size: 12px; color: #5c5c58; }
+          .fc-board { font-weight: 700; color: #1a1a18; }
+          .bdg { font: 700 10.5px/1 ui-monospace, Menlo, monospace; padding: 3px 5px; border-radius: 4px; border: 1.2px solid #111; }
+          .bdg-jp { color: #b23a5c; border-color: #b23a5c; }
+          .bdg-kr { color: #2f5aa8; border-color: #2f5aa8; }
+          .bdg-staff { background: #111; color: #fff; }
+          .fc-title { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.5; color: #111; text-wrap: pretty; word-break: auto-phrase; }
+          .t-ko { font-family: 'Noto Sans KR', 'Noto Sans JP', sans-serif; word-break: keep-all; }
+          .fc-tr { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 12px; color: #5c5c58; }
+          .tr { padding: 2px 8px; border: 1px dashed #8f8f89; border-radius: 6px; }
+          .flip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border: 1.5px solid #111; border-radius: 999px; background: #fff; color: #111; font-size: 12px; font-weight: 700; cursor: pointer; }
+          .flip:hover { background: #111; color: #fff; }
+          .fc-ft { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 10px; border-top: 1px dashed #d4d4cf; font-size: 13px; }
+          .cnt { font-weight: 700; color: #1a1a18; }
+          .st { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+          .st-done { color: #1d6b45; border: 1.5px solid #1d6b45; }
+          .st-wait { color: #b23a5c; border: 1.5px solid #b23a5c; background: #fde7ec; }
+          .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 22px; }
+
+          /* spread: question + answer on one ring */
+          .spread { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding-top: 14px; }
+          .sp-ring { position: absolute; left: calc(50% - 48px); top: -12px; z-index: 5; width: 96px; height: 64px; border: 6px solid #111; border-radius: 50%; }
+          .sp { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 26px 24px 18px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .hole-r { position: absolute; right: 16px; top: 20px; z-index: 6; width: 18px; height: 18px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .hole-l { position: absolute; left: 16px; top: 20px; z-index: 6; width: 18px; height: 18px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .sp-side { position: absolute; left: 22px; top: -12px; padding: 3px 10px; border-radius: 999px; background: #fff; border: 1.5px solid #111; font-size: 11px; font-weight: 700; color: #111; }
+          .sp-side-a { left: auto; right: 22px; background: #111; color: #fff; }
+          .sp-title { margin: 0; font-size: 21px; font-weight: 700; line-height: 1.5; color: #111; text-wrap: pretty; word-break: auto-phrase; }
+          .sp-body { margin: 0; font-size: 14px; line-height: 1.75; color: #3a3a37; }
+          .ans-a { font-size: 30px; line-height: 1; color: #b23a5c; }
+          .ans-body { margin: 0; font-size: 15px; line-height: 1.8; color: #1a1a18; }
+          .best { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1.5px solid #1d6b45; color: #1d6b45; }
+          .lesson { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 20px; margin-top: 22px; padding: 16px 20px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .ls-tag { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 92px; height: 66px; border-radius: 10px; background: #111; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+          .ls-big { font-size: 20px; line-height: 1.2; }
+          .ls-k { font-size: 12px; font-weight: 700; color: #b23a5c; }
+          .ls-t { margin: 2px 0 0; font-size: 17px; font-weight: 700; color: #111; }
+          .ls-s { margin: 2px 0 0; font-size: 13px; color: #4a4a46; }
+
+          /* sidebar */
+          .side-col { display: flex; flex-direction: column; gap: 24px; }
+          .card { background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; overflow: hidden; }
+          .card-h { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 14px 18px; border-bottom: 1.5px solid #111; }
+          .card-t { margin: 0; font-size: 20px; color: #111; }
+          .card-s { font-size: 11px; color: #5c5c58; }
+          .sch { padding: 6px 18px 18px; }
+          .sch-r { display: grid; grid-template-columns: 70px 1fr; padding: 9px 0; border-bottom: 1px dashed #d4d4cf; font-size: 14px; }
+          .sch-k { color: #5c5c58; }
+          .sch-v { font-weight: 700; color: #1a1a18; }
+          .next-k { margin-top: 14px; font-size: 12px; font-weight: 700; color: #b23a5c; }
+          .next-v { font-size: 26px; font-weight: 900; color: #111; line-height: 1.3; }
+          .pill { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; border: 1.5px solid #b23a5c; color: #b23a5c; }
+          .btn-wide { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; margin-top: 16px; border: 1.5px solid #111; border-radius: 999px; background: #b23a5c; color: #fff; box-shadow: 3px 3px 0 #111; font-size: 15px; font-weight: 700; cursor: pointer; }
+          .nt { padding: 12px 18px; border-bottom: 1px solid #ecece7; }
+          .nt-t { font-size: 14px; font-weight: 700; color: #1a1a18; line-height: 1.5; }
+          .nt-m { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; color: #5c5c58; }
+          .staff { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; border: 1.2px solid #111; color: #111; }
+          .minis { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+          .mini { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 14px 12px 12px 34px; background: #fff; border: 1.5px solid #111; border-radius: 12px; box-shadow: 2px 2px 0 #111; text-decoration: none; color: #1a1a18; }
+          .mini-hole { position: absolute; left: 11px; top: 16px; width: 14px; height: 14px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .mini-n { font-size: 14px; font-weight: 700; color: #111; }
+          .mini-d { font-size: 11.5px; line-height: 1.5; color: #4a4a46; }
+          .mini-c { margin-top: 4px; font-size: 12px; font-weight: 700; color: #b23a5c; }
+          .ft { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; border-top: 1.5px solid #111; background: #fff; font-size: 12px; color: #5c5c58; }
+
+          /* mobile */
+          .m-st { display: flex; align-items: center; justify-content: space-between; padding: 12px 26px 6px; background: #fff; font-size: 14px; font-weight: 700; }
+          .m-batt { width: 24px; height: 11px; border: 1.5px solid #111; border-radius: 3px; }
+          .m-hd { display: flex; align-items: center; justify-content: space-between; padding: 6px 12px 8px 16px; background: #fff; border-bottom: 1.5px solid #111; }
+          .m-logo-w { font-size: 20px; letter-spacing: 0.1em; color: #111; }
+          .m-hd-r { display: flex; align-items: center; gap: 4px; }
+          .m-menu { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 44px; height: 44px; border: 0; background: none; cursor: pointer; }
+          .m-bar { width: 20px; height: 2px; background: #111; }
+          .m-hero { padding: 14px 16px 20px; }
+          .m-row { display: flex; align-items: flex-end; justify-content: space-between; height: 150px; }
+          .m-bubble { position: relative; max-width: 196px; margin-bottom: 44px; padding: 10px 14px; background: #fff; border: 1.5px solid #111; border-radius: 14px; box-shadow: 2px 2px 0 #111; font-size: 15px; line-height: 1.6; color: #111; }
+          .m-tail { position: absolute; right: -9px; top: 22px; width: 14px; height: 14px; background: #fff; border-top: 1.5px solid #111; border-right: 1.5px solid #111; transform: rotate(45deg); }
+          .m-crop { width: 150px; height: 150px; overflow: hidden; flex: none; }
+          .m-img { display: block; width: 250px; max-width: none; margin: -26px 0 0 -64px; }
+          .m-big { position: relative; margin-top: -10px; padding: 28px 18px 18px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .m-hole { position: absolute; left: 18px; top: 18px; z-index: 4; width: 20px; height: 20px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .m-ring { position: absolute; left: 4px; top: -22px; z-index: 3; width: 48px; height: 50px; border: 6px solid #111; border-radius: 50%; }
+          .m-tab { position: absolute; right: 14px; top: -13px; padding: 4px 10px; border-radius: 8px; background: #111; color: #fff; font-size: 11px; font-weight: 700; }
+          .m-h { margin: 8px 0 0; font-size: 23px; line-height: 1.45; color: #111; }
+          .m-sub { margin: 6px 0 0; font-size: 13px; color: #4a4a46; }
+          .m-in { display: block; width: 100%; min-height: 76px; margin-top: 14px; padding: 12px 14px; border: 1.5px solid #111; border-radius: 12px; background: #fff; font: 15px/1.6 'Noto Sans JP', sans-serif; color: #1a1a18; resize: none; }
+          .m-act { display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px; margin-top: 14px; }
+          .m-chips { display: flex; gap: 10px; overflow-x: auto; padding: 4px 16px 18px; scrollbar-width: none; }
+          .m-stk { flex: none; min-height: 44px; }
+          .m-sec { display: flex; align-items: baseline; justify-content: space-between; padding: 6px 16px 12px; }
+          .m-sec-h { margin: 0; font-size: 20px; color: #111; }
+          .m-link { font-size: 13px; font-weight: 700; }
+          .m-sp { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 10px 16px 0; }
+          .m-q { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 22px 18px 34px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .m-a { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 26px 18px 16px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .m-qhole { position: absolute; left: 18px; bottom: 12px; z-index: 6; width: 16px; height: 16px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .m-ahole { position: absolute; left: 18px; top: 12px; z-index: 6; width: 16px; height: 16px; border-radius: 50%; background: #fafaf7; border: 1.5px solid #111; }
+          .m-aring { position: absolute; left: 9px; top: -44px; z-index: 5; width: 34px; height: 70px; border: 5px solid #111; border-radius: 50%; }
+          .m-qt { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #111; word-break: auto-phrase; }
+          .m-lesson { margin: 18px 16px 26px; padding: 16px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .m-feed { display: flex; flex-direction: column; gap: 26px; padding: 12px 16px 0; }
+          .m-fc { min-height: 0; padding: 20px 16px 14px 52px; }
+          .m-flip { min-height: 44px; padding: 0 14px; }
+          .m-kr { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 26px 16px 0; padding: 14px 16px; background: #fff; border: 1.5px solid #111; border-radius: 16px; box-shadow: 3px 3px 0 #111; }
+          .m-kr-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border: 1.5px solid #111; border-radius: 999px; background: #b23a5c; color: #fff; box-shadow: 2px 2px 0 #111; font-size: 14px; font-weight: 700; flex: none; }
+          .m-nt { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 52px; margin: 14px 16px 0; padding: 8px 16px; background: #fff; border: 1.5px solid #111; border-radius: 12px; font-size: 13px; color: #1a1a18; text-decoration: none; }
+          .m-ft { display: flex; justify-content: space-between; margin-top: 22px; padding: 16px; border-top: 1.5px solid #111; background: #fff; font-size: 11px; color: #5c5c58; }
+        </style>
+      </helmet>
+
+      <div class="ttl" data-drags-parent="1">
+        <div class="ttl-row"><span class="oid">3d</span><span class="ttl-name">単語帳</span><span class="ttl-ko">단어장 카드형</span></div>
+        <p class="ttl-desc">일본어를 배우는 한국인 멤버와 일본인이 모이는 스터디 커뮤니티답게, 글을 링에 끼운 단어장 카드로 보여 줍니다. 번역된 글은 「めくる」를 누르면 카드 뒷면에서 한국어 원문을 볼 수 있고, 질문과 답변은 한 링에 끼운 두 장의 카드로 이어집니다.</p>
+      </div>
+
+      <div class="fw" style="left: 40px">
+        <div class="fl" data-drags-parent="1">Desktop 1280</div>
+        <div class="desk" data-screen-label="3d Desktop" lang="ja">
+          <header class="hd">
+            <a class="logo" href="#">
+              <span class="ava"><img class="ava-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="" /></span>
+              <span class="logo-s">釜山暮らし。</span><span class="logo-w hand">いもじょも</span>
+            </a>
+            <nav class="nav">
+              <a class="nav-a nav-on" href="#">コミュニティ</a>
+              <a class="nav-a" href="#">質問する</a>
+              <a class="nav-a" href="#">読みもの</a>
+              <a class="nav-a" href="#">釜山お知らせ</a>
+              <a class="nav-a" href="#">交流会</a>
+            </nav>
+            <div class="hd-r">
+              <div class="lang"><span class="lang-on">JP</span><span class="lang-off">KR</span></div>
+              <a class="login" href="#">ログイン</a>
+            </div>
+          </header>
+
+          <section class="hero">
+            <div class="hs">
+              <div class="bubble hand">カードに書くだけ。<br />日本語でも韓国語でも、ソコが届けるよ<span class="tail"></span></div>
+              <div class="crop"><img class="crop-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="ソコ" /></div>
+              <span class="cap">案内係 ソコ</span>
+            </div>
+            <div class="stack">
+              <div class="sb sb2"></div>
+              <div class="sb sb1"></div>
+              <div class="big">
+                <span class="big-ring"></span><span class="big-hole"></span>
+                <span class="big-tab">表：日本語 / 裏：<span class="ko">한국어</span></span>
+                <div class="kick">Q. 質問カード</div>
+                <h1 class="big-h hand">釜山の暮らし、<br />気軽に聞いてみよう</h1>
+                <p class="big-sub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                <textarea class="big-in" placeholder="例：釜山で日本語が通じる病院はありますか？"></textarea>
+                <div class="big-act">
+                  <button class="btn-p" type="button">質問する</button>
+                  <button class="btn-o" type="button">投稿する</button>
+                  <span class="no">No.129 · 送るときにログインをご案内します</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="bd">
+            <section class="pick-wrap">
+              <div class="sec"><h2 class="sec-h hand">ソコのピックアップ</h2><span class="sec-s">質問と答えを、ひとつのリングで</span></div>
+              <div class="spread">
+                <span class="sp-ring"></span>
+                <article class="sp">
+                  <span class="hole-r"></span>
+                  <span class="sp-side">表 · Q</span>
+                  <div class="fc-top"><span class="dot d-qa"></span><span class="fc-board">質問</span><span class="bdg bdg-jp">JP</span><span>さくら（海雲台在住）</span><span>3時間前</span></div>
+                  <h3 class="sp-title">外国人登録証の更新、海雲台の出入国事務所は予約必要？</h3>
+                  <p class="sp-body">来月で在留期限が切れるので更新に行きたいのですが、予約が必要なのか分かりません。</p>
+                  <div class="fc-ft"><span class="cnt">回答 3</span><span class="st st-done">解決済み</span></div>
+                </article>
+                <article class="sp">
+                  <span class="hole-l"></span>
+                  <span class="sp-side sp-side-a">裏 · A</span>
+                  <div class="fc-top" style="padding-left: 22px"><span class="ans-a hand">A.</span><span class="bdg bdg-kr">KR</span><span class="fc-board">ミンジ</span><span>ソコソコメンバー · 1時間前</span><span class="best">ベストアンサー</span></div>
+                  <p class="ans-body">はい、ハイコリア（hikorea.go.kr）で事前予約が必要です。平日午前は混むので、午後の枠がおすすめです。</p>
+                  <div class="fc-tr"><span class="tr">日本語で回答（翻訳なし）</span></div>
+                  <div class="fc-ft"><span class="cnt">いいね 12</span><a href="#">ほかの回答 2件を見る →</a></div>
+                </article>
+              </div>
+              <div class="lesson">
+                <div class="ls-tag">NEXT<span class="ls-big hand">交流会</span></div>
+                <div>
+                  <div class="ls-k">次のレッスン：交流会</div>
+                  <p class="ls-t">このメンバーと話してみませんか？</p>
+                  <p class="ls-s">毎週土曜 日本語・韓国語交流会 · 次回 10/26（土）14:00 西面 · 初参加歓迎</p>
+                </div>
+                <button class="btn-p" type="button">参加してみる →</button>
+              </div>
+            </section>
+
+            <main>
+              <div class="sec"><h2 class="sec-h hand">カードの束をえらぶ</h2><span class="sec-s">「{{ tabName }}」{{ tabCount }}件 · 新しい順</span></div>
+              <div class="stks">
+                <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+                  <button type="button" class="{{ t.cls }}" onClick="{{ t.onPick }}"><span class="{{ t.dot }}"></span>{{ t.name }}<span class="stk-n">{{ t.count }}</span></button>
+                </sc-for>
+              </div>
+              <div class="fgrid">
+                <sc-for list="{{ feed }}" as="it" hint-placeholder-count="6">
+                  <article class="{{ it.cardClass }}">
+                    <span class="ring"></span><span class="hole"></span>
+                    <span class="{{ it.sideClass }}">{{ it.side }}</span>
+                    <div class="fc-top"><span class="{{ it.dotClass }}"></span><span class="fc-board">{{ it.board }}</span><span class="{{ it.badgeClass }}">{{ it.badge }}</span><span>{{ it.name }}</span><span>{{ it.time }}</span></div>
+                    <h3 class="{{ it.titleClass }}">{{ it.title }}</h3>
+                    <div class="fc-tr">
+                      <span class="tr">{{ it.transLabel }}</span>
+                      <sc-if value="{{ it.translated }}" hint-placeholder-val="{{ true }}"><button type="button" class="flip" onClick="{{ it.onFlip }}">{{ it.flipText }}</button></sc-if>
+                    </div>
+                    <div class="fc-ft"><span class="cnt">{{ it.count }}</span><sc-if value="{{ it.hasStatus }}" hint-placeholder-val="{{ true }}"><span class="{{ it.statusClass }}">{{ it.status }}</span></sc-if></div>
+                  </article>
+                </sc-for>
+              </div>
+            </main>
+
+            <aside class="side-col">
+              <section class="card">
+                <div class="card-h"><h3 class="card-t hand">ソコソコ交流会</h3><span class="card-s">レッスン表</span></div>
+                <div class="sch">
+                  <div class="sch-r"><span class="sch-k">毎週</span><span class="sch-v">土曜 14:00〜</span></div>
+                  <div class="sch-r"><span class="sch-k">場所</span><span class="sch-v">西面</span></div>
+                  <div class="sch-r"><span class="sch-k">ことば</span><span class="sch-v">日本語・韓国語</span></div>
+                  <div class="next-k">次回</div>
+                  <div class="next-v">10/26（土）14:00</div>
+                  <span class="pill">初参加歓迎</span>
+                  <button class="btn-wide" type="button">参加する</button>
+                </div>
+              </section>
+
+              <section class="card">
+                <div class="card-h"><h3 class="card-t hand">今週の釜山お知らせ</h3><span class="card-s">スタッフ作成</span></div>
+                <div class="nt"><div class="nt-t">10/25〜 都市鉄道1号線、一部駅で夜間工事</div><div class="nt-m">出典：<a href="#">釜山交通公社</a><span class="staff">スタッフ作成</span></div></div>
+                <div class="nt"><div class="nt-t">外国人住民向け 無料健康診断（11月）</div><div class="nt-m">出典：<a href="#">釜山広域市</a><span class="staff">スタッフ作成</span></div></div>
+                <div class="nt" style="border-bottom: 0"><div class="nt-t">広安里花火大会の交通規制</div><div class="nt-m">出典：<a href="#">水営区</a><span class="staff">スタッフ作成</span></div></div>
+              </section>
+
+              <section>
+                <div class="sec"><h3 class="card-t hand">掲示板の束</h3></div>
+                <div class="minis">
+                  <a class="mini" href="#"><span class="mini-hole"></span><span class="mini-n">留学・就職</span><span class="mini-d">釜山での留学・仕事のリアル</span><span class="mini-c">12件 →</span></a>
+                  <a class="mini" href="#"><span class="mini-hole"></span><span class="mini-n">日韓言語交流</span><span class="mini-d">スタディのお知らせと振り返り</span><span class="mini-c">21件 →</span></a>
+                  <a class="mini" href="#"><span class="mini-hole"></span><span class="mini-n">日韓文化交流</span><span class="mini-d">日韓の“違い”を話そう</span><span class="mini-c">9件 →</span></a>
+                  <a class="mini" href="#"><span class="mini-hole"></span><span class="mini-n">自由</span><span class="mini-d">なんでも気軽に</span><span class="mini-c">17件 →</span></a>
+                </div>
+              </section>
+            </aside>
+          </div>
+
+          <footer class="ft"><span class="hand">釜山暮らし。いもじょも</span><span>運営：日本語・韓国語スタディ ソコソコ · 利用規約 · プライバシー</span></footer>
+        </div>
+      </div>
+
+      <div class="fw" style="left: 1400px">
+        <div class="fl" data-drags-parent="1">Mobile 390</div>
+        <div class="phone">
+          <div class="scr" data-screen-label="3d Mobile" lang="ja">
+            <div class="m-st"><span>9:41</span><span class="m-batt"></span></div>
+            <div class="m-hd">
+              <a class="logo" href="#"><span class="ava"><img class="ava-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="" /></span><span class="m-logo-w hand">いもじょも</span></a>
+              <div class="m-hd-r">
+                <div class="lang"><span class="lang-on">JP</span><span class="lang-off">KR</span></div>
+                <button class="m-menu" type="button" aria-label="メニュー"><span class="m-bar"></span><span class="m-bar"></span><span class="m-bar"></span></button>
+              </div>
+            </div>
+
+            <section class="m-hero">
+              <div class="m-row">
+                <div class="m-bubble hand">カードに書くだけ。<br />ソコが届けるよ<span class="m-tail"></span></div>
+                <div class="m-crop"><img class="m-img" src="https://busanmoa.com/_next/image?url=%2Fbrand%2Fhero-daytime.png&amp;w=640&amp;q=75" alt="ソコ" /></div>
+              </div>
+              <div class="m-big">
+                <span class="m-ring"></span><span class="m-hole"></span>
+                <span class="m-tab">表：日本語 / 裏：<span class="ko">한국어</span></span>
+                <div class="kick" style="padding-left: 34px">Q. 質問カード</div>
+                <h1 class="m-h hand">釜山の暮らし、<br />気軽に聞いてみよう</h1>
+                <p class="m-sub">日本語でも韓国語でもOK。自動翻訳で読めます</p>
+                <textarea class="m-in" placeholder="例：釜山で日本語が通じる病院はありますか？"></textarea>
+                <div class="m-act"><button class="btn-p" type="button">質問する</button><button class="btn-o" type="button">投稿する</button></div>
+              </div>
+            </section>
+
+            <div class="m-chips">
+              <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+                <button type="button" class="{{ t.mcls }}" onClick="{{ t.onPick }}"><span class="{{ t.dot }}"></span>{{ t.name }}<span class="stk-n">{{ t.count }}</span></button>
+              </sc-for>
+            </div>
+
+            <div class="m-sec"><h2 class="m-sec-h hand">ソコのピックアップ</h2><span class="sec-s">解決済み</span></div>
+            <div class="m-sp">
+              <article class="m-q">
+                <span class="m-qhole"></span>
+                <span class="sp-side">表 · Q</span>
+                <div class="fc-top"><span class="dot d-qa"></span><span class="fc-board">質問</span><span class="bdg bdg-jp">JP</span><span>さくら · 3時間前</span></div>
+                <h3 class="m-qt">外国人登録証の更新、海雲台の出入国事務所は予約必要？</h3>
+                <div class="fc-top"><span class="cnt">回答 3</span><span class="st st-done">解決済み</span></div>
+              </article>
+              <article class="m-a">
+                <span class="m-aring"></span><span class="m-ahole"></span>
+                <span class="sp-side sp-side-a">裏 · A</span>
+                <div class="fc-top" style="padding-left: 26px"><span class="bdg bdg-kr">KR</span><span class="fc-board">ミンジ</span><span class="best">ベストアンサー</span></div>
+                <p class="ans-body" style="font-size: 14px">はい、ハイコリア（hikorea.go.kr）で事前予約が必要です。平日午前は混むので、午後の枠がおすすめです。</p>
+                <div class="fc-tr"><span class="tr">日本語で回答（翻訳なし）</span></div>
+              </article>
+            </div>
+            <div class="m-lesson">
+              <div class="ls-k">次のレッスン：交流会</div>
+              <p class="ls-t">このメンバーと話してみませんか？</p>
+              <p class="ls-s">毎週土曜 日本語・韓国語交流会</p>
+              <button class="btn-wide" type="button">参加してみる →</button>
+            </div>
+
+            <div class="m-sec"><h2 class="m-sec-h hand">「{{ tabName }}」のカード</h2><a class="m-link" href="#">もっと見る →</a></div>
+            <div class="m-feed">
+              <sc-for list="{{ mfeed }}" as="it" hint-placeholder-count="3">
+                <article class="{{ it.mCardClass }}">
+                  <span class="ring"></span><span class="hole"></span>
+                  <span class="{{ it.sideClass }}">{{ it.side }}</span>
+                  <div class="fc-top"><span class="{{ it.dotClass }}"></span><span class="fc-board">{{ it.board }}</span><span class="{{ it.badgeClass }}">{{ it.badge }}</span><span>{{ it.name }}</span></div>
+                  <h3 class="{{ it.titleClass }}">{{ it.title }}</h3>
+                  <sc-if value="{{ it.translated }}" hint-placeholder-val="{{ true }}">
+                    <div class="fc-tr"><span class="tr">{{ it.transLabel }}</span><button type="button" class="flip m-flip" onClick="{{ it.onFlip }}">{{ it.flipText }}</button></div>
+                  </sc-if>
+                  <div class="fc-ft"><span class="cnt">{{ it.count }}</span><sc-if value="{{ it.hasStatus }}" hint-placeholder-val="{{ true }}"><span class="{{ it.statusClass }}">{{ it.status }}</span></sc-if></div>
+                </article>
+              </sc-for>
+            </div>
+
+            <div class="m-kr">
+              <div><div class="ls-k">ソコソコ交流会 · 初参加歓迎</div><div class="cnt" style="font-size: 16px">10/26（土）14:00 西面</div></div>
+              <span class="m-kr-btn">参加する</span>
+            </div>
+            <a class="m-nt" href="#"><span><b>今週の釜山お知らせ</b> · スタッフ作成</span><span style="color: #b23a5c; font-weight: 700">3件 →</span></a>
+            <div class="m-ft"><span class="hand">いもじょも</span><span>利用規約 · プライバシー</span></div>
+          </div>
+        </div>
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script data-props='{}'>
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.state = { tab: 'all', flipped: {} };
+        }
+        flip(id) {
+          const next = Object.assign({}, this.state.flipped);
+          next[id] = !next[id];
+          this.setState({ flipped: next });
+        }
+        renderVals() {
+          const self = this;
+          const tab = (this.state && this.state.tab) || 'all';
+          const flipped = (this.state && this.state.flipped) || {};
+          const boards = [
+            { key: 'all', name: 'すべて', count: 128 },
+            { key: 'qa', name: '質問 Q&A', count: 48 },
+            { key: 'study', name: '留学・就職', count: 12 },
+            { key: 'lang', name: '日韓言語交流', count: 21 },
+            { key: 'culture', name: '日韓文化交流', count: 9 },
+            { key: 'free', name: '自由', count: 17 }
+          ];
+          const items = [
+            { id: 2, key: 'free', board: '自由', badge: 'KR', name: 'ジフン', time: '5時間前', ja: '日本から来た友達を案内するなら、影島と甘川洞どっちがいい？', ko: '일본에서 온 친구를 안내한다면 영도랑 감천동 중 어디가 좋을까요?', count: 'コメント 7' },
+            { id: 3, key: 'qa', board: '質問', badge: 'JP', name: 'ゆうと（西面在住）', time: '2時間前', ja: '釜山の地下鉄、交通カードはどれがおすすめ？', count: '回答 0', status: '回答待ち' },
+            { id: 4, key: 'free', board: '自由', badge: 'JP', name: 'あや', time: '昨日', ja: '広安里の花火、今年はどこから見るのがおすすめ？', count: 'コメント 6' },
+            { id: 5, key: 'study', board: '留学・就職', badge: '運営', name: 'ケコ', time: '昨日', ja: '釜山で日本語を活かせる仕事の探し方', count: '読みもの' },
+            { id: 6, key: 'qa', board: '質問', badge: 'KR', name: 'ソヨン', time: '昨日', ja: '日本の友達の結婚式、ご祝儀の相場は？', ko: '일본 친구 결혼식, 축의금은 얼마 정도가 적당할까요?', count: '回答 2' },
+            { id: 7, key: 'lang', board: '日韓言語交流', badge: '運営', name: 'ソコソコ運営', time: '2日前', ja: '10月のスタディ振り返り：敬語の使い分け', count: 'コメント 4' },
+            { id: 8, key: 'culture', board: '日韓文化交流', badge: '運営', name: 'ソコソコ運営', time: '3日前', ja: 'チュソクに招かれたら、手土産は何がいい？', count: 'コメント 9' }
+          ];
+          const mk = function (it) {
+            const translated = !!it.ko;
+            const back = translated && !!flipped[it.id];
+            let transLabel = '原文のまま';
+            if (translated) transLabel = back ? '原文（韓国語）' : '韓国語から自動翻訳';
+            else if (it.key === 'lang') transLabel = '原文のまま（この掲示板は翻訳しません）';
+            return Object.assign({}, it, {
+              cardClass: back ? 'fc is-back' : 'fc',
+              mCardClass: back ? 'fc m-fc is-back' : 'fc m-fc',
+              dotClass: 'dot d-' + it.key,
+              badgeClass: it.badge === 'JP' ? 'bdg bdg-jp' : it.badge === 'KR' ? 'bdg bdg-kr' : 'bdg bdg-staff',
+              side: back ? '裏 · 한국어' : '表 · 日本語',
+              sideClass: back ? 'side side-back' : 'side',
+              title: back ? it.ko : it.ja,
+              titleClass: back ? 'fc-title t-ko' : 'fc-title',
+              translated: translated,
+              transLabel: transLabel,
+              flipText: back ? 'めくる → 表（翻訳）' : 'めくる → 裏（原文）',
+              hasStatus: !!it.status,
+              statusClass: it.status === '回答待ち' ? 'st st-wait' : 'st st-done',
+              onFlip: function () { self.flip(it.id); }
+            });
+          };
+          const current = boards.filter(function (b) { return b.key === tab; })[0] || boards[0];
+          const feed = items.filter(function (it) { return tab === 'all' || it.key === tab; }).map(mk);
+          return {
+            tabs: boards.map(function (b) {
+              const on = b.key === tab;
+              return {
+                name: b.name,
+                count: b.count,
+                cls: on ? 'stk is-on' : 'stk',
+                mcls: on ? 'stk m-stk is-on' : 'stk m-stk',
+                dot: 'dot d-' + b.key,
+                onPick: function () { self.setState({ tab: b.key }); }
+              };
+            }),
+            feed: feed,
+            mfeed: feed.slice(0, 3),
+            tabName: current.name,
+            tabCount: current.count
+          };
+        }
+      }
+    </script>
+    <script src="vote.js" data-vote-id="3d"></script>
+  </body>
+</html>
