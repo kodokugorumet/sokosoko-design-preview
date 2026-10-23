@@ -55,6 +55,18 @@
         max-width: 760px;
         text-wrap: pretty;
       }
+      .notice {
+        margin: 16px 0 0;
+        max-width: 760px;
+        padding: 12px 16px;
+        border: 1.5px solid var(--ink);
+        border-radius: 10px;
+        background: #fff;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--ink);
+        text-wrap: pretty;
+      }
       .note {
         display: flex;
         flex-wrap: wrap;
@@ -72,7 +84,7 @@
       }
       .vote-box {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+        grid-template-columns: minmax(0, 1fr);
         gap: 28px;
         margin-top: 28px;
         padding: 22px 24px;
@@ -118,80 +130,6 @@
       }
       .pip.used {
         background: var(--accent-deep);
-      }
-      .rank-head {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 8px;
-        font-size: 14px;
-        color: var(--sub);
-      }
-      .rank-head strong {
-        font-size: 16px;
-        color: var(--ink);
-      }
-      .rank {
-        list-style: none;
-        margin: 10px 0 0;
-        padding: 0;
-        display: grid;
-        gap: 2px;
-      }
-      .rank li {
-        display: grid;
-        grid-template-columns: 22px minmax(0, 11em) minmax(0, 1fr) 3.2em;
-        align-items: center;
-        gap: 10px;
-        min-height: 30px;
-        font-size: 14px;
-      }
-      .rank .no {
-        font-variant-numeric: tabular-nums;
-        color: var(--sub);
-        text-align: right;
-      }
-      .rank .nm {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: var(--ink);
-      }
-      .rank .track {
-        height: 14px;
-      }
-      .rank .fill {
-        display: block;
-        height: 14px;
-        min-width: 2px;
-        background: var(--accent-deep);
-        border-radius: 0 4px 4px 0;
-      }
-      .rank .val {
-        font-variant-numeric: tabular-nums;
-        font-weight: 700;
-        color: var(--ink);
-        text-align: right;
-      }
-      .rank li:hover .fill {
-        background: var(--ink);
-      }
-      .rank-more {
-        margin-top: 8px;
-        padding: 0;
-        border: 0;
-        background: none;
-        font: inherit;
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--accent-deep);
-        text-decoration: underline;
-        cursor: pointer;
-      }
-      .rank-empty {
-        margin-top: 12px;
-        font-size: 14px;
-        color: var(--sub);
       }
       section {
         margin-top: 56px;
@@ -306,20 +244,11 @@
       .vote-row {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         gap: 12px;
         margin-top: 4px;
         padding-top: 12px;
         border-top: 1px solid #e6e6e1;
-      }
-      .vote-count {
-        font-size: 14px;
-        color: var(--sub);
-        font-variant-numeric: tabular-nums;
-      }
-      .vote-count b {
-        font-size: 18px;
-        color: var(--ink);
       }
       .btn.vote {
         cursor: pointer;
@@ -361,6 +290,10 @@
           「釜山暮らし。いもじょも」를 커뮤니티형으로 개편하면서 만든 홈 화면 시안입니다. 시안 페이지의
           왼쪽은 데스크톱(1280px), 오른쪽은 모바일(390px) 화면입니다.
         </p>
+        <p class="notice">
+          투표로 고른 시안이 실제 사이트에 100% 똑같이 옮겨지는 것은 아닙니다. 고른 시안의 분위기와 구성을
+          바탕으로, 실제 사이트에는 비슷한 느낌으로 반영됩니다.
+        </p>
         <ul class="note">
           <li>PC에서 보시는 것을 권장합니다</li>
           <li>버튼과 탭은 실제로 눌러 볼 수 있습니다</li>
@@ -377,13 +310,8 @@
               같은 사람이 여러 번 투표하지 않도록 기기 정보와 IP 주소를 되돌릴 수 없는 값(해시)으로 바꿔
               비교합니다. 원래 정보는 저장하지 않습니다.
             </p>
+            <p class="fine">투표 결과와 표 수는 공개하지 않고 운영진만 확인합니다.</p>
             <div class="left-votes" id="left-votes" aria-live="polite"></div>
-          </div>
-          <div>
-            <div class="rank-head"><strong>지금 순위</strong><span id="rank-total"></span></div>
-            <ol class="rank" id="rank" aria-label="시안별 득표 순위"></ol>
-            <div class="rank-empty" id="rank-empty" hidden>아직 투표가 없습니다. 첫 표를 던져 주세요.</div>
-            <button type="button" class="rank-more" id="rank-more" hidden>전체 순위 보기</button>
           </div>
         </div>
       </header>
@@ -470,7 +398,6 @@
           el('a', { class: 'btn', href: 'shots/' + d.file + '.png' }, ['전체 이미지']),
         ];
         const voteBtn = el('button', { type: 'button', class: 'btn vote', 'data-vote': d.id }, ['투표하기']);
-        const voteCount = el('span', { class: 'vote-count', 'data-count': d.id, 'aria-live': 'polite' }, ['']);
         const card = el('article', { class: 'card', id: 'card-' + d.id }, [
           el('a', { href: d.file + '.html' }, [
             el('img', { src: 'shots/' + d.file + '-thumb.png', alt: d.id + ' ' + d.jp + ' 시안 미리보기', loading: 'lazy' }),
@@ -479,7 +406,7 @@
             el('h3', { class: 'title' }, titleBits),
             el('p', { class: 'desc' }, [d.desc]),
             el('div', { class: 'links' }, links),
-            el('div', { class: 'vote-row' }, [voteCount, voteBtn]),
+            el('div', { class: 'vote-row' }, [voteBtn]),
           ]),
         ]);
         document.getElementById('all').append(card);
@@ -487,9 +414,6 @@
 
       // ---- Voting UI ---------------------------------------------------------
       const V = window.SokoVote;
-      const byId = Object.fromEntries(DESIGNS.map((d) => [d.id, d]));
-      let counts = {};
-      let showAll = false;
       const pending = {};
 
       function renderLeft() {
@@ -519,35 +443,6 @@
         renderLeft();
       }
 
-      function renderCounts() {
-        document.querySelectorAll('[data-count]').forEach((s) => {
-          const n = counts[s.dataset.count];
-          s.replaceChildren(...(n == null ? ['집계 중'] : [el('b', {}, [String(n)]), '표']));
-        });
-        const ranked = DESIGNS.map((d) => ({ d, n: counts[d.id] || 0 })).sort((a, b) => b.n - a.n || a.d.id.localeCompare(b.d.id));
-        const total = ranked.reduce((s, r) => s + r.n, 0);
-        const max = Math.max(1, ...ranked.map((r) => r.n));
-        const voted = ranked.filter((r) => r.n > 0);
-        const rows = (showAll ? ranked : voted.slice(0, 5)).map((r, i) =>
-          el('li', { title: `${r.d.id} ${r.d.jp}: ${r.n}표` }, [
-            el('span', { class: 'no' }, [String(i + 1)]),
-            el('a', { class: 'nm', href: '#card-' + r.d.id }, [`${r.d.id} ${r.d.jp}`]),
-            el('span', { class: 'track' }, [el('span', { class: 'fill', style: `width:${(r.n / max) * 100}%` })]),
-            el('span', { class: 'val' }, [`${r.n}표`]),
-          ]),
-        );
-        document.getElementById('rank').replaceChildren(...rows);
-        document.getElementById('rank-total').textContent = `총 ${total}표`;
-        document.getElementById('rank-empty').hidden = total > 0;
-        const more = document.getElementById('rank-more');
-        more.hidden = total === 0;
-        more.textContent = showAll ? '상위 5개만 보기' : '전체 순위 보기';
-      }
-
-      document.getElementById('rank-more').addEventListener('click', () => {
-        showAll = !showAll;
-        renderCounts();
-      });
 
       document.addEventListener('click', (e) => {
         const b = e.target.closest('[data-vote]');
@@ -569,30 +464,19 @@
           b.textContent = '보내는 중…';
           try {
             const r = await V.cast(id);
-            if (r.ok) counts[id] = r.value;
-            else if (r.reason === 'limit') alert(V.LIMIT_MSG);
+            if (!r.ok && r.reason === 'limit') alert(V.LIMIT_MSG);
           } catch {
             alert('투표를 보내지 못했어요. 잠시 뒤 다시 눌러 주세요.');
           }
           delete pending[id];
           renderButtons();
-          renderCounts();
         }, 1000);
         renderButtons();
       });
 
-      async function refresh(fresh) {
-        try {
-          counts = Object.assign({}, counts, await V.fetchCounts(V.IDS, { fresh }));
-        } catch {}
-        renderCounts();
-      }
 
       renderButtons();
-      renderCounts();
       V.ready.then(renderButtons);
-      refresh(false);
-      setInterval(() => document.visibilityState === 'visible' && refresh(true), 45000);
     </script>
   </body>
 </html>
