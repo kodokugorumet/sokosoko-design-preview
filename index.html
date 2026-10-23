@@ -390,45 +390,29 @@
 
       <section>
         <div class="sec-head">
-          <h2>3차 시안</h2>
-          <p>지금까지 없던 방향 6개입니다. 다크 모드, 앱 화면, 잡지, 단어장, 달력, 칸반으로 구성했습니다.</p>
+          <h2>시안 22개</h2>
+          <p>특정 시안이 앞에 있어 유리하지 않도록, 순서는 들어올 때마다 섞입니다.</p>
         </div>
-        <div class="grid" id="round3"></div>
+        <div class="grid" id="all"></div>
       </section>
 
-      <section>
-        <div class="sec-head">
-          <h2>2차 시안</h2>
-          <p>1차에서 반응이 좋았던 노선도(1e)를 발전시킨 6개와 새로운 방향 4개입니다.</p>
-        </div>
-        <div class="grid" id="round2"></div>
-      </section>
-
-      <section>
-        <div class="sec-head">
-          <h2>1차 시안</h2>
-          <p>방향마다 레이아웃과 콘셉트를 확실히 다르게 잡은 6개입니다.</p>
-        </div>
-        <div class="grid" id="round1"></div>
-      </section>
-
-      <footer>검토용 시안이며 실제 서비스 화면이 아닙니다. 2026년 10월 21일 작성.</footer>
+      <footer>검토용 시안이며 실제 서비스 화면이 아닙니다. 2026년 10월 작성.</footer>
     </div>
 
     <script src="vote.js"></script>
     <script>
       const DESIGNS = [
-        { id: '3a', round: 3, file: '3a-night-gwangan', jp: '夜の広安里', ko: '밤의 광안리 다크형', tag: '새 방향',
+        { id: '3a', round: 3, file: '3a-night-gwangan', jp: '夜の広安里', ko: '밤의 광안리 다크형',
           desc: '유일한 다크 모드 시안입니다. 밤의 광안대교와 소코를 배경으로, 화면에서 가장 밝은 질문창이 주인공입니다.' },
-        { id: '3b', round: 3, file: '3b-app-stories', jp: 'アプリ風', ko: '앱 스토리형', tag: '새 방향',
+        { id: '3b', round: 3, file: '3b-app-stories', jp: 'アプリ風', ko: '앱 스토리형',
           desc: '커뮤니티 앱을 여는 느낌입니다. 스토리 줄, 넘겨 보는 「答えられる？」 질문 카드, 모바일 하단 탭바가 있습니다.' },
-        { id: '3c', round: 3, file: '3c-magazine', jp: 'MAGAZINE', ko: '잡지 표지형', tag: '새 방향',
+        { id: '3c', round: 3, file: '3c-magazine', jp: 'MAGAZINE', ko: '잡지 표지형',
           desc: '일본 라이프스타일 잡지 표지처럼 큰 손글씨 제호 앞에 소코를 세우고, 게시판은 목차로, 인기 질문은 표지 문구로 보여 줍니다.' },
-        { id: '3d', round: 3, file: '3d-flashcards', jp: '単語帳', ko: '단어장 카드형', tag: '새 방향',
+        { id: '3d', round: 3, file: '3d-flashcards', jp: '単語帳', ko: '단어장 카드형',
           desc: '글을 링에 끼운 단어장 카드로 보여 줍니다. 번역된 글은 「めくる」를 누르면 뒷면의 한국어 원문이 나옵니다.' },
-        { id: '3e', round: 3, file: '3e-koyomi', jp: 'こよみ', ko: '달력·일력형', tag: '새 방향',
+        { id: '3e', round: 3, file: '3e-koyomi', jp: 'こよみ', ko: '달력·일력형',
           desc: '오늘 장에 바로 질문을 쓰는 일력과 이번 주 플래너로 구성했습니다. 토요일 교류회가 달력에서 바로 보입니다.' },
-        { id: '3f', round: 3, file: '3f-answer-board', jp: '回答ボード', ko: '답변 칸반형', tag: '새 방향',
+        { id: '3f', round: 3, file: '3f-answer-board', jp: '回答ボード', ko: '답변 칸반형',
           desc: '질문이 回答待ち → 回答あり → 解決済み로 넘어가는 흐름을 칸반 보드로 보여 줘서, 답할 질문이 한눈에 보입니다.' },
         { id: '2a', round: 2, file: '2a-line-refined', jp: 'くらしライン磨き版', ko: '노선도 다듬은 안', tag: '노선도', label: '2a くらしライン磨き版 / 노선도 다듬은 안',
           desc: '1e를 기본으로 정리한 안입니다. 노선도를 히어로에 합치고 소코가 역무원처럼 승강장에 서 있으며, 모바일에서는 노선을 세로로 세웠습니다.' },
@@ -442,13 +426,13 @@
           desc: '답을 기다리는 질문을 LED 발차 안내판에 띄우고, 전체 글은 일본식 시각표로 정리했습니다.' },
         { id: '2f', round: 2, file: '2f-sanpo-map', jp: 'おさんぽマップ', ko: '산책 지도형', tag: '노선도', label: '2f おさんぽマップ / 산책 지도형',
           desc: '노선도를 손그림 산책 지도로 바꿨습니다. 동네 핀을 누르면 소코가 그 동네로 걸어가고 최근 질문이 말풍선으로 열립니다.' },
-        { id: '2g', round: 2, file: '2g-bento', jp: 'ベント', ko: '벤토 그리드형', tag: '새 방향', label: '2g ベント / 벤토 그리드형',
+        { id: '2g', round: 2, file: '2g-bento', jp: 'ベント', ko: '벤토 그리드형', label: '2g ベント / 벤토 그리드형',
           desc: '소코, 질문창, 번역 체험, 교류회 날짜를 크기가 다른 타일로 나눠 한 화면에 모은 최신 웹 스타일입니다.' },
-        { id: '2h', round: 2, file: '2h-shotengai', jp: '商店街', ko: '상점가형', tag: '새 방향', label: '2h 商店街 / 상점가형',
+        { id: '2h', round: 2, file: '2h-shotengai', jp: '商店街', ko: '상점가형', label: '2h 商店街 / 상점가형',
           desc: '홈을 일본 동네 상점가로 꾸몄습니다. 게시판은 노렌을 건 가게이고, 가게 주인 소코가 카운터에서 질문을 받습니다.' },
-        { id: '2i', round: 2, file: '2i-letters', jp: '日韓レター', ko: '편지·엽서형', tag: '새 방향', label: '2i 日韓レター / 편지·엽서형',
+        { id: '2i', round: 2, file: '2i-letters', jp: '日韓レター', ko: '편지·엽서형', label: '2i 日韓レター / 편지·엽서형',
           desc: '질문과 답변이 한국과 일본 이웃 사이를 엽서처럼 오갑니다. 번역된 글에는 「翻訳メモ」 쪽지가 붙습니다.' },
-        { id: '2j', round: 2, file: '2j-two-doors', jp: 'ふたつの入口', ko: '두 개의 입구형', tag: '새 방향', label: '2j ふたつの入口 / 두 개의 입구형',
+        { id: '2j', round: 2, file: '2j-two-doors', jp: 'ふたつの入口', ko: '두 개의 입구형', label: '2j ふたつの入口 / 두 개의 입구형',
           desc: '화면을 「聞きたい」(일본인)와 「答えたい」(한국인 멤버) 두 문으로 나누고, 두 쪽에서 나온 질문과 답이 가운데에서 만납니다.' },
         { id: '1a', round: 1, file: '1a-window', jp: '窓辺', ko: '소코의 창가', label: '1a 窓辺 / 소코의 창가',
           desc: '지금 사이트를 가장 충실하게 발전시킨 안입니다. 소코의 말풍선 안에서 바로 질문을 쓰고, 朝·夕·夜 버튼으로 시간대별 소코를 볼 수 있습니다.' },
@@ -471,7 +455,14 @@
         return node;
       }
 
-      DESIGNS.forEach((d) => {
+      // Fresh order on every visit so no design gets a fixed head start.
+      const shuffled = DESIGNS.slice();
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+
+      shuffled.forEach((d) => {
         const titleBits = [el('span', { class: 'id' }, [d.id]), el('span', { class: 'jp' }, [d.jp]), d.ko];
         if (d.tag) titleBits.push(el('span', { class: 'tag' }, [d.tag]));
         const links = [
@@ -491,7 +482,7 @@
             el('div', { class: 'vote-row' }, [voteCount, voteBtn]),
           ]),
         ]);
-        document.getElementById('round' + d.round).append(card);
+        document.getElementById('all').append(card);
       });
 
       // ---- Voting UI ---------------------------------------------------------
