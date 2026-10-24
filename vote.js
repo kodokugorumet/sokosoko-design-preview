@@ -6,7 +6,7 @@
 //     votes that device/network has used. Private windows, other browsers and
 //     cleared storage on the same device and network all map to the same hash.
 //  2. Local markers in localStorage and a cookie (which design was voted).
-//  3. A "ballots" counter incremented with every legitimate vote, so votes
+//  3. A "ballots" counter incremented first with every legitimate vote, so votes
 //     pushed straight to the API (bypassing this page) show up as a mismatch.
 // Nothing here can stop a determined user who changes network and spoofs
 // device signals; only an account-based backend can.
@@ -48,7 +48,7 @@
   // GET with polite retries when the API rate-limits (30 req / 10 s per IP).
   async function call(path) {
     for (let attempt = 0; attempt < 6; attempt++) {
-      const res = await fetch(API + path, { cache: 'no-store' });
+      const res = await fetch(API + path, { cache: 'no-store', keepalive: true });
       if (res.status === 404) return { value: 0 };
       if (res.status === 429) {
         const body = await res.json().catch(() => ({}));
@@ -134,13 +134,15 @@
       checkedAt = Date.now();
     }
     if (used() >= MAX) return { ok: false, reason: 'limit' };
+    // Ballot first: if anything after it is lost, ballots >= votes still holds,
+    // so only votes pushed straight to the API show up as a mismatch.
+    await call(`/hit/${NS}/ballots`);
     await call(`/hit/${NS}/vote-${id}`);
     saveMine([...list, id]);
     if (voterKey) {
       const v = await call(`/hit/${NS}/${voterKey}`).catch(() => null);
       if (v) serverUsed = Number(v.value) || serverUsed + 1;
     }
-    call(`/hit/${NS}/ballots`).catch(() => {});
     return { ok: true };
   }
 
